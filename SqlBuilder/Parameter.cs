@@ -1,4 +1,6 @@
-﻿namespace BenzeneSoft.SqlBuilder
+﻿using System.Data;
+
+namespace BenzeneSoft.SqlBuilder
 {
     public class Parameter
     {
@@ -15,6 +17,14 @@
         public static Parameter CreateNew(object value)
         {
             return new Parameter($"@p{_paramId++}", value);
+        }
+
+        public IDbDataParameter CreateDbParameter(IDbCommand command)
+        {
+            var param = command.CreateParameter();
+            param.ParameterName = Name;
+            param.Value = Value;
+            return param;
         }
     }
 }

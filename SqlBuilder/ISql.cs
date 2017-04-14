@@ -7,6 +7,6 @@ namespace BenzeneSoft.SqlBuilder
     {
         string SqlText { get; }
         IEnumerable<Parameter> Parameters { get; }
-        IDbCommand CreateCommand(IDbConnection connection);
+        IDbCommand CreateDbCommand(IDbConnection connection);
     }
 }
