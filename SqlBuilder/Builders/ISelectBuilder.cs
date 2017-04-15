@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.SqlBuilder.Builders
 {
     public interface ISelectBuilder : ISqlBuilder
     {

@@ -1,4 +1,4 @@
-﻿namespace BenzeneSoft.SqlBuilder
+﻿namespace BenzeneSoft.SqlBuilder.Builders
 {
     public class FromBuilder<T> : IFromBuilder<T>
     {
