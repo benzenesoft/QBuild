@@ -5,10 +5,12 @@ namespace BenzeneSoft.SqlBuilder
     public class QueryBuilder<T> : IQueryBuilder<T>
     {
         private readonly ISelectBuilder<T> _selectBuilder;
+        private readonly IFromBuilder<T> _fromBuilder;
 
-        public QueryBuilder(ISelectBuilder<T> selectBuilder)
+        public QueryBuilder(ISelectBuilder<T> selectBuilder, IFromBuilder<T> fromBuilder)
         {
             _selectBuilder = selectBuilder;
+            _fromBuilder = fromBuilder;
         }
 
         public ISql Build()
@@ -31,9 +33,16 @@ namespace BenzeneSoft.SqlBuilder
             return this;
         }
 
-        public IQueryBuilder From(string expression)
+        public IQueryBuilder From(Action<IFromBuilder> build)
         {
-            throw new NotImplementedException();
+            build.Invoke(_fromBuilder);
+            return this;
+        }
+
+        public IQueryBuilder From(Action<IFromBuilder<T>> build)
+        {
+            build.Invoke(_fromBuilder);
+            return this;
         }
 
         public IQueryBuilder Where(Action<IWhereBuilder, IPredicateFactory> builder)

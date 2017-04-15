@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FromBuilder.cs" />
+    <Compile Include="IFromBuilder.cs" />
     <Compile Include="INameResolver.cs" />
     <Compile Include="IPredicateFactory.cs" />
     <Compile Include="IQueryBuilder.cs" />
