@@ -1,66 +1,35 @@
-using System;
-
 namespace BenzeneSoft.SqlBuilder
 {
-    public class QueryBuilder<T> : IQueryBuilder<T>
+    public class QueryBuilder : IQueryBuilder
     {
-        private readonly ISelectBuilder<T> _selectBuilder;
-        private readonly IFromBuilder<T> _fromBuilder;
-        private readonly IWhereBuilder _whereBuilder;
-        private readonly IPredicateFactory<T> _predicateFactory;
-
-        public QueryBuilder(ISelectBuilder<T> selectBuilder, IFromBuilder<T> fromBuilder
-            , IWhereBuilder whereBuilder, IPredicateFactory<T> predicateFactory)
-        {
-            _selectBuilder = selectBuilder;
-            _fromBuilder = fromBuilder;
-            _whereBuilder = whereBuilder;
-            _predicateFactory = predicateFactory;
-        }
-
+        private ISql _select;
+        private ISql _from;
+        private ISql _predicate;
         public ISql Build()
         {
             var sql = new Sql()
-                .Append(_selectBuilder.Build()).Line()
-                .Append(_fromBuilder.Build()).Line()
-                .Append(_whereBuilder.Build()).Line();
+                .Append(_select).Line()
+                .Append(_from).Line()
+                .Append(_predicate).Line();
 
             return sql;
         }
 
-        IQueryBuilder IQueryBuilder.Select(Action<ISelectBuilder> build)
+        public IQueryBuilder Select(ISql select)
         {
-            build.Invoke(_selectBuilder);
+            _select = select;
             return this;
         }
 
-        public IQueryBuilder<T> Select(Action<ISelectBuilder<T>> build)
+        public IQueryBuilder From(ISql from)
         {
-            build.Invoke(_selectBuilder);
+            _from = from;
             return this;
         }
 
-        IQueryBuilder IQueryBuilder.From(Action<IFromBuilder> build)
+        public IQueryBuilder Where(ISql predicate)
         {
-            build.Invoke(_fromBuilder);
-            return this;
-        }
-
-        public IQueryBuilder<T> From(Action<IFromBuilder<T>> build)
-        {
-            build.Invoke(_fromBuilder);
-            return this;
-        }
-
-        IQueryBuilder IQueryBuilder.Where(Action<IWhereBuilder, IPredicateFactory> build)
-        {
-            build.Invoke(_whereBuilder, _predicateFactory);
-            return this;
-        }
-
-        public IQueryBuilder<T> Where(Action<IWhereBuilder, IPredicateFactory<T>> build)
-        {
-            build.Invoke(_whereBuilder, _predicateFactory);
+            _predicate = predicate;
             return this;
         }
     }
