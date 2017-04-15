@@ -49,6 +49,7 @@
     <Compile Include="ISql.cs" />
     <Compile Include="ISqlBuilder.cs" />
     <Compile Include="IWhereBuilder.cs" />
+    <Compile Include="LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="PredicateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
