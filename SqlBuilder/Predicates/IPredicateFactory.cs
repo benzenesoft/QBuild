@@ -15,5 +15,6 @@ namespace BenzeneSoft.SqlBuilder.Predicates
     {
         ISql Binary(Expression<Func<T, object>> leftExpression, string comparison, object rightValue);
         ISql Binary(Expression<Func<T, object>> leftExpression, string comparison, Expression<Func<T, object>> rightExpression);
+        ISql Expression(Expression<Predicate<T>> expression);
     }
 }

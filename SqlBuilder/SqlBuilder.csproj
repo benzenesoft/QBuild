@@ -51,6 +51,7 @@
     <Compile Include="Builders\IWhereBuilder.cs" />
     <Compile Include="LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Parameter.cs" />
+    <Compile Include="Predicates\OperatorMap.cs" />
     <Compile Include="Predicates\PredicateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\QueryBuilder.cs" />
