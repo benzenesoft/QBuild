@@ -6,17 +6,24 @@ namespace BenzeneSoft.SqlBuilder
     {
         private readonly ISelectBuilder<T> _selectBuilder;
         private readonly IFromBuilder<T> _fromBuilder;
+        private readonly IWhereBuilder _whereBuilder;
+        private readonly IPredicateFactory<T> _predicateFactory;
 
-        public QueryBuilder(ISelectBuilder<T> selectBuilder, IFromBuilder<T> fromBuilder)
+        public QueryBuilder(ISelectBuilder<T> selectBuilder, IFromBuilder<T> fromBuilder
+            , IWhereBuilder whereBuilder, IPredicateFactory<T> predicateFactory)
         {
             _selectBuilder = selectBuilder;
             _fromBuilder = fromBuilder;
+            _whereBuilder = whereBuilder;
+            _predicateFactory = predicateFactory;
         }
 
         public ISql Build()
         {
-            var sql = new Sql();
-            sql.Append(_selectBuilder.Build()).Line();
+            var sql = new Sql()
+                .Append(_selectBuilder.Build()).Line()
+                .Append(_fromBuilder.Build()).Line()
+                .Append(_whereBuilder.Build()).Line();
 
             return sql;
         }
@@ -45,14 +52,16 @@ namespace BenzeneSoft.SqlBuilder
             return this;
         }
 
-        public IQueryBuilder Where(Action<IWhereBuilder, IPredicateFactory> builder)
+        public IQueryBuilder Where(Action<IWhereBuilder, IPredicateFactory> build)
         {
-            throw new NotImplementedException();
+            build.Invoke(_whereBuilder, _predicateFactory);
+            return this;
         }
 
-        public IQueryBuilder<T> Where(Action<IWhereBuilder, IPredicateFactory<T>> builder)
+        public IQueryBuilder<T> Where(Action<IWhereBuilder, IPredicateFactory<T>> build)
         {
-            throw new NotImplementedException();
+            build.Invoke(_whereBuilder, _predicateFactory);
+            return this;
         }
     }
 }

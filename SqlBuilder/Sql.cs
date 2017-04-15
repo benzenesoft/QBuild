@@ -30,10 +30,9 @@ namespace BenzeneSoft.SqlBuilder
             return this;
         }
 
-        public Sql Prepend(ISql sql)
+        public Sql Text(string sqlText)
         {
-            _sqlTextBuilder.Insert(0, sql.SqlText);
-            _parameters.InsertRange(0, sql.Parameters);
+            _sqlTextBuilder.Append(sqlText);
             return this;
         }
 

@@ -2,8 +2,8 @@
 {
     public interface IWhereBuilder : ISqlBuilder
     {
-        IWhereBuilder Or(params ISql[] predicates);
-        IWhereBuilder And(params ISql[] predicates);
-        IWhereBuilder Custom(ISql sql);
+        IWhereBuilder Or(ISql predicate);
+        IWhereBuilder And(ISql predicate);
+        IWhereBuilder Begin(ISql predicate);
     }
 }

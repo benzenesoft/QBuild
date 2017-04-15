@@ -8,7 +8,7 @@ namespace BenzeneSoft.SqlBuilder
         ISql Binary(string leftExpression, string comparison, string rightExpression);
     }
 
-    public interface IPredicateFactory<out T>
+    public interface IPredicateFactory<out T> : IPredicateFactory
     {
         ISql Binary(Func<T, object> leftExpression, string comparison, object rightValue);
         ISql Binary(Func<T, object> leftExpression, string comparison, Func<T, object> rightExpression);

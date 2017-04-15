@@ -25,7 +25,7 @@ namespace BenzeneSoft.SqlBuilder
             }
 
             var expression = string.Join("\n,", _columns);
-            var sql = new Sql(expression);
+            var sql = new Sql("SELECT ").Text(expression);
             return sql;
         }
 
