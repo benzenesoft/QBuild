@@ -12,7 +12,7 @@ namespace BenzeneSoft.SqlBuilder
     public interface IQueryBuilder<T> : IQueryBuilder
     {
         IQueryBuilder<T> Select(Action<ISelectBuilder<T>> build);
-        IQueryBuilder From(Action<IFromBuilder<T>> build);
+        IQueryBuilder<T> From(Action<IFromBuilder<T>> build);
         IQueryBuilder<T> Where(Action<IWhereBuilder, IPredicateFactory<T>> build);
     }
 }
