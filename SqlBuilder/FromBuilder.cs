@@ -12,7 +12,7 @@
 
         public ISql Build()
         {
-            return new Sql(_from);
+            return new Sql("FROM ").Text(_from);
         }
 
         public IFromBuilder From(string fromExpression)
