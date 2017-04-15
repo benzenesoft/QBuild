@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using BenzeneSoft.SqlBuilder;
 using NUnit.Framework;
@@ -79,7 +81,25 @@ namespace UnitTest
         [Test]
         public void CreateDbCommand()
         {
-            Assert.Fail("Not tested yet");
+            using (var connection = new SQLiteConnection("Data Source=:memory:"))
+            {
+                connection.Open();
+                using (var createTableCommand = connection.CreateCommand())
+                {
+                    createTableCommand.CommandText = File.ReadAllText("sql_files/create_table_product.sql");
+                    createTableCommand.ExecuteNonQuery();
+                }
+
+                var sql = new Sql().Text("select * from product order by id");
+                using (var command = sql.CreateDbCommand(connection))
+                {
+                    var reader = command.ExecuteReader();
+                    Assert.IsTrue(reader.Read());
+                    Assert.AreEqual(1, reader["id"]);
+                    Assert.AreEqual("almira", reader["name"]);
+                    Assert.AreEqual(1000, reader["price"]);
+                }
+            }
         }
     }
 }
