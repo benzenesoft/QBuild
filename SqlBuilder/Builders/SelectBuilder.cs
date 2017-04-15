@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.SqlBuilder.Builders
 {
     public class SelectBuilder<T> : ISelectBuilder<T>
     {

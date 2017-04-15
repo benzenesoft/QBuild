@@ -1,6 +1,8 @@
 ﻿using System.Data.SQLite;
 using System.IO;
 using BenzeneSoft.SqlBuilder;
+using BenzeneSoft.SqlBuilder.Builders;
+using BenzeneSoft.SqlBuilder.Predicates;
 using NUnit.Framework;
 using UnitTest.Entities;
 

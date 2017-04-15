@@ -40,23 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FromBuilder.cs" />
-    <Compile Include="IFromBuilder.cs" />
+    <Compile Include="Builders\FromBuilder.cs" />
+    <Compile Include="Builders\IFromBuilder.cs" />
     <Compile Include="INameResolver.cs" />
-    <Compile Include="IPredicateFactory.cs" />
-    <Compile Include="IQueryBuilder.cs" />
-    <Compile Include="ISelectBuilder.cs" />
+    <Compile Include="Predicates\IPredicateFactory.cs" />
+    <Compile Include="Builders\IQueryBuilder.cs" />
+    <Compile Include="Builders\ISelectBuilder.cs" />
     <Compile Include="ISql.cs" />
-    <Compile Include="ISqlBuilder.cs" />
-    <Compile Include="IWhereBuilder.cs" />
+    <Compile Include="Builders\ISqlBuilder.cs" />
+    <Compile Include="Builders\IWhereBuilder.cs" />
     <Compile Include="LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Parameter.cs" />
-    <Compile Include="PredicateFactory.cs" />
+    <Compile Include="Predicates\PredicateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBuilder.cs" />
-    <Compile Include="SelectBuilder.cs" />
+    <Compile Include="Builders\QueryBuilder.cs" />
+    <Compile Include="Builders\SelectBuilder.cs" />
     <Compile Include="Sql.cs" />
-    <Compile Include="WhereBuilder.cs" />
+    <Compile Include="Builders\WhereBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

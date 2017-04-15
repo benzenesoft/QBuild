@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.SqlBuilder.Predicates
 {
     public class PredicateFactory<T> : IPredicateFactory<T>
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.SqlBuilder.Builders
 {
     public class WhereBuilder : IWhereBuilder
     {

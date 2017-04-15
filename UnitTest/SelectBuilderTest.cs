@@ -1,4 +1,5 @@
 ﻿using BenzeneSoft.SqlBuilder;
+using BenzeneSoft.SqlBuilder.Builders;
 using NUnit.Framework;
 using UnitTest.Entities;
 
