@@ -23,9 +23,15 @@ namespace BenzeneSoft.SqlBuilder
 
         public IEnumerable<Parameter> Parameters => _parameters;
 
-        public Sql Append(ISql sql)
+        public Sql Append(ISql sql, bool wrapParanthesis = false)
         {
-            _sqlTextBuilder.Append(sql.SqlText);
+            var text = sql.SqlText;
+            if (wrapParanthesis)
+            {
+                text = $"({text})";
+            }
+
+            _sqlTextBuilder.Append(text);
             _parameters.AddRange(sql.Parameters);
             return this;
         }

@@ -16,15 +16,13 @@ namespace BenzeneSoft.SqlBuilder
             }
 
             var sql = new Sql();
-            sql.Text("WHERE ").Text("(").Append(_predicates.First()).Text(")");
+            sql.Text("WHERE ").Append(_predicates.First(), true);
 
             for (var i = 0; i < _operators.Count; i++)
             {
                 sql.Line()
                     .Text($" {_operators[i]} ")
-                    .Text("(")
-                    .Append(_predicates[i + 1])
-                    .Text(")");
+                    .Append(_predicates[i + 1], true);
             }
 
             return sql;
