@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace BenzeneSoft.SqlBuilder
 {
@@ -9,8 +11,8 @@ namespace BenzeneSoft.SqlBuilder
         ISelectBuilder Custom(ISql sql);
     }
 
-    public interface ISelectBuilder<out T> : ISelectBuilder
+    public interface ISelectBuilder<T> : ISelectBuilder
     {
-        ISelectBuilder<T> Columns(params Func<T, object>[] expressions);
+        ISelectBuilder<T> Columns(params Expression<Func<T, object>>[] expressions);
     }
 }
