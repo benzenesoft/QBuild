@@ -9,18 +9,22 @@ namespace UnitTest
     [TestFixture]
     public class QueryBuilderTest
     {
-        private QueryBuilder<Product> _builder;
+        private QueryBuilder _builder;
         private SQLiteConnection _connection;
+        private SelectBuilder<Product> _selectBuilder;
+        private FromBuilder<Product> _fromBuilder;
+        private WhereBuilder _whereBuilder;
+        private PredicateFactory<Product> _predicateFactory;
 
         [SetUp]
         public void Setup()
         {
             var nameResolver = new LowerSnakeCaseNameResolver();
-            var selectBuilder = new SelectBuilder<Product>(nameResolver);
-            var fromBuilder = new FromBuilder<Product>(nameResolver);
-            var whereBuilder = new WhereBuilder();
-            var predicateFactory = new PredicateFactory<Product>(nameResolver);
-            _builder = new QueryBuilder<Product>(selectBuilder, fromBuilder, whereBuilder, predicateFactory);
+            _selectBuilder = new SelectBuilder<Product>(nameResolver);
+            _fromBuilder = new FromBuilder<Product>(nameResolver);
+            _whereBuilder = new WhereBuilder();
+            _predicateFactory = new PredicateFactory<Product>(nameResolver);
+            _builder = new QueryBuilder();
 
             _connection = new SQLiteConnection("Data Source=:memory:");
             _connection.Open();
@@ -41,13 +45,15 @@ namespace UnitTest
         [Test(Description = "select * from product where id = 1")]
         public void Test1()
         {
-            var sql = _builder.Select(builder => builder.All())
-                .From(builder => builder.Default())
-                .Where((builder, factory) => builder.Begin(factory.Binary(p => p.Id, "=", 1))).Build();
+            var sql = _builder.Select(_selectBuilder.All().Build())
+                .From(_fromBuilder.Default().Build())
+                .Where(_whereBuilder.Begin(_predicateFactory.Binary(p => p.Id, "=", 1)).Build())
+                .Build();
 
             using (var command = sql.CreateDbCommand(_connection))
             {
                 var reader = command.ExecuteReader();
+
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(1, reader["id"]);
                 Assert.AreEqual("almira", reader["name"]);
