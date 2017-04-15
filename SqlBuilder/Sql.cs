@@ -9,10 +9,14 @@ namespace BenzeneSoft.SqlBuilder
         private readonly StringBuilder _sqlTextBuilder;
         private readonly List<Parameter> _parameters;
 
-        public Sql()
+        public Sql() : this(string.Empty)
         {
-            _sqlTextBuilder = new StringBuilder();
-            _parameters = new List<Parameter>();
+        }
+
+        public Sql(string sqlText, params Parameter[] parameters)
+        {
+            _sqlTextBuilder = new StringBuilder(sqlText);
+            _parameters = new List<Parameter>(parameters);
         }
 
         public string SqlText => _sqlTextBuilder.ToString();
@@ -30,6 +34,12 @@ namespace BenzeneSoft.SqlBuilder
         {
             _sqlTextBuilder.Insert(0, sql.SqlText);
             _parameters.InsertRange(0, sql.Parameters);
+            return this;
+        }
+
+        public Sql Line()
+        {
+            _sqlTextBuilder.AppendLine();
             return this;
         }
 
