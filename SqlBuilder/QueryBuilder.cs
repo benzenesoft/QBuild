@@ -28,7 +28,7 @@ namespace BenzeneSoft.SqlBuilder
             return sql;
         }
 
-        public IQueryBuilder Select(Action<ISelectBuilder> build)
+        IQueryBuilder IQueryBuilder.Select(Action<ISelectBuilder> build)
         {
             build.Invoke(_selectBuilder);
             return this;
@@ -40,19 +40,19 @@ namespace BenzeneSoft.SqlBuilder
             return this;
         }
 
-        public IQueryBuilder From(Action<IFromBuilder> build)
+        IQueryBuilder IQueryBuilder.From(Action<IFromBuilder> build)
         {
             build.Invoke(_fromBuilder);
             return this;
         }
 
-        public IQueryBuilder From(Action<IFromBuilder<T>> build)
+        public IQueryBuilder<T> From(Action<IFromBuilder<T>> build)
         {
             build.Invoke(_fromBuilder);
             return this;
         }
 
-        public IQueryBuilder Where(Action<IWhereBuilder, IPredicateFactory> build)
+        IQueryBuilder IQueryBuilder.Where(Action<IWhereBuilder, IPredicateFactory> build)
         {
             build.Invoke(_whereBuilder, _predicateFactory);
             return this;
