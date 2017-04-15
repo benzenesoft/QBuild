@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -44,7 +45,7 @@ namespace BenzeneSoft.SqlBuilder
 
         public Sql Line()
         {
-            _sqlTextBuilder.AppendLine();
+            _sqlTextBuilder.Append(Environment.NewLine);
             return this;
         }
 
