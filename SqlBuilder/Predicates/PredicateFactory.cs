@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace BenzeneSoft.SqlBuilder.Predicates
 {
     public class PredicateFactory<T> : IPredicateFactory<T>
     {
+        private static readonly OperatorMap Map = new OperatorMap();
         private readonly INameResolver _nameResolver;
 
         public PredicateFactory(INameResolver nameResolver)
@@ -57,6 +59,48 @@ namespace BenzeneSoft.SqlBuilder.Predicates
             }
 
             return sql;
+        }
+
+        public ISql Expression(Expression<Predicate<T>> expression)
+        {
+            var bin = expression.Body as BinaryExpression;
+            if (bin == null)
+            {
+                throw new ArgumentException("expression must be a binary expression");
+            }
+
+            var left = bin.Left as MemberExpression;
+
+            if (left == null)
+            {
+                throw new ArgumentException("left side of the expression must be a property");
+            }
+
+            var leftProp = left.Member as PropertyInfo;
+
+            if (leftProp == null)
+            {
+                throw new ArgumentException("left side of the expression must be a property");
+            }
+
+            var leftColumn = _nameResolver.Column(leftProp);
+
+            var op = Map[bin.NodeType];
+            var right = bin.Right;
+
+
+            if (right is ConstantExpression)
+            {
+                var rightValue = (right as ConstantExpression).Value;
+                return Binary(leftColumn, "=", rightValue);
+            }
+            if (right is MemberExpression)
+            {
+                var rightProp = (right as MemberExpression).Member as PropertyInfo;
+                return Binary(leftColumn, op, _nameResolver.Column(rightProp));
+            }
+
+            throw new ArgumentException("right side of the expression must be a property or a constant value");
         }
     }
 }
