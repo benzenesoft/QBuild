@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Doubles\TestConnection.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductTag.cs" />
     <Compile Include="FromBuilderTest.cs" />
