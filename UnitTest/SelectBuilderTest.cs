@@ -1,6 +1,7 @@
 ﻿using BenzeneSoft.SqlBuilder;
 using BenzeneSoft.SqlBuilder.Builders;
 using NUnit.Framework;
+using UnitTest.Doubles;
 using UnitTest.Entities;
 
 namespace UnitTest
@@ -8,31 +9,67 @@ namespace UnitTest
     [TestFixture]
     public class SelectBuilderTest
     {
+        private TestConnection _connection;
+        private SelectBuilder<Product> builder;
+
+        [SetUp]
+        public void Setup()
+        {
+            builder = new SelectBuilder<Product>(new LowerSnakeCaseNameResolver());
+            _connection = new TestConnection();
+            _connection.Open();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _connection.Dispose();
+        }
         [Test]
         public void All()
         {
-            var sb = new SelectBuilder<Product>(new LowerSnakeCaseNameResolver());
+            builder.All();
+            var sql = new Sql(builder).Append(" from product");
 
-            var sql = sb.All().Build();
-            Assert.AreEqual("SELECT *", sql.SqlText);
+            var reader = _connection.Read(sql);
+            var count = reader.FieldCount;
+            var columns = new[] { "id", "name", "price" };
+
+            Assert.AreEqual(3, count);
+            Assert.Contains(reader.GetName(0), columns);
+            Assert.Contains(reader.GetName(1), columns);
+            Assert.Contains(reader.GetName(2), columns);
         }
 
         [Test]
         public void Column_String()
         {
-            var sb = new SelectBuilder<Product>(new LowerSnakeCaseNameResolver());
+            builder.Columns("id", "name");
+            var sql = new Sql(builder).Append(" from product");
 
-            var sql = sb.Columns("id", "name").Build();
-            Assert.AreEqual("SELECT id\n,name", sql.SqlText);
+            var reader = _connection.Read(sql);
+            var count = reader.FieldCount;
+            var columns = new[] { "id", "name" };
+
+            Assert.AreEqual(2, count);
+            Assert.Contains(reader.GetName(0), columns);
+            Assert.Contains(reader.GetName(1), columns);
         }
 
         [Test]
         public void Column_Expression()
         {
-            var sb = new SelectBuilder<Product>(new LowerSnakeCaseNameResolver());
-            
-            var sql = sb.Columns(p => p.Id, p => p.Name).Build();
-            Assert.AreEqual("SELECT id\n,name", sql.SqlText);
+            builder.Columns(p => p.Id, p => p.Name);
+            var sql = new Sql(builder).Append(" from product");
+
+            var reader = _connection.Read(sql);
+            var count = reader.FieldCount;
+            var columns = new[] { "id", "name" };
+
+            Assert.AreEqual(2, count);
+            Assert.Contains(reader.GetName(0), columns);
+            Assert.Contains(reader.GetName(1), columns);
         }
     }
+
 }
