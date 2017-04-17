@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using BenzeneSoft.SqlBuilder;
-using BenzeneSoft.SqlBuilder.Predicates;
+using BenzeneSoft.QBuild;
+using BenzeneSoft.QBuild.Predicates;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;

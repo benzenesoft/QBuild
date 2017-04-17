@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using BenzeneSoft.SqlBuilder;
+using BenzeneSoft.QBuild;
 
 namespace UnitTest.Doubles
 {

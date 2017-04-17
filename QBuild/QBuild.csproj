@@ -7,8 +7,8 @@
     <ProjectGuid>{BF8787A6-AA8E-4794-9C1C-066A217315C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BenzeneSoft.SqlBuilder</RootNamespace>
-    <AssemblyName>BenzeneSoft.SqlBuilder</AssemblyName>
+    <RootNamespace>BenzeneSoft.QBuild</RootNamespace>
+    <AssemblyName>BenzeneSoft.QBuild</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
