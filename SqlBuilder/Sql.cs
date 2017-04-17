@@ -26,6 +26,8 @@ namespace BenzeneSoft.SqlBuilder
 
         public Sql Append(ISql sql, bool wrapParanthesis = false)
         {
+            if (sql == null) return this;
+
             var text = sql.SqlText;
             if (wrapParanthesis)
             {
@@ -37,7 +39,7 @@ namespace BenzeneSoft.SqlBuilder
             return this;
         }
 
-        public Sql Text(string sqlText)
+        public Sql Append(string sqlText)
         {
             _sqlTextBuilder.Append(sqlText);
             return this;

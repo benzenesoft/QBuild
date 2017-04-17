@@ -55,7 +55,7 @@ namespace BenzeneSoft.SqlBuilder.Predicates
             sql.Append(expressions[0], true);
             for (var i = 1; i < expressions.Length; i++)
             {
-                sql.Text(separator).Append(expressions[i], true);
+                sql.Append(separator).Append(expressions[i], true);
             }
 
             return sql;

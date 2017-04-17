@@ -5,5 +5,6 @@
         IQueryBuilder Select(ISql select);
         IQueryBuilder From(ISql from);
         IQueryBuilder Where(ISql predicate);
+        IQueryBuilder OrderBy(ISql orderBy);
     }
 }
