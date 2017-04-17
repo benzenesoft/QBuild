@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.QBuild
 {
     public interface INameResolver
     {

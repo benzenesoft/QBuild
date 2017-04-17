@@ -71,9 +71,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SqlBuilder\SqlBuilder.csproj">
+    <ProjectReference Include="..\QBuild\QBuild.csproj">
       <Project>{bf8787a6-aa8e-4794-9c1c-066a217315c8}</Project>
-      <Name>SqlBuilder</Name>
+      <Name>QBuild</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

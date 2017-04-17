@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using BenzeneSoft.SqlBuilder.Builders;
+using BenzeneSoft.QBuild.Builders;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.QBuild
 {
     public class Sql : ISql
     {

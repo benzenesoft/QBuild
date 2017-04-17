@@ -1,9 +1,9 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using BenzeneSoft.SqlBuilder;
-using BenzeneSoft.SqlBuilder.Builders;
-using BenzeneSoft.SqlBuilder.Predicates;
+using BenzeneSoft.QBuild;
+using BenzeneSoft.QBuild.Builders;
+using BenzeneSoft.QBuild.Predicates;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;

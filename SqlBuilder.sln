@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlBuilder", "SqlBuilder\SqlBuilder.csproj", "{BF8787A6-AA8E-4794-9C1C-066A217315C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QBuild", "QBuild\QBuild.csproj", "{BF8787A6-AA8E-4794-9C1C-066A217315C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{23391CEE-CB7D-48D3-91FD-FE1A2C5BA09A}"
 EndProject
