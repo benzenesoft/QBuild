@@ -2,6 +2,7 @@
 using BenzeneSoft.SqlBuilder;
 using BenzeneSoft.SqlBuilder.Predicates;
 using NUnit.Framework;
+using UnitTest.Doubles;
 using UnitTest.Entities;
 
 namespace UnitTest
@@ -9,15 +10,40 @@ namespace UnitTest
     [TestFixture]
     public class PredicateFactoryTest
     {
-        [Test]
-        public void Expression()
+        private PredicateFactory<Product> _factory;
+        private Sql _sql;
+        private TestConnection _connection;
+
+        [SetUp]
+        public void Setup()
         {
-            var factory = new PredicateFactory<Product>(new LowerSnakeCaseNameResolver());
+            _factory = new PredicateFactory<Product>(new LowerSnakeCaseNameResolver());
+            _sql = new Sql("select * from product WHERE ");
+            _connection = new TestConnection();
+            _connection.Open();
+        }
 
-            var pred = factory.Expression(product => product.Name == "almira");
+        [TearDown]
+        public void TearDown()
+        {
+            _connection.Dispose();
+        }
 
-            Assert.AreEqual("almira", pred.Parameters.First().Value);
-            Assert.AreEqual("name = @p0", pred.SqlText);
+        [Test]
+        public void Expression_Equal()
+        {
+            var pred = _factory.Expression(product => product.Name == "almira");
+            _sql.Append(pred);
+
+            var reader = _connection.Read(_sql);
+
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual("almira", reader["name"]);
+
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual("almira", reader["name"]);
+
+            Assert.IsFalse(reader.Read());
         }
     }
 }

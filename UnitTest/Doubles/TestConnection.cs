@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using BenzeneSoft.SqlBuilder;
 
 namespace UnitTest.Doubles
 {
@@ -67,9 +68,13 @@ namespace UnitTest.Doubles
 
         public IDataReader Read(string query)
         {
-            using (var command = _connection.CreateCommand())
+            return Read(new Sql(query));
+        }
+
+        public IDataReader Read(ISql sql)
+        {
+            using (var command = sql.CreateDbCommand(_connection))
             {
-                command.CommandText = query;
                 return command.ExecuteReader();
             }
         }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
+using BenzeneSoft.SqlBuilder.Builders;
 
 namespace BenzeneSoft.SqlBuilder
 {
@@ -10,15 +12,15 @@ namespace BenzeneSoft.SqlBuilder
         private readonly StringBuilder _sqlTextBuilder;
         private readonly List<Parameter> _parameters;
 
-        public Sql() : this(string.Empty)
-        {
-        }
-
         public Sql(string sqlText, params Parameter[] parameters)
         {
             _sqlTextBuilder = new StringBuilder(sqlText);
             _parameters = new List<Parameter>(parameters);
         }
+
+        public Sql() : this(string.Empty) { }
+        public Sql(ISql sql) : this(sql.SqlText, sql.Parameters.ToArray()) { }
+        public Sql(ISqlBuilder builder) : this(builder.Build()) { }
 
         public string SqlText => _sqlTextBuilder.ToString();
 
