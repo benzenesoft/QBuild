@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Data.SQLite;
-using System.IO;
 using System.Linq;
 using BenzeneSoft.SqlBuilder;
 using NUnit.Framework;
+using UnitTest.Doubles;
 
 namespace UnitTest
 {
@@ -81,14 +80,9 @@ namespace UnitTest
         [Test]
         public void CreateDbCommand()
         {
-            using (var connection = new SQLiteConnection("Data Source=:memory:"))
+            using (var connection = new TestConnection())
             {
                 connection.Open();
-                using (var createTableCommand = connection.CreateCommand())
-                {
-                    createTableCommand.CommandText = File.ReadAllText("sql_files/create_table_product.sql");
-                    createTableCommand.ExecuteNonQuery();
-                }
 
                 var sql = new Sql().Text("select * from product order by id");
                 using (var command = sql.CreateDbCommand(connection))

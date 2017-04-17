@@ -1,9 +1,11 @@
-﻿using System.Data.SQLite;
+﻿using System.Data;
+using System.Data.SQLite;
 using System.IO;
 using BenzeneSoft.SqlBuilder;
 using BenzeneSoft.SqlBuilder.Builders;
 using BenzeneSoft.SqlBuilder.Predicates;
 using NUnit.Framework;
+using UnitTest.Doubles;
 using UnitTest.Entities;
 
 namespace UnitTest
@@ -12,7 +14,7 @@ namespace UnitTest
     public class QueryBuilderTest
     {
         private QueryBuilder _builder;
-        private SQLiteConnection _connection;
+        private IDbConnection _connection;
         private SelectBuilder<Product> _selectBuilder;
         private FromBuilder<Product> _fromBuilder;
         private WhereBuilder _whereBuilder;
@@ -28,13 +30,8 @@ namespace UnitTest
             _predicateFactory = new PredicateFactory<Product>(nameResolver);
             _builder = new QueryBuilder();
 
-            _connection = new SQLiteConnection("Data Source=:memory:");
+            _connection = new TestConnection();
             _connection.Open();
-            using (var createTableCommand = _connection.CreateCommand())
-            {
-                createTableCommand.CommandText = File.ReadAllText("sql_files/create_table_product.sql");
-                createTableCommand.ExecuteNonQuery();
-            }
         }
 
         [TearDown]
