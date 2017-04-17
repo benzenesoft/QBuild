@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace BenzeneSoft.SqlBuilder.Builders
+namespace BenzeneSoft.QBuild.Builders
 {
     public class OrderByBuilder<T> : IOrderByBuilder<T>
     {

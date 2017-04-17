@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace BenzeneSoft.SqlBuilder.Predicates
+namespace BenzeneSoft.QBuild.Predicates
 {
     public class PredicateFactory<T> : IPredicateFactory<T>
     {
