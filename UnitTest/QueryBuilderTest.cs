@@ -18,6 +18,7 @@ namespace UnitTest
         private SelectBuilder<Product> _selectBuilder;
         private FromBuilder<Product> _fromBuilder;
         private WhereBuilder _whereBuilder;
+        private OrderByBuilder<Product> _orderByBuilder;
         private PredicateFactory<Product> _predicateFactory;
 
         [SetUp]
@@ -28,6 +29,7 @@ namespace UnitTest
             _fromBuilder = new FromBuilder<Product>(nameResolver);
             _whereBuilder = new WhereBuilder();
             _predicateFactory = new PredicateFactory<Product>(nameResolver);
+            _orderByBuilder = new OrderByBuilder<Product>(nameResolver);
             _builder = new QueryBuilder();
 
             _connection = new TestConnection();

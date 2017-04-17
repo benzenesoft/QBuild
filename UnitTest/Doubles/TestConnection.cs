@@ -6,7 +6,7 @@ namespace UnitTest.Doubles
 {
     public class TestConnection : IDbConnection
     {
-        private IDbConnection _connection;
+        private SQLiteConnection _connection;
 
         public TestConnection()
         {
@@ -64,5 +64,14 @@ namespace UnitTest.Doubles
         public string Database => _connection.Database;
 
         public ConnectionState State => _connection.State;
+
+        public IDataReader Read(string query)
+        {
+            using (var command = _connection.CreateCommand())
+            {
+                command.CommandText = query;
+                return command.ExecuteReader();
+            }
+        }
     }
 }

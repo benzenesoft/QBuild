@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Builders\FromBuilder.cs" />
     <Compile Include="Builders\IFromBuilder.cs" />
+    <Compile Include="Builders\IOrderByBuilder.cs" />
+    <Compile Include="Builders\OrderByBuilder.cs" />
     <Compile Include="INameResolver.cs" />
     <Compile Include="Predicates\IPredicateFactory.cs" />
     <Compile Include="Builders\IQueryBuilder.cs" />

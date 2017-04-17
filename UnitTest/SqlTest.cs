@@ -72,7 +72,7 @@ namespace UnitTest
         public void AppendText_TextAppended()
         {
             var sql = new Sql("some sql");
-            sql.Text(" append this");
+            sql.Append(" append this");
 
             Assert.AreEqual("some sql append this", sql.SqlText);
         }
@@ -84,7 +84,7 @@ namespace UnitTest
             {
                 connection.Open();
 
-                var sql = new Sql().Text("select * from product order by id");
+                var sql = new Sql().Append("select * from product order by id");
                 using (var command = sql.CreateDbCommand(connection))
                 {
                     var reader = command.ExecuteReader();

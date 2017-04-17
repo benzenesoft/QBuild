@@ -5,12 +5,15 @@ namespace BenzeneSoft.SqlBuilder.Builders
         private ISql _select;
         private ISql _from;
         private ISql _predicate;
+        private ISql _orderBy;
+
         public ISql Build()
         {
             var sql = new Sql()
                 .Append(_select).Line()
                 .Append(_from).Line()
-                .Append(_predicate).Line();
+                .Append(_predicate).Line()
+                .Append(_orderBy).Line();
 
             return sql;
         }
@@ -30,6 +33,12 @@ namespace BenzeneSoft.SqlBuilder.Builders
         public IQueryBuilder Where(ISql predicate)
         {
             _predicate = predicate;
+            return this;
+        }
+
+        public IQueryBuilder OrderBy(ISql orderBy)
+        {
+            _orderBy = orderBy;
             return this;
         }
     }
