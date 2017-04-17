@@ -15,7 +15,12 @@
             return new Sql("FROM ").Append(_from);
         }
 
-        public IFromBuilder From(string fromExpression)
+        IFromBuilder IFromBuilder.From(string fromExpression)
+        {
+            return From(fromExpression);
+        }
+
+        public IFromBuilder<T> From(string fromExpression)
         {
             _from = fromExpression;
             return this;
@@ -23,8 +28,7 @@
 
         public IFromBuilder<T> Default()
         {
-            _from = _nameResolver.Table(typeof(T));
-            return this;
+            return From(_nameResolver.Table(typeof(T)));
         }
     }
 }

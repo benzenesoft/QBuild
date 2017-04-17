@@ -9,7 +9,6 @@ namespace BenzeneSoft.SqlBuilder.Builders
     {
         private readonly INameResolver _nameResolver;
         private readonly List<string> _columns;
-        private ISql _customSql;
 
         public SelectBuilder(INameResolver nameResolver)
         {
@@ -19,38 +18,37 @@ namespace BenzeneSoft.SqlBuilder.Builders
 
         public ISql Build()
         {
-            if (_customSql != null)
-            {
-                return _customSql;
-            }
-
             var expression = string.Join("\n,", _columns);
             var sql = new Sql("SELECT ").Append(expression);
             return sql;
+        }
+
+        public ISelectBuilder<T> All()
+        {
+            return Columns("*");
+        }
+
+        public ISelectBuilder<T> Columns(params string[] expressions)
+        {
+            _columns.AddRange(expressions);
+            return this;
         }
 
         public ISelectBuilder<T> Columns(params Expression<Func<T, object>>[] expressions)
         {
             var names = expressions.Select(_nameResolver.Column).ToArray();
 
-            return (ISelectBuilder<T>) Columns(names);
+            return Columns(names);
         }
 
-        public ISelectBuilder All()
+        ISelectBuilder ISelectBuilder.All()
         {
-            return Columns("*");
+            return All();
         }
 
-        public ISelectBuilder Columns(params string[] expressions)
+        ISelectBuilder ISelectBuilder.Columns(params string[] expressions)
         {
-            _columns.AddRange(expressions);
-            return this;
-        }
-
-        public ISelectBuilder Custom(ISql sql)
-        {
-            _customSql = sql;
-            return this;
+            return Columns(expressions);
         }
     }
 }

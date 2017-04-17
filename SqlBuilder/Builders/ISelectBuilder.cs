@@ -7,7 +7,6 @@ namespace BenzeneSoft.SqlBuilder.Builders
     {
         ISelectBuilder All();
         ISelectBuilder Columns(params string[] expressions);
-        ISelectBuilder Custom(ISql sql);
     }
 
     public interface ISelectBuilder<T> : ISelectBuilder
