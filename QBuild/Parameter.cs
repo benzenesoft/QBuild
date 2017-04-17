@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.QBuild
 {
     public class Parameter
     {

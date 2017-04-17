@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
-namespace BenzeneSoft.SqlBuilder.Predicates
+namespace BenzeneSoft.QBuild.Predicates
 {
     public class OperatorMap
     {

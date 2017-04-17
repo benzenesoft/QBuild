@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace BenzeneSoft.SqlBuilder.Builders
+namespace BenzeneSoft.QBuild.Builders
 {
     public interface IOrderByBuilder : ISqlBuilder
     {

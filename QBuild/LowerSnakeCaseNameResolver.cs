@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace BenzeneSoft.SqlBuilder
+namespace BenzeneSoft.QBuild
 {
     public class LowerSnakeCaseNameResolver : INameResolver
     {
