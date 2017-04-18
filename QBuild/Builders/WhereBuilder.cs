@@ -16,13 +16,13 @@ namespace BenzeneSoft.QBuild.Builders
             }
 
             var sql = new Sql();
-            sql.Append("WHERE ").Append(_predicates.First(), true);
+            sql.Append("WHERE ").Append(_predicates.First(), wrapParanthesis: true);
 
             for (var i = 0; i < _operators.Count; i++)
             {
                 sql.Line()
                     .Append($" {_operators[i]} ")
-                    .Append(_predicates[i + 1], true);
+                    .Append(_predicates[i + 1], wrapParanthesis: true);
             }
 
             return sql;

@@ -47,7 +47,7 @@
     <Compile Include="INameResolver.cs" />
     <Compile Include="Predicates\IPredicateFactory.cs" />
     <Compile Include="Builders\IQueryBuilder.cs" />
-    <Compile Include="Builders\ISelectBuilder.cs" />
+    <Compile Include="Builders\IColumnsBuilder.cs" />
     <Compile Include="ISql.cs" />
     <Compile Include="Builders\ISqlBuilder.cs" />
     <Compile Include="Builders\IWhereBuilder.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Predicates\PredicateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\QueryBuilder.cs" />
-    <Compile Include="Builders\SelectBuilder.cs" />
+    <Compile Include="Builders\ColumnsBuilder.cs" />
     <Compile Include="Sql.cs" />
     <Compile Include="Builders\WhereBuilder.cs" />
   </ItemGroup>

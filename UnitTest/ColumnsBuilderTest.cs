@@ -9,15 +9,15 @@ using UnitTest.Entities;
 namespace UnitTest
 {
     [TestFixture]
-    public class SelectBuilderTest
+    public class ColumnsBuilderTest
     {
         private TestConnection _connection;
-        private SelectBuilder<Product> builder;
+        private ColumnsBuilder<Product> builder;
 
         [SetUp]
         public void Setup()
         {
-            builder = new SelectBuilder<Product>(new LowerSnakeCaseNameResolver());
+            builder = new ColumnsBuilder<Product>(new LowerSnakeCaseNameResolver());
             _connection = new TestConnection();
             _connection.Open();
         }
@@ -27,11 +27,12 @@ namespace UnitTest
         {
             _connection.Dispose();
         }
+
         [Test]
         public void All()
         {
-            builder.All();
-            var sql = new Sql(builder).Append(" from product");
+            var columnsSql = builder.All().Build();
+            var sql = new Sql("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);
             var expectedColumns = new[] { "id", "name", "price", "size", "color" };
@@ -46,8 +47,8 @@ namespace UnitTest
         [Test]
         public void Column_String()
         {
-            builder.Columns("id", "name");
-            var sql = new Sql(builder).Append(" from product");
+            var columnsSql = builder.Columns("id", "name").Build();
+            var sql = new Sql("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);
             var count = reader.FieldCount;
@@ -61,8 +62,8 @@ namespace UnitTest
         [Test]
         public void Column_Expression()
         {
-            builder.Columns(p => p.Id, p => p.Name);
-            var sql = new Sql(builder).Append(" from product");
+            var columnsSql = builder.Columns(p => p.Id, p => p.Name).Build();
+            var sql = new Sql("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);
             var count = reader.FieldCount;

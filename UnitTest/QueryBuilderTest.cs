@@ -13,7 +13,7 @@ namespace UnitTest
     {
         private QueryBuilder _builder;
         private TestConnection _connection;
-        private SelectBuilder<Product> _selectBuilder;
+        private ColumnsBuilder<Product> _columnsBuilder;
         private FromBuilder<Product> _fromBuilder;
         private WhereBuilder _whereBuilder;
         private OrderByBuilder<Product> _orderByBuilder;
@@ -23,7 +23,7 @@ namespace UnitTest
         public void Setup()
         {
             var nameResolver = new LowerSnakeCaseNameResolver();
-            _selectBuilder = new SelectBuilder<Product>(nameResolver);
+            _columnsBuilder = new ColumnsBuilder<Product>(nameResolver);
             _fromBuilder = new FromBuilder<Product>(nameResolver);
             _whereBuilder = new WhereBuilder();
             _predicateFactory = new PredicateFactory<Product>(nameResolver);
@@ -44,7 +44,7 @@ namespace UnitTest
         [Test(Description = "select * from product where id = 1")]
         public void Test1()
         {
-            var sql = _builder.Select(_selectBuilder.All().Build())
+            var sql = _builder.Select(_columnsBuilder.All().Build())
                 .From(_fromBuilder.Default().Build())
                 .Where(_whereBuilder.Begin(_predicateFactory.Binary(p => p.Id, "=", 1)).Build())
                 .Build();
