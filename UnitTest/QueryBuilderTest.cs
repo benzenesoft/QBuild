@@ -58,7 +58,8 @@ namespace UnitTest
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(1, reader["id"]);
                 Assert.AreEqual("almira", reader["name"]);
-                Assert.AreEqual(1000, reader["price"]);
+                Assert.AreEqual(80, reader["price"]);
+                Assert.IsFalse(reader.Read());
             }
         }
     }
