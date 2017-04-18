@@ -52,10 +52,10 @@ namespace BenzeneSoft.QBuild.Predicates
         {
             var sql = new Sql();
 
-            sql.Append(expressions[0], true);
+            sql.Append(expressions[0], wrapParanthesis: true);
             for (var i = 1; i < expressions.Length; i++)
             {
-                sql.Append(separator).Append(expressions[i], true);
+                sql.Append(separator).Append(expressions[i], wrapParanthesis: true);
             }
 
             return sql;
