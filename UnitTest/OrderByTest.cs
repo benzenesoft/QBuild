@@ -49,7 +49,7 @@ namespace UnitTest
             using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
             {
                 Assert.IsTrue(reader.Read());
-                Assert.AreEqual("zipper", reader["name"]);
+                Assert.AreEqual("table", reader["name"]);
             }
         }
 
@@ -62,11 +62,11 @@ namespace UnitTest
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
-                Assert.AreEqual(500, reader["price"]);
+                Assert.AreEqual(70, reader["price"]);
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
-                Assert.AreEqual(1000, reader["price"]);
+                Assert.AreEqual(80, reader["price"]);
             }
         }
 
@@ -78,12 +78,12 @@ namespace UnitTest
             using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
             {
                 Assert.IsTrue(reader.Read());
-                Assert.AreEqual("zipper", reader["name"]);
-                Assert.AreEqual(10, reader["price"]);
+                Assert.AreEqual("table", reader["name"]);
+                Assert.AreEqual(55, reader["price"]);
 
                 Assert.IsTrue(reader.Read());
-                Assert.AreEqual("zipper", reader["name"]);
-                Assert.AreEqual(5, reader["price"]);
+                Assert.AreEqual("table", reader["name"]);
+                Assert.AreEqual(40, reader["price"]);
             }
         }
 
@@ -96,11 +96,11 @@ namespace UnitTest
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
-                Assert.AreEqual(1000, reader["price"]);
+                Assert.AreEqual(80, reader["price"]);
 
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
-                Assert.AreEqual(500, reader["price"]);
+                Assert.AreEqual(70, reader["price"]);
             }
         }
     }

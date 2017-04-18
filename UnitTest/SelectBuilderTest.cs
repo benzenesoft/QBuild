@@ -1,4 +1,6 @@
-﻿using BenzeneSoft.QBuild;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
 using NUnit.Framework;
 using UnitTest.Doubles;
@@ -32,13 +34,13 @@ namespace UnitTest
             var sql = new Sql(builder).Append(" from product");
 
             var reader = _connection.Read(sql);
-            var count = reader.FieldCount;
-            var columns = new[] { "id", "name", "price" };
+            var expectedColumns = new[] { "id", "name", "price", "size", "color" };
 
-            Assert.AreEqual(3, count);
-            Assert.Contains(reader.GetName(0), columns);
-            Assert.Contains(reader.GetName(1), columns);
-            Assert.Contains(reader.GetName(2), columns);
+            Assert.AreEqual(5, reader.FieldCount);
+            for (var i = 0; i < 5; i++)
+            {
+                Assert.Contains(reader.GetName(i), expectedColumns);
+            }
         }
 
         [Test]

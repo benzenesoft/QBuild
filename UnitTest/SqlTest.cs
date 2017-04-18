@@ -84,14 +84,13 @@ namespace UnitTest
             {
                 connection.Open();
 
-                var sql = new Sql().Append("select * from product order by id");
+                var sql = new Sql("select * from product order by id");
                 using (var command = sql.CreateDbCommand(connection))
                 {
                     var reader = command.ExecuteReader();
                     Assert.IsTrue(reader.Read());
                     Assert.AreEqual(1, reader["id"]);
                     Assert.AreEqual("almira", reader["name"]);
-                    Assert.AreEqual(1000, reader["price"]);
                 }
             }
         }
