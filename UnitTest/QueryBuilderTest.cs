@@ -1,12 +1,10 @@
-﻿using System.Data;
-using System.Data.SQLite;
-using System.IO;
-using BenzeneSoft.QBuild;
+﻿using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
 using BenzeneSoft.QBuild.Predicates;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;
+using static NUnit.Framework.Assert;
 
 namespace UnitTest
 {
@@ -14,7 +12,7 @@ namespace UnitTest
     public class QueryBuilderTest
     {
         private QueryBuilder _builder;
-        private IDbConnection _connection;
+        private TestConnection _connection;
         private SelectBuilder<Product> _selectBuilder;
         private FromBuilder<Product> _fromBuilder;
         private WhereBuilder _whereBuilder;
@@ -55,12 +53,27 @@ namespace UnitTest
             {
                 var reader = command.ExecuteReader();
 
-                Assert.IsTrue(reader.Read());
-                Assert.AreEqual(1, reader["id"]);
-                Assert.AreEqual("almira", reader["name"]);
-                Assert.AreEqual(80, reader["price"]);
-                Assert.IsFalse(reader.Read());
+                IsTrue(reader.Read());
+                AreEqual(1, reader["id"]);
+                AreEqual("almira", reader["name"]);
+                AreEqual(80, reader["price"]);
+                IsFalse(reader.Read());
             }
+        }
+
+        [Test(Description = "select name, avg(price) from product group by name")]
+        public void GroupBy()
+        {
+            var sql = _builder
+                .Select(new Sql("select name, avg(price) as avg_price"))
+                .From(new Sql("from product"))
+                .GroupBy(new Sql("group by name"))
+                .Build();
+
+            var reader = _connection.Read(sql);
+            IsTrue(reader.Read());
+            AreEqual("almira", reader["name"]);
+            AreEqual(75, reader["avg_price"]);
         }
     }
 }
