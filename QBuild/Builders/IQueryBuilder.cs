@@ -4,7 +4,8 @@
     {
         IQueryBuilder Select(ISql select);
         IQueryBuilder From(ISql from);
-        IQueryBuilder Where(ISql predicate);
+        IQueryBuilder Where(ISql where);
+        IQueryBuilder GroupBy(ISql groupBy);
         IQueryBuilder OrderBy(ISql orderBy);
     }
 }

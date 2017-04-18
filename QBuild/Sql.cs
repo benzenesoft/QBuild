@@ -26,7 +26,7 @@ namespace BenzeneSoft.QBuild
 
         public IEnumerable<Parameter> Parameters => _parameters;
 
-        public Sql Append(ISql sql, bool wrapParanthesis = false)
+        public Sql Append(ISql sql, bool wrapParanthesis = false, bool appendLine = false)
         {
             if (sql == null) return this;
 
@@ -38,6 +38,8 @@ namespace BenzeneSoft.QBuild
 
             _sqlTextBuilder.Append(text);
             _parameters.AddRange(sql.Parameters);
+
+            if (appendLine) Line();
             return this;
         }
 

@@ -4,16 +4,18 @@ namespace BenzeneSoft.QBuild.Builders
     {
         private ISql _select;
         private ISql _from;
-        private ISql _predicate;
+        private ISql _where;
+        private ISql _groupBy;
         private ISql _orderBy;
 
         public ISql Build()
         {
             var sql = new Sql()
-                .Append(_select).Line()
-                .Append(_from).Line()
-                .Append(_predicate).Line()
-                .Append(_orderBy).Line();
+                .Append(_select, appendLine:true)
+                .Append(_from, appendLine: true)
+                .Append(_where, appendLine: true)
+                .Append(_groupBy, appendLine: true)
+                .Append(_orderBy, appendLine: true);
 
             return sql;
         }
@@ -30,9 +32,15 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public IQueryBuilder Where(ISql predicate)
+        public IQueryBuilder Where(ISql where)
         {
-            _predicate = predicate;
+            _where = where;
+            return this;
+        }
+
+        public IQueryBuilder GroupBy(ISql groupBy)
+        {
+            _groupBy = groupBy;
             return this;
         }
 
