@@ -54,16 +54,5 @@ namespace BenzeneSoft.QBuild
             _sqlTextBuilder.Append(Environment.NewLine);
             return this;
         }
-
-        public IDbCommand CreateDbCommand(IDbConnection connection)
-        {
-            var command = connection.CreateCommand();
-            command.CommandText = SqlText;
-            foreach (var param in Parameters)
-            {
-                command.Parameters.Add(param.CreateDbParameter(command));
-            }
-            return command;
-        }
     }
 }

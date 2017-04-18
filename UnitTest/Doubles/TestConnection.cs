@@ -73,10 +73,16 @@ namespace UnitTest.Doubles
 
         public IDataReader Read(ISql sql)
         {
-            using (var command = sql.CreateDbCommand(_connection))
+            var command = CreateCommand();
+            command.CommandText = sql.SqlText;
+            foreach (var parameter in sql.Parameters)
             {
-                return command.ExecuteReader();
+                var param = command.CreateParameter();
+                param.ParameterName = parameter.Name;
+                param.Value = parameter.Value;
+                command.Parameters.Add(param);
             }
+            return command.ExecuteReader();
         }
     }
 }
