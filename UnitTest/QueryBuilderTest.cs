@@ -14,7 +14,7 @@ namespace UnitTest
         private QueryBuilder _builder;
         private TestConnection _connection;
         private ColumnsBuilder<Product> _columnsBuilder;
-        private FromBuilder<Product> _fromBuilder;
+        private TablesBuilder<Product> _tablesBuilder;
         private WhereBuilder _whereBuilder;
         private OrderByBuilder<Product> _orderByBuilder;
         private PredicateFactory<Product> _predicateFactory;
@@ -24,7 +24,7 @@ namespace UnitTest
         {
             var nameResolver = new LowerSnakeCaseNameResolver();
             _columnsBuilder = new ColumnsBuilder<Product>(nameResolver);
-            _fromBuilder = new FromBuilder<Product>(nameResolver);
+            _tablesBuilder = new TablesBuilder<Product>(nameResolver);
             _whereBuilder = new WhereBuilder();
             _predicateFactory = new PredicateFactory<Product>(nameResolver);
             _orderByBuilder = new OrderByBuilder<Product>(nameResolver);
@@ -45,7 +45,7 @@ namespace UnitTest
         public void Test1()
         {
             var sql = _builder.Select(_columnsBuilder.All().Build())
-                .From(_fromBuilder.Default().Build())
+                .From(_tablesBuilder.Build())
                 .Where(_whereBuilder.Begin(_predicateFactory.Binary(p => p.Id, "=", 1)).Build())
                 .Build();
 
@@ -62,8 +62,8 @@ namespace UnitTest
         public void GroupBy()
         {
             var sql = _builder
-                .Select(new Sql("select name, avg(price) as avg_price"))
-                .From(new Sql("from product"))
+                .Select(new Sql("name, avg(price) as avg_price"))
+                .From(new Sql("product"))
                 .GroupBy(new Sql("group by name"))
                 .Build();
 

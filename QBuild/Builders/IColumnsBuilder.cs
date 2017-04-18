@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Builders
 {
+    // TODO feature: alias (x AS y)
     public interface IColumnsBuilder : ISqlBuilder
     {
         IColumnsBuilder All();

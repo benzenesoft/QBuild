@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\FromBuilder.cs" />
-    <Compile Include="Builders\IFromBuilder.cs" />
+    <Compile Include="Builders\TablesBuilder.cs" />
+    <Compile Include="Builders\ITablesBuilder.cs" />
     <Compile Include="Builders\IOrderByBuilder.cs" />
     <Compile Include="Builders\OrderByBuilder.cs" />
     <Compile Include="INameResolver.cs" />
