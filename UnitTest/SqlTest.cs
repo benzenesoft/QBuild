@@ -76,23 +76,5 @@ namespace UnitTest
 
             Assert.AreEqual("some sql append this", sql.SqlText);
         }
-
-        [Test]
-        public void CreateDbCommand()
-        {
-            using (var connection = new TestConnection())
-            {
-                connection.Open();
-
-                var sql = new Sql("select * from product order by id");
-                using (var command = sql.CreateDbCommand(connection))
-                {
-                    var reader = command.ExecuteReader();
-                    Assert.IsTrue(reader.Read());
-                    Assert.AreEqual(1, reader["id"]);
-                    Assert.AreEqual("almira", reader["name"]);
-                }
-            }
-        }
     }
 }

@@ -7,6 +7,5 @@ namespace BenzeneSoft.QBuild
     {
         string SqlText { get; }
         IEnumerable<Parameter> Parameters { get; }
-        IDbCommand CreateDbCommand(IDbConnection connection);
     }
 }

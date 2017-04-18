@@ -49,16 +49,13 @@ namespace UnitTest
                 .Where(_whereBuilder.Begin(_predicateFactory.Binary(p => p.Id, "=", 1)).Build())
                 .Build();
 
-            using (var command = sql.CreateDbCommand(_connection))
-            {
-                var reader = command.ExecuteReader();
+            var reader = _connection.Read(sql);
 
-                IsTrue(reader.Read());
-                AreEqual(1, reader["id"]);
-                AreEqual("almira", reader["name"]);
-                AreEqual(80, reader["price"]);
-                IsFalse(reader.Read());
-            }
+            IsTrue(reader.Read());
+            AreEqual(1, reader["id"]);
+            AreEqual("almira", reader["name"]);
+            AreEqual(80, reader["price"]);
+            IsFalse(reader.Read());
         }
 
         [Test(Description = "select name, avg(price) from product group by name")]
