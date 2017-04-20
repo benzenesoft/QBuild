@@ -15,7 +15,7 @@ namespace UnitTest
         private TestConnection _connection;
         private ColumnsBuilder<Product> _columnsBuilder;
         private TablesBuilder<Product> _tablesBuilder;
-        private WhereBuilder _whereBuilder;
+        private PredicateBuilder _predicateBuilder;
         private OrderByBuilder<Product> _orderByBuilder;
         private PredicateFactory<Product> _predicateFactory;
 
@@ -25,7 +25,7 @@ namespace UnitTest
             var nameResolver = new LowerSnakeCaseNameResolver();
             _columnsBuilder = new ColumnsBuilder<Product>(nameResolver);
             _tablesBuilder = new TablesBuilder<Product>(nameResolver);
-            _whereBuilder = new WhereBuilder();
+            _predicateBuilder = new PredicateBuilder();
             _predicateFactory = new PredicateFactory<Product>(nameResolver);
             _orderByBuilder = new OrderByBuilder<Product>(nameResolver);
             _builder = new QueryBuilder();
@@ -46,7 +46,7 @@ namespace UnitTest
         {
             var sql = _builder.Select(_columnsBuilder.All().Build())
                 .From(_tablesBuilder.Build())
-                .Where(_whereBuilder.Begin(_predicateFactory.Binary(p => p.Id, "=", 1)).Build())
+                .Where(_predicateBuilder.Begin(_predicateFactory.Binary(p => p.Id, "=", 1)).Build())
                 .Build();
 
             var reader = _connection.Read(sql);
