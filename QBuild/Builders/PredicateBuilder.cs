@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BenzeneSoft.QBuild.Builders
 {
-    public class WhereBuilder : IWhereBuilder
+    public class PredicateBuilder : IPredicateBuilder
     {
         private List<ISql> _predicates;
         private List<string> _operators;
@@ -28,7 +28,7 @@ namespace BenzeneSoft.QBuild.Builders
             return sql;
         }
 
-        public IWhereBuilder Or(ISql predicate)
+        public IPredicateBuilder Or(ISql predicate)
         {
             _predicates.Add(predicate);
             _operators.Add("OR");
@@ -36,7 +36,7 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public IWhereBuilder And(ISql predicate)
+        public IPredicateBuilder And(ISql predicate)
         {
             _predicates.Add(predicate);
             _operators.Add("AND");
@@ -44,7 +44,7 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public IWhereBuilder Begin(ISql predicate)
+        public IPredicateBuilder Begin(ISql predicate)
         {
             _predicates = new List<ISql>();
             _operators = new List<string>();
