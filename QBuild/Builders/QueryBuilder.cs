@@ -11,11 +11,17 @@ namespace BenzeneSoft.QBuild.Builders
         public ISql Build()
         {
             var sql = new Sql()
-                .Append(_select, appendLine:true)
-                .Append(_from, appendLine: true)
-                .Append(_where, appendLine: true)
-                .Append(_groupBy, appendLine: true)
-                .Append(_orderBy, appendLine: true);
+                .Append("SELECT ").Append(_select, true)
+                .Append("FROM ").Append(_from, true);
+
+            if (_where != null)
+                sql.Append("WHERE ").Append(_where, true);
+
+            if (_groupBy != null)
+                sql.Append("GROUP BY ").Append(_groupBy, true);
+
+            if (_orderBy != null)
+                sql.Append("ORDER BY ").Append(_orderBy, true);
 
             return sql;
         }

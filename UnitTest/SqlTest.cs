@@ -54,7 +54,7 @@ namespace UnitTest
         {
             var sql = new Sql("some sql ");
             var sqlToAppend = new Sql("append this");
-            sql.Append(sqlToAppend, true);
+            sql.Append(sqlToAppend, wrapParanthesis: true);
             
             Assert.AreEqual("some sql (append this)", sql.SqlText);
         }

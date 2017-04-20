@@ -1,9 +1,7 @@
 ﻿using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
-using BenzeneSoft.QBuild.Predicates;
 using NUnit.Framework;
 using UnitTest.Doubles;
-using UnitTest.Entities;
 using static NUnit.Framework.Assert;
 
 namespace UnitTest
@@ -13,21 +11,10 @@ namespace UnitTest
     {
         private QueryBuilder _builder;
         private TestConnection _connection;
-        private SelectBuilder<Product> _selectBuilder;
-        private FromBuilder<Product> _fromBuilder;
-        private WhereBuilder _whereBuilder;
-        private OrderByBuilder<Product> _orderByBuilder;
-        private PredicateFactory<Product> _predicateFactory;
 
         [SetUp]
         public void Setup()
         {
-            var nameResolver = new LowerSnakeCaseNameResolver();
-            _selectBuilder = new SelectBuilder<Product>(nameResolver);
-            _fromBuilder = new FromBuilder<Product>(nameResolver);
-            _whereBuilder = new WhereBuilder();
-            _predicateFactory = new PredicateFactory<Product>(nameResolver);
-            _orderByBuilder = new OrderByBuilder<Product>(nameResolver);
             _builder = new QueryBuilder();
 
             _connection = new TestConnection();
@@ -44,9 +31,9 @@ namespace UnitTest
         [Test(Description = "select * from product where id = 1")]
         public void Test1()
         {
-            var sql = _builder.Select(_selectBuilder.All().Build())
-                .From(_fromBuilder.Default().Build())
-                .Where(_whereBuilder.Begin(_predicateFactory.Binary(p => p.Id, "=", 1)).Build())
+            var sql = _builder.Select(new Sql("*"))
+                .From(new Sql("product"))
+                .Where(new Sql("id = 1"))
                 .Build();
 
             var reader = _connection.Read(sql);
@@ -62,9 +49,9 @@ namespace UnitTest
         public void GroupBy()
         {
             var sql = _builder
-                .Select(new Sql("select name, avg(price) as avg_price"))
-                .From(new Sql("from product"))
-                .GroupBy(new Sql("group by name"))
+                .Select(new Sql("name, avg(price) as avg_price"))
+                .From(new Sql("product"))
+                .GroupBy(new Sql("name"))
                 .Build();
 
             var reader = _connection.Read(sql);
