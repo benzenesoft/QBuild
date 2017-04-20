@@ -12,10 +12,16 @@ namespace BenzeneSoft.QBuild.Builders
         {
             var sql = new Sql()
                 .Append("SELECT ").Append(_select, true)
-                .Append("FROM ").Append(_from, true)
-                .Append(_where, true)
-                .Append(_groupBy, true)
-                .Append(_orderBy, true);
+                .Append("FROM ").Append(_from, true);
+
+            if (_where != null)
+                sql.Append("WHERE ").Append(_where, true);
+
+            if (_groupBy != null)
+                sql.Append("GROUP BY ").Append(_groupBy, true);
+
+            if (_orderBy != null)
+                sql.Append("ORDER BY ").Append(_orderBy, true);
 
             return sql;
         }
