@@ -72,7 +72,6 @@ namespace UnitTest
                 .Build();
 
             var reader = _connection.Read(sql);
-            Console.WriteLine(sql.SqlText);
             IsTrue(reader.Read());
             AreEqual("almira", reader["name"]);
             AreEqual(75, reader["avg_price"]);
@@ -80,5 +79,18 @@ namespace UnitTest
             IsFalse(reader.Read());
         }
 
+        [Test(Description = "select * order by name desc")]
+        public void OrderBy()
+        {
+            var sql = _builder
+                .Select(new Sql("name"))
+                .From(new Sql("product"))
+                .OrderBy(new Sql("name desc"))
+                .Build();
+
+            var reader = _connection.Read(sql);
+            IsTrue(reader.Read());
+            AreEqual("table", reader["name"]);
+        }
     }
 }

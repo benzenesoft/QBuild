@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using BenzeneSoft.QBuild;
@@ -82,6 +83,8 @@ namespace UnitTest.Doubles
                 param.Value = parameter.Value;
                 command.Parameters.Add(param);
             }
+
+            Console.WriteLine(sql.SqlText);
             return command.ExecuteReader();
         }
     }
