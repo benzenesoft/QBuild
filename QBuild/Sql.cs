@@ -54,5 +54,10 @@ namespace BenzeneSoft.QBuild
             _sqlTextBuilder.Append(Environment.NewLine);
             return this;
         }
+
+        public override string ToString()
+        {
+            return SqlText;
+        }
     }
 }
