@@ -1,5 +1,4 @@
-﻿using System.Data;
-
+﻿
 namespace BenzeneSoft.QBuild
 {
     public class Parameter
@@ -17,6 +16,11 @@ namespace BenzeneSoft.QBuild
         public static Parameter CreateNew(object value)
         {
             return new Parameter($"@p{_paramId++}", value);
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}={Value}";
         }
     }
 }
