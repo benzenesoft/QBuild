@@ -1,4 +1,5 @@
-﻿using BenzeneSoft.QBuild;
+﻿using System;
+using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
 using NUnit.Framework;
 using UnitTest.Doubles;
@@ -59,5 +60,25 @@ namespace UnitTest
             AreEqual("almira", reader["name"]);
             AreEqual(75, reader["avg_price"]);
         }
+
+        [Test(Description = "select name, avg(price) from product group by name having price > 74")]
+        public void Having()
+        {
+            var sql = _builder
+                .Select(new Sql("name, avg(price) as avg_price"))
+                .From(new Sql("product"))
+                .GroupBy(new Sql("name"))
+                .Having(new Sql("avg_price > 74"))
+                .Build();
+
+            var reader = _connection.Read(sql);
+            Console.WriteLine(sql.SqlText);
+            IsTrue(reader.Read());
+            AreEqual("almira", reader["name"]);
+            AreEqual(75, reader["avg_price"]);
+
+            IsFalse(reader.Read());
+        }
+
     }
 }

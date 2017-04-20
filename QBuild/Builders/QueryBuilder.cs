@@ -6,24 +6,27 @@ namespace BenzeneSoft.QBuild.Builders
         private ISql _from;
         private ISql _where;
         private ISql _groupBy;
+        private ISql _having;
         private ISql _orderBy;
 
         public ISql Build()
         {
-            var sql = new Sql()
-                .Append("SELECT ").Append(_select, true)
-                .Append("FROM ").Append(_from, true);
+            var sql = new Sql();
 
-            if (_where != null)
-                sql.Append("WHERE ").Append(_where, true);
-
-            if (_groupBy != null)
-                sql.Append("GROUP BY ").Append(_groupBy, true);
-
-            if (_orderBy != null)
-                sql.Append("ORDER BY ").Append(_orderBy, true);
+            AppendIfNotNull("SELECT ", _select, sql);
+            AppendIfNotNull("FROM ", _from, sql);
+            AppendIfNotNull("WHERE ", _where, sql);
+            AppendIfNotNull("GROUP BY ", _groupBy, sql);
+            AppendIfNotNull("HAVING ", _having, sql);
+            AppendIfNotNull("ORDER BY ", _orderBy, sql);
 
             return sql;
+        }
+
+        private void AppendIfNotNull(string prefix, ISql append, Sql appendTo)
+        {
+            if (append != null)
+                appendTo.Append(prefix).Append(append, true);
         }
 
         public IQueryBuilder Select(ISql select)
@@ -47,6 +50,12 @@ namespace BenzeneSoft.QBuild.Builders
         public IQueryBuilder GroupBy(ISql groupBy)
         {
             _groupBy = groupBy;
+            return this;
+        }
+
+        public IQueryBuilder Having(ISql having)
+        {
+            _having = having;
             return this;
         }
 
