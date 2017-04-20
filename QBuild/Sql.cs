@@ -26,7 +26,7 @@ namespace BenzeneSoft.QBuild
 
         public IEnumerable<Parameter> Parameters => _parameters;
 
-        public Sql Append(ISql sql, bool wrapParanthesis = false, bool appendLine = false)
+        public Sql Append(ISql sql, bool appendLine = false, bool wrapParanthesis = false)
         {
             if (sql == null) return this;
 
