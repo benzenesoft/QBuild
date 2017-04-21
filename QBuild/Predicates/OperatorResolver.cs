@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Predicates
 {
-    public class OperatorMap
+    public class OperatorResolver : IOperatorResolver
     {
         private readonly Dictionary<ExpressionType, string> _map = new Dictionary<ExpressionType, string>
         {

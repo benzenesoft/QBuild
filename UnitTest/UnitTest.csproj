@@ -54,6 +54,7 @@
     <Compile Include="Doubles\TestConnection.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductTag.cs" />
+    <Compile Include="Predicates\BinaryExpressionParserTest.cs" />
     <Compile Include="TablesBuilderTest.cs" />
     <Compile Include="LowerSnameCaseNameResolverTest.cs" />
     <Compile Include="OrderByTest.cs" />

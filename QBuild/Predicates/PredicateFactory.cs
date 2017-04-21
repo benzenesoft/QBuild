@@ -6,7 +6,7 @@ namespace BenzeneSoft.QBuild.Predicates
 {
     public class PredicateFactory<T> : IPredicateFactory<T>
     {
-        private static readonly OperatorMap Map = new OperatorMap();
+        private static readonly OperatorResolver Resolver = new OperatorResolver();
         private readonly INameResolver _nameResolver;
 
         public PredicateFactory(INameResolver nameResolver)
@@ -85,7 +85,7 @@ namespace BenzeneSoft.QBuild.Predicates
 
             var leftColumn = _nameResolver.Column(leftProp);
 
-            var op = Map[bin.NodeType];
+            var op = Resolver[bin.NodeType];
             var right = bin.Right;
 
 
