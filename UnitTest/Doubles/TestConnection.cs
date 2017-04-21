@@ -40,7 +40,12 @@ namespace UnitTest.Doubles
             _connection.ChangeDatabase(databaseName);
         }
 
-        public IDbCommand CreateCommand()
+        IDbCommand IDbConnection.CreateCommand()
+        {
+            return _connection.CreateCommand();
+        }
+
+        public SQLiteCommand CreateCommand()
         {
             return _connection.CreateCommand();
         }
@@ -72,7 +77,7 @@ namespace UnitTest.Doubles
             return Read(new Sql(query));
         }
 
-        public IDataReader Read(ISql sql)
+        public SQLiteDataReader Read(ISql sql)
         {
             var command = CreateCommand();
             command.CommandText = sql.SqlText;

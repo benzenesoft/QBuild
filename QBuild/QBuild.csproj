@@ -45,6 +45,9 @@
     <Compile Include="Builders\IOrderByBuilder.cs" />
     <Compile Include="Builders\OrderByBuilder.cs" />
     <Compile Include="INameResolver.cs" />
+    <Compile Include="Predicates\BinaryPredicateExpressionParser.cs" />
+    <Compile Include="Predicates\IPredicateExpressionParser.cs" />
+    <Compile Include="Predicates\IOperatorResolver.cs" />
     <Compile Include="Predicates\IPredicateFactory.cs" />
     <Compile Include="Builders\IQueryBuilder.cs" />
     <Compile Include="Builders\IColumnsBuilder.cs" />
@@ -53,7 +56,7 @@
     <Compile Include="Builders\IPredicateBuilder.cs" />
     <Compile Include="LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Parameter.cs" />
-    <Compile Include="Predicates\OperatorMap.cs" />
+    <Compile Include="Predicates\OperatorResolver.cs" />
     <Compile Include="Predicates\PredicateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\QueryBuilder.cs" />
