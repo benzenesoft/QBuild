@@ -55,6 +55,7 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductTag.cs" />
     <Compile Include="Expressions\BinaryExpressionParserTest.cs" />
+    <Compile Include="Expressions\PredicateParserTest.cs" />
     <Compile Include="TablesBuilderTest.cs" />
     <Compile Include="LowerSnameCaseNameResolverTest.cs" />
     <Compile Include="OrderByTest.cs" />
