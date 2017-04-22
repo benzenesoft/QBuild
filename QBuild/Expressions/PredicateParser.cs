@@ -1,11 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
     public class PredicateParser : IPredicateParser
     {
+        private IEnumerable<IExpressionParser> _prioritisedParsers;
         private readonly BinaryExpressionParser _binaryParser;
         private readonly ConstantExpressionParser _constantParser;
         private readonly PropertyExpressionParser _propertyParser;
@@ -15,6 +17,11 @@ namespace BenzeneSoft.QBuild.Expressions
             _constantParser = new ConstantExpressionParser();
             _propertyParser = new PropertyExpressionParser(nameResolver);
             _binaryParser = new BinaryExpressionParser(operatorResolver, _constantParser, _propertyParser);
+
+            _prioritisedParsers = new IExpressionParser[]
+            {
+                _constantParser, _propertyParser, _binaryParser
+            };
         }
 
         public ISql Parse<T>(Expression<Func<T, bool>> predicate)
@@ -24,19 +31,9 @@ namespace BenzeneSoft.QBuild.Expressions
 
         protected ISql ParseExpression(Expression expression)
         {
-            if (expression is ConstantExpression)
-                return _constantParser.Parse((ConstantExpression) expression);
+            var parser = _prioritisedParsers.FirstOrDefault(p => p.CanParse(expression));
 
-            if (expression is MemberExpression)
-            {
-                var me = (MemberExpression)expression;
-                if (me.Member is PropertyInfo)
-                    return _propertyParser.Parse(me);
-            }
-
-            if (expression is BinaryExpression)
-                return _binaryParser.Parse((BinaryExpression) expression);
-            return null;
+            return parser?.Parse(expression);
         }
     }
 }
