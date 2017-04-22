@@ -8,5 +8,6 @@
         public int DiscountedPrice { get; set; }
         public string Size { get; set; }
         public string Color { get; set; }
+        public bool IsAvailable { get; set; }
     }
 }
