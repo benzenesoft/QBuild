@@ -2,9 +2,9 @@
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class ConstantExpressionParser : ExpressionParser<ConstantExpression>
+    public class ConstantExpressionParser : TypedExpressionParser<ConstantExpression>
     {
-        protected override ISql ParseImpl(ConstantExpression expression)
+        protected override ISql ParseTyped(ConstantExpression expression)
         {
             var value = expression.Value;
             var param = Parameter.CreateNew(value);
