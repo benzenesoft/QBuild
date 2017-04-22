@@ -21,11 +21,6 @@ namespace BenzeneSoft.QBuild.Expressions
         private ISql ParseExact(MemberExpression expression)
         {
             var prop = expression.Member as PropertyInfo;
-            if (prop == null)
-            {
-                throw new ArgumentException("member expression must be a property", nameof(expression));
-            }
-
             var column = _nameResolver.Column(prop);
             return new Sql(column);
         }
