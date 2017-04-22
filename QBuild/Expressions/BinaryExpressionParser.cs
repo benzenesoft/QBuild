@@ -10,10 +10,16 @@ namespace BenzeneSoft.QBuild.Expressions
         private PropertyExpressionParser _propertyParser;
 
         public BinaryExpressionParser(INameResolver nameResolver, IOperatorResolver operatorResolver)
+            : this(operatorResolver, new ConstantExpressionParser(), new PropertyExpressionParser(nameResolver))
+        {
+        }
+
+        public BinaryExpressionParser(IOperatorResolver operatorResolver, ConstantExpressionParser constantParser
+            , PropertyExpressionParser propertyParser)
         {
             _operatorResolver = operatorResolver;
-            _constantParser = new ConstantExpressionParser();
-            _propertyParser = new PropertyExpressionParser(nameResolver);
+            _constantParser = constantParser;
+            _propertyParser = propertyParser;
         }
 
         protected override ISql ParseTyped(BinaryExpression expression)
