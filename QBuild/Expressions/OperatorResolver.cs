@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace BenzeneSoft.QBuild.Predicates
+namespace BenzeneSoft.QBuild.Expressions
 {
     public class OperatorResolver : IOperatorResolver
     {

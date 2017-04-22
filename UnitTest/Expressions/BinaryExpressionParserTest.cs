@@ -1,11 +1,12 @@
-﻿using BenzeneSoft.QBuild;
-using BenzeneSoft.QBuild.Predicates;
+﻿using System;
+using System.Linq.Expressions;
+using BenzeneSoft.QBuild;
+using BenzeneSoft.QBuild.Expressions;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;
-using static NUnit.Framework.Assert;
 
-namespace UnitTest.Predicates
+namespace UnitTest.Expressions
 {
     [TestFixture]
     public class BinaryExpressionParserTest
@@ -24,21 +25,23 @@ namespace UnitTest.Predicates
         [Test(Description = "find items that has discount")]
         public void Parse_ColumnColum()
         {
-            var predicate = _parser.Parse<Product>(p => p.DiscountedPrice < p.Price);
+            Expression<Predicate<Product>> exp = p => p.DiscountedPrice < p.Price;
+            var predicate = _parser.Parse(exp.Body);
             var sql = new Sql("select * from product where ").Append(predicate);
             var reader = _connection.Read(sql);
-            IsTrue(reader.Read());
-            AreEqual("sofa", reader["name"]);
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual("sofa", reader["name"]);
         }
 
         [Test(Description = "find cheap items")]
         public void Parse_ColumnValue()
         {
-            var predicate = _parser.Parse<Product>(p => p.Price <= 15);
+            Expression<Predicate<Product>> exp = p => p.Price <= 15;
+            var predicate = _parser.Parse(exp.Body);
             var sql = new Sql("select * from product where ").Append(predicate);
             var reader = _connection.Read(sql);
-            IsTrue(reader.Read());
-            AreEqual("bench", reader["name"]);
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual("bench", reader["name"]);
         }
     }
 }
