@@ -12,10 +12,11 @@ namespace UnitTest.Expressions
     {
         private PredicateParser _parser;
         private TestConnection _connection;
+
         [SetUp]
         public void Setup()
         {
-            _parser = new PredicateParser(new ParserLookup(new LowerSnakeCaseNameResolver(), new OperatorResolver()));
+            _parser = new PredicateParser(new ParserLookup(new LowerSnakeCaseNameResolver()));
             _connection = new TestConnection();
             _connection.Open();
         }
