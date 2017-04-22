@@ -1,8 +1,11 @@
 ﻿
+using System.Linq.Expressions;
+
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public interface IExpressionParser<in TExpression>
+    public interface IExpressionParser
     {
-        ISql Parse(TExpression expression);
+        bool CanParse(Expression expression);
+        ISql Parse(Expression expression);
     }
 }

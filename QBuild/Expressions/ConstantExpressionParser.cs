@@ -2,13 +2,18 @@
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class ConstantExpressionParser : IExpressionParser<ConstantExpression>
+    public class ConstantExpressionParser : IExpressionParser
     {
-        public ISql Parse(ConstantExpression expression)
+        public ISql Parse(Expression expression)
         {
-            var value = expression.Value;
+            var value = (expression as ConstantExpression).Value;
             var param = Parameter.CreateNew(value);
             return new Sql(param.Name, param);
+        }
+
+        public bool CanParse(Expression expression)
+        {
+            return expression is ConstantExpression;
         }
     }
 }

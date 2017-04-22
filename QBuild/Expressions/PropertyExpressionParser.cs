@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class PropertyExpressionParser : IExpressionParser<MemberExpression>
+    public class PropertyExpressionParser : IExpressionParser
     {
         private readonly INameResolver _nameResolver;
 
@@ -13,7 +13,12 @@ namespace BenzeneSoft.QBuild.Expressions
             _nameResolver = nameResolver;
         }
 
-        public ISql Parse(MemberExpression expression)
+        public ISql Parse(Expression expression)
+        {
+            return ParseExact(expression as MemberExpression);
+        }
+
+        private ISql ParseExact(MemberExpression expression)
         {
             var prop = expression.Member as PropertyInfo;
             if (prop == null)
@@ -23,6 +28,11 @@ namespace BenzeneSoft.QBuild.Expressions
 
             var column = _nameResolver.Column(prop);
             return new Sql(column);
+        }
+
+        public bool CanParse(Expression expression)
+        {
+            return (expression as MemberExpression)?.Member is PropertyInfo;
         }
     }
 }
