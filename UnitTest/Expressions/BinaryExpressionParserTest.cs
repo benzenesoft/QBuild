@@ -26,7 +26,7 @@ namespace UnitTest.Expressions
         public void Parse_ColumnColum()
         {
             Expression<Predicate<Product>> exp = p => p.DiscountedPrice < p.Price;
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse((BinaryExpression) exp.Body);
             var sql = new Sql("select * from product where ").Append(predicate);
             var reader = _connection.Read(sql);
             Assert.IsTrue(reader.Read());
@@ -37,7 +37,7 @@ namespace UnitTest.Expressions
         public void Parse_ColumnValue()
         {
             Expression<Predicate<Product>> exp = p => p.Price <= 15;
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse((BinaryExpression) exp.Body);
             var sql = new Sql("select * from product where ").Append(predicate);
             var reader = _connection.Read(sql);
             Assert.IsTrue(reader.Read());

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class BinaryExpressionParser : TypedExpressionParser<BinaryExpression>
+    public class BinaryExpressionParser : IExpressionParser<BinaryExpression>
     {
         private readonly IOperatorResolver _operatorResolver;
         private readonly ConstantExpressionParser _constantParser;
@@ -22,7 +22,7 @@ namespace BenzeneSoft.QBuild.Expressions
             _propertyParser = propertyParser;
         }
 
-        protected override ISql ParseTyped(BinaryExpression expression)
+        public ISql Parse(BinaryExpression expression)
         {
             var left = AsColumnOrValue(expression.Left);
             var op = _operatorResolver[expression.NodeType];
@@ -37,11 +37,11 @@ namespace BenzeneSoft.QBuild.Expressions
         {
             if (expression is MemberExpression)
             {
-                return _propertyParser.Parse(expression);
+                return _propertyParser.Parse((MemberExpression) expression);
             }
             if (expression is ConstantExpression)
             {
-                return _constantParser.Parse(expression);
+                return _constantParser.Parse((ConstantExpression) expression);
             }
 
             throw new ArgumentException("expression must be a property on constant", nameof(expression));

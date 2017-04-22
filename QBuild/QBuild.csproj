@@ -47,7 +47,6 @@
     <Compile Include="Expressions\ConstantExpressionParser.cs" />
     <Compile Include="Expressions\IPredicateParser.cs" />
     <Compile Include="Expressions\PredicateParser.cs" />
-    <Compile Include="Expressions\TypedExpressionParser.cs" />
     <Compile Include="Expressions\PropertyExpressionParser.cs" />
     <Compile Include="INameResolver.cs" />
     <Compile Include="Expressions\BinaryExpressionParser.cs" />
