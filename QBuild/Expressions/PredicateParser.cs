@@ -8,19 +8,16 @@ namespace BenzeneSoft.QBuild.Expressions
     public class PredicateParser : IPredicateParser
     {
         private IEnumerable<IExpressionParser> _prioritisedParsers;
-        private readonly BinaryExpressionParser _binaryParser;
-        private readonly ConstantExpressionParser _constantParser;
-        private readonly PropertyExpressionParser _propertyParser;
 
         public PredicateParser(INameResolver nameResolver, IOperatorResolver operatorResolver)
         {
-            _constantParser = new ConstantExpressionParser();
-            _propertyParser = new PropertyExpressionParser(nameResolver);
-            _binaryParser = new BinaryExpressionParser(operatorResolver, _constantParser, _propertyParser);
-
+            var constantParser = new ConstantExpressionParser();
+            var propertyParser = new PropertyExpressionParser(nameResolver);
+            var binaryParser = new BinaryExpressionParser(operatorResolver, constantParser, propertyParser);
+            var notExpressionParser = new NotExpressionParser(nameResolver);
             _prioritisedParsers = new IExpressionParser[]
             {
-                _constantParser, _propertyParser, _binaryParser
+                constantParser, propertyParser, binaryParser, notExpressionParser
             };
         }
 
