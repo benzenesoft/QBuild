@@ -4,6 +4,7 @@ namespace BenzeneSoft.QBuild.Expressions
 {
     public interface IParserLookup
     {
-        IExpressionParser FindParser(Expression expression);
+        IExpressionParser this[Expression expression] { get; }
+        IOperationParser this[ExpressionType operation] { get; }
     }
 }
