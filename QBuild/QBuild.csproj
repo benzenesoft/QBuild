@@ -45,7 +45,9 @@
     <Compile Include="Builders\IOrderByBuilder.cs" />
     <Compile Include="Builders\OrderByBuilder.cs" />
     <Compile Include="Expressions\ConstantExpressionParser.cs" />
+    <Compile Include="Expressions\IParserLookup.cs" />
     <Compile Include="Expressions\IPredicateParser.cs" />
+    <Compile Include="Expressions\ParserLookup.cs" />
     <Compile Include="Expressions\PredicateParser.cs" />
     <Compile Include="Expressions\PropertyExpressionParser.cs" />
     <Compile Include="Expressions\NotExpressionParser.cs" />
