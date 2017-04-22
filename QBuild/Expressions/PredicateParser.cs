@@ -1,36 +1,23 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
     public class PredicateParser : IPredicateParser
     {
-        private IEnumerable<IExpressionParser> _prioritisedParsers;
+        private readonly IParserLookup _lookup;
 
-        public PredicateParser(INameResolver nameResolver, IOperatorResolver operatorResolver)
+        public PredicateParser(IParserLookup lookup)
         {
-            var constantParser = new ConstantExpressionParser();
-            var propertyParser = new PropertyExpressionParser(nameResolver);
-            var binaryParser = new BinaryExpressionParser(operatorResolver, constantParser, propertyParser);
-            var notExpressionParser = new NotExpressionParser(nameResolver);
-            _prioritisedParsers = new IExpressionParser[]
-            {
-                constantParser, propertyParser, binaryParser, notExpressionParser
-            };
+            _lookup = lookup;
         }
 
         public ISql Parse<T>(Expression<Func<T, bool>> predicate)
         {
-            return ParseExpression(predicate.Body);
-        }
-
-        protected ISql ParseExpression(Expression expression)
-        {
-            var parser = _prioritisedParsers.FirstOrDefault(p => p.CanParse(expression));
-
-            return parser?.Parse(expression);
+            var expression = predicate.Body;
+            var parser = _lookup.FindParser(expression);
+            return parser.Parse(expression);
         }
     }
 }

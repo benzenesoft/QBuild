@@ -15,7 +15,7 @@ namespace UnitTest.Expressions
         [SetUp]
         public void Setup()
         {
-            _parser = new PredicateParser(new LowerSnakeCaseNameResolver(), new OperatorResolver());
+            _parser = new PredicateParser(new ParserLookup(new LowerSnakeCaseNameResolver(), new OperatorResolver()));
             _connection = new TestConnection();
             _connection.Open();
         }
