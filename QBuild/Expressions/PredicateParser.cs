@@ -24,11 +24,11 @@ namespace BenzeneSoft.QBuild.Expressions
         {
             if (expression is ConstantExpression)
             {
-                return _constantParser.Parse(expression);
+                return _constantParser.Parse((ConstantExpression) expression);
             }
             if (expression is BinaryExpression)
             {
-                return _binaryParser.Parse(expression);
+                return _binaryParser.Parse((BinaryExpression) expression);
             }
             return null;
         }
