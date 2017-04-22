@@ -41,5 +41,27 @@ namespace UnitTest.Expressions
             IsTrue(reader.Read());
             AreEqual("bed", reader["name"]);
         }
+
+        [Test]
+        public void SimpleBoolean_True()
+        {
+            var predicate = _parser.Parse<Product>(product => product.IsAvailable);
+            var sql = new Sql("select * from product where ").Append(predicate).Append(" order by name");
+
+            var reader = _connection.Read(sql);
+            IsTrue(reader.Read());
+            AreEqual("bed", reader["name"]);
+        }
+
+        [Test]
+        public void SimpleBoolean_False()
+        {
+            var predicate = _parser.Parse<Product>(product => !product.IsAvailable);
+            var sql = new Sql("select * from product where ").Append(predicate).Append(" order by name");
+
+            var reader = _connection.Read(sql);
+            IsTrue(reader.Read());
+            AreEqual("almira", reader["name"]);
+        }
     }
 }
