@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class BinaryExpressionParser : ExpressionParser<BinaryExpression>
+    public class BinaryExpressionParser : TypedExpressionParser<BinaryExpression>
     {
         private readonly IOperatorResolver _operatorResolver;
         private readonly ConstantExpressionParser _constantParser;
@@ -16,7 +16,7 @@ namespace BenzeneSoft.QBuild.Expressions
             _propertyParser = new PropertyExpressionParser(nameResolver);
         }
 
-        protected override ISql ParseImpl(BinaryExpression expression)
+        protected override ISql ParseTyped(BinaryExpression expression)
         {
             var left = AsColumnOrValue(expression.Left);
             var op = _operatorResolver[expression.NodeType];
