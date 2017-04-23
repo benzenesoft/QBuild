@@ -26,7 +26,7 @@ namespace BenzeneSoft.QBuild.Builders
         private void AppendIfNotNull(string prefix, ISql append, Sql appendTo)
         {
             if (append != null)
-                appendTo.Append(prefix).Append(append, true);
+                appendTo.Append(prefix).Append(append).Line();
         }
 
         public IQueryBuilder Select(ISql select)
