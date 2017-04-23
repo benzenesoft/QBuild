@@ -1,4 +1,3 @@
-using System;
 using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Expressions
@@ -23,7 +22,8 @@ namespace BenzeneSoft.QBuild.Expressions
             var op = _lookup[expression.NodeType];
             var right = _lookup[expression.Right].Parse(expression.Right);
 
-            var sql = op.Parse(expression.NodeType, left, right);
+            var sql = new Sql(op.Parse(expression.NodeType, left, right))
+                .WrapParentheses();
 
             return sql;
         }

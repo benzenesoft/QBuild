@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using BenzeneSoft.QBuild.Builders;
@@ -26,20 +24,15 @@ namespace BenzeneSoft.QBuild
 
         public IEnumerable<Parameter> Parameters => _parameters;
 
-        public Sql Append(ISql sql, bool appendLine = false, bool wrapParanthesis = false)
+        public Sql Append(ISql sql)
         {
             if (sql == null) return this;
 
             var text = sql.SqlText;
-            if (wrapParanthesis)
-            {
-                text = $"({text})";
-            }
 
             _sqlTextBuilder.Append(text);
             _parameters.AddRange(sql.Parameters);
 
-            if (appendLine) Line();
             return this;
         }
 
@@ -51,7 +44,13 @@ namespace BenzeneSoft.QBuild
 
         public Sql Line()
         {
-            _sqlTextBuilder.Append(Environment.NewLine);
+            _sqlTextBuilder.Append("\n");
+            return this;
+        }
+
+        public Sql WrapParentheses()
+        {
+            _sqlTextBuilder.Insert(0, "(").Append(")");
             return this;
         }
 
