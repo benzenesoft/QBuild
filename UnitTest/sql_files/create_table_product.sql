@@ -11,6 +11,7 @@
 
 INSERT INTO product (id, name, price, discounted_price, size, color, is_available)
 	VALUES 
+	--	  id	,name		,price	,dprice	,size	,color		,available	
 		 ( 1	,"almira"	,80		,80		,"l"	,"black"	,0)
 		,( 2	,"almira"	,70		,70		,"m"	,"red"      ,0)
 		,( 3	,"bed"		,60		,60		,"l"	,"red"      ,1)

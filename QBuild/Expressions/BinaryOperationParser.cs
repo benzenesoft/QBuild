@@ -13,7 +13,9 @@ namespace BenzeneSoft.QBuild.Expressions
             {GreaterThan, ">"},
             {GreaterThanOrEqual, ">="},
             {LessThan, "<"},
-            {LessThanOrEqual, "<="}
+            {LessThanOrEqual, "<="},
+            {OrElse, "OR"},
+            {AndAlso, "AND"}
         };
 
         public bool CanParse(ExpressionType operation)
