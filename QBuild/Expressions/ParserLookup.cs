@@ -6,18 +6,18 @@ namespace BenzeneSoft.QBuild.Expressions
 {
     public class ParserLookup : IParserLookup
     {
-        private IExpressionParser[] _expressionParsers;
-        private IOperationParser[] _operationParsers;
+        private readonly IExpressionParser[] _expressionParsers;
+        private readonly IOperationParser[] _operationParsers;
 
         public ParserLookup(INameResolver nameResolver)
         {
-            var constantParser = new ConstantExpressionParser();
-            var propertyParser = new PropertyExpressionParser(nameResolver);
-            var binaryParser = new BinaryExpressionParser(this);
-            var notExpressionParser = new NotExpressionParser(nameResolver);
             _expressionParsers = new IExpressionParser[]
             {
-                constantParser, propertyParser, binaryParser, notExpressionParser
+                new ConstantExpressionParser(), 
+                new PropertyExpressionParser(nameResolver), 
+                new NullityExpressionParser(this), 
+                new BinaryExpressionParser(this), 
+                new NotExpressionParser(nameResolver), 
             };
 
             _operationParsers = new IOperationParser[]
