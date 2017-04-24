@@ -49,6 +49,7 @@
     <Compile Include="Expressions\IOperationParser.cs" />
     <Compile Include="Expressions\IParserLookup.cs" />
     <Compile Include="Expressions\IPredicateParser.cs" />
+    <Compile Include="Expressions\NullityExpressionParser.cs" />
     <Compile Include="Expressions\ParserLookup.cs" />
     <Compile Include="Expressions\PredicateParser.cs" />
     <Compile Include="Expressions\PropertyExpressionParser.cs" />
