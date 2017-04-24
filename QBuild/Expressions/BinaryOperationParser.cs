@@ -8,14 +8,21 @@ namespace BenzeneSoft.QBuild.Expressions
     {
         private static readonly Dictionary<ExpressionType, string> Operations = new Dictionary<ExpressionType, string>
         {
-            {Equal, "="},
-            {NotEqual, "<>"},
-            {GreaterThan, ">"},
-            {GreaterThanOrEqual, ">="},
-            {LessThan, "<"},
-            {LessThanOrEqual, "<="},
-            {OrElse, "OR"},
-            {AndAlso, "AND"}
+
+            { Equal, "="},
+            { NotEqual, "<>"},
+            { GreaterThan, ">"},
+            { GreaterThanOrEqual, ">="},
+            { LessThan, "<"},
+            { LessThanOrEqual, "<="},
+
+            { OrElse, "OR"},
+            { AndAlso, "AND"},
+
+            { Add, "+"},
+            { Subtract, "-"},
+            { Multiply, "*"},
+            { Divide, "/"},
         };
 
         public bool CanParse(ExpressionType operation)

@@ -64,5 +64,19 @@ namespace UnitTest.Expressions
             IsTrue(reader.Read());
             AreEqual("almira", reader["name"]);
         }
+
+        [Test(Description = "At least 15% discount")]
+        public void ArithmeticOperations()
+        {
+            var predicate =
+                _parser.Parse<Product>(
+                    product => (100 * (product.Price - product.DiscountedPrice) / product.Price) + 1 >= 16);
+            var sql = new Sql("select * from product where ").Append(predicate);
+
+            var reader = _connection.Read(sql);
+            IsTrue(reader.Read());
+            AreEqual("sofa", reader["name"]);
+            AreEqual("l", reader["size"]);
+        }
     }
 }
