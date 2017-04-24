@@ -23,7 +23,7 @@ INSERT INTO product (id, name, price, discounted_price, size, color, is_availabl
 		,( 9	,"chair"	,20		,20		,"m"	,"red"      ,1)
 		,(10	,"chair"	,20		,20		,"m"	,"blue"     ,1)
 		,(11	,"desk"		,25		,25		,"m"	,"yellow"   ,1)
-		,(12	,"sofa"		,65		,60		,"l"	,"red"      ,1) -- has discount
-		,(13	,"sofa"		,45		,40		,"m"	,"blue"     ,1) -- has discount
+		,(12	,"sofa"		,65		,55		,"l"	,"red"      ,1) -- has discount = 10
+		,(13	,"sofa"		,50		,45		,"m"	,"blue"     ,1) -- has discount = 5
 		,(14	,"table"	,55		,55		,"m"	,"blue"     ,1)
 		,(15	,"table"	,40		,40		,"s"	,"green"    ,1);
