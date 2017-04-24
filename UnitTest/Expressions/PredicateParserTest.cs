@@ -78,5 +78,35 @@ namespace UnitTest.Expressions
             AreEqual("sofa", reader["name"]);
             AreEqual("l", reader["size"]);
         }
+
+        [Test]
+        public void IsNull()
+        {
+            Fail();
+        }
+
+        [Test]
+        public void IsNotNull()
+        {
+            Fail();
+        }
+
+        [Test]
+        public void UnaryNot()
+        {
+            Fail();
+        }
+
+        [Test]
+        public void UnaryIncreament()
+        {
+            Fail();
+        }
+
+        [Test]
+        public void UnaryDecreament()
+        {
+            Fail();
+        }
     }
 }
