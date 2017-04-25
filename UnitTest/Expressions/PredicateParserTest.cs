@@ -100,23 +100,5 @@ namespace UnitTest.Expressions
             IsTrue(reader.Read());
             AreEqual("chair", reader["name"]);
         }
-
-        [Test]
-        public void UnaryNot()
-        {
-            Fail();
-        }
-
-        [Test]
-        public void UnaryIncreament()
-        {
-            Fail();
-        }
-
-        [Test]
-        public void UnaryDecreament()
-        {
-            Fail();
-        }
     }
 }
