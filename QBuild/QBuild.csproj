@@ -44,23 +44,30 @@
     <Compile Include="Builders\ITablesBuilder.cs" />
     <Compile Include="Builders\IOrderByBuilder.cs" />
     <Compile Include="Builders\OrderByBuilder.cs" />
+    <Compile Include="Expressions\BinaryOperationParser.cs" />
+    <Compile Include="Expressions\ConstantExpressionParser.cs" />
+    <Compile Include="Expressions\IOperationParser.cs" />
+    <Compile Include="Expressions\IParserLookup.cs" />
+    <Compile Include="Expressions\IPredicateParser.cs" />
+    <Compile Include="Expressions\NullityExpressionParser.cs" />
+    <Compile Include="Expressions\ParserLookup.cs" />
+    <Compile Include="Expressions\PredicateParser.cs" />
+    <Compile Include="Expressions\PropertyExpressionParser.cs" />
     <Compile Include="INameResolver.cs" />
-    <Compile Include="Predicates\IPredicateFactory.cs" />
+    <Compile Include="Expressions\BinaryExpressionParser.cs" />
+    <Compile Include="Expressions\IExpressionParser.cs" />
     <Compile Include="Builders\IQueryBuilder.cs" />
     <Compile Include="Builders\IColumnsBuilder.cs" />
     <Compile Include="ISql.cs" />
     <Compile Include="Builders\ISqlBuilder.cs" />
-    <Compile Include="Builders\IPredicateBuilder.cs" />
     <Compile Include="LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Parameter.cs" />
-    <Compile Include="Predicates\OperatorMap.cs" />
-    <Compile Include="Predicates\PredicateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\QueryBuilder.cs" />
     <Compile Include="Builders\ColumnsBuilder.cs" />
     <Compile Include="Sql.cs" />
-    <Compile Include="Builders\PredicateBuilder.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

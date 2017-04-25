@@ -50,22 +50,12 @@ namespace UnitTest
         }
 
         [Test]
-        public void Append_WrapParantheses()
-        {
-            var sql = new Sql("some sql ");
-            var sqlToAppend = new Sql("append this");
-            sql.Append(sqlToAppend, wrapParanthesis: true);
-            
-            Assert.AreEqual("some sql (append this)", sql.SqlText);
-        }
-
-        [Test]
         public void AppendLine_EndWithLine()
         {
             var sql = new Sql("some sql");
             sql.Line();
             
-            Assert.AreEqual("some sql" + Environment.NewLine, sql.SqlText);
+            Assert.AreEqual("some sql\n", sql.SqlText);
         }
 
         [Test]
