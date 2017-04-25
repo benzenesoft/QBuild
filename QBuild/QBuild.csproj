@@ -53,7 +53,6 @@
     <Compile Include="Expressions\ParserLookup.cs" />
     <Compile Include="Expressions\PredicateParser.cs" />
     <Compile Include="Expressions\PropertyExpressionParser.cs" />
-    <Compile Include="Expressions\NotExpressionParser.cs" />
     <Compile Include="INameResolver.cs" />
     <Compile Include="Expressions\BinaryExpressionParser.cs" />
     <Compile Include="Expressions\IExpressionParser.cs" />
