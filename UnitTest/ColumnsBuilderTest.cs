@@ -30,16 +30,8 @@ namespace UnitTest
         public void All()
         {
             var columnsSql = builder.All().Build();
-            var sql = new Sql("select ").Append(columnsSql).Append(" from product");
 
-            var reader = _connection.Read(sql);
-            var expectedColumns = new[] { "id", "name", "price", "size", "color" };
-
-            Assert.AreEqual(5, reader.FieldCount);
-            for (var i = 0; i < 5; i++)
-            {
-                Assert.Contains(reader.GetName(i), expectedColumns);
-            }
+            Assert.AreEqual("*", columnsSql.SqlText.Trim());
         }
 
         [Test]
