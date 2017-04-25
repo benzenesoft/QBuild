@@ -8,13 +8,11 @@ namespace BenzeneSoft.QBuild.Builders
     public class ColumnsBuilder<T> : IColumnsBuilder<T>
     {
         private readonly INameResolver _nameResolver;
-        private readonly bool _appendLine;
         private readonly List<string> _columns;
 
-        public ColumnsBuilder(INameResolver nameResolver, bool appendLine = false)
+        public ColumnsBuilder(INameResolver nameResolver)
         {
             _nameResolver = nameResolver;
-            _appendLine = appendLine;
             _columns = new List<string>();
         }
 
@@ -23,10 +21,10 @@ namespace BenzeneSoft.QBuild.Builders
             if (_columns.Count <= 0) return new Sql();
 
             var sql = new Sql();
-            sql.Append(new Sql(_columns[0]), _appendLine);
+            sql.Append(new Sql(_columns[0])).Line();
             for (var i = 1; i < _columns.Count; i++)
             {
-                sql.Append(",").Append(new Sql(_columns[i]), _appendLine);
+                sql.Append(",").Append(new Sql(_columns[i])).Line();
             }
 
             return sql;

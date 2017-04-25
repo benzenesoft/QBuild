@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BenzeneSoft.QBuild;
+﻿using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
 using NUnit.Framework;
 using UnitTest.Doubles;
