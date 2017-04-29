@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Builders
 {
-    public class OrderByBuilder<T> : IOrderByBuilder<T>
+    public class OrderByBuilder : IOrderByBuilder
     {
         private readonly INameResolver _nameResolver;
         private readonly List<string> _expressions;
@@ -30,36 +30,26 @@ namespace BenzeneSoft.QBuild.Builders
             return sql;
         }
 
-        public IOrderByBuilder<T> Asc(params string[] orderExpression)
+        public IOrderByBuilder Asc(params string[] orderExpression)
         {
             _expressions.AddRange(orderExpression.Select(exp => $"{exp} ASC"));
             return this;
         }
 
-        public IOrderByBuilder<T> Desc(params string[] orderExpression)
+        public IOrderByBuilder Desc(params string[] orderExpression)
         {
             _expressions.AddRange(orderExpression.Select(exp => $"{exp} DESC"));
             return this;
         }
 
-        public IOrderByBuilder<T> Asc(params Expression<Func<T, object>>[] orderProperty)
+        public IOrderByBuilder Asc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
             return Asc(orderProperty.Select(_nameResolver.Column).ToArray());
         }
 
-        public IOrderByBuilder<T> Desc(params Expression<Func<T, object>>[] orderProperty)
+        public IOrderByBuilder Desc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
             return Desc(orderProperty.Select(_nameResolver.Column).ToArray());
-        }
-
-        IOrderByBuilder IOrderByBuilder.Asc(params string[] orderExpression)
-        {
-            return Asc(orderExpression);
-        }
-
-        IOrderByBuilder IOrderByBuilder.Desc(params string[] orderExpression)
-        {
-            return Desc(orderExpression);
         }
     }
 }

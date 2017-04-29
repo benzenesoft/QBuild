@@ -8,10 +8,6 @@ namespace BenzeneSoft.QBuild.Builders
     {
         IColumnsBuilder All();
         IColumnsBuilder Columns(params string[] expressions);
-    }
-
-    public interface IColumnsBuilder<T> : IColumnsBuilder
-    {
-        IColumnsBuilder<T> Columns(params Expression<Func<T, object>>[] expressions);
+        IColumnsBuilder Columns<T>(params Expression<Func<T, object>>[] expressions);
     }
 }
