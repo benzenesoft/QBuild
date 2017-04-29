@@ -4,7 +4,7 @@ using BenzeneSoft.QBuild.Expressions;
 
 namespace BenzeneSoft.QBuild.Builders
 {
-    public class SingleTableQueryBuilder<T> : ISqlBuilder
+    public class TableQBuilder<T> : ISqlBuilder
     {
         private IColumnsBuilder _selectBuilder;
         private readonly ITablesBuilder _tablesBuilder;
@@ -14,12 +14,12 @@ namespace BenzeneSoft.QBuild.Builders
         private IOrderByBuilder _orderByBuilder;
         private readonly IPredicateParser _predicateParser;
 
-        public SingleTableQueryBuilder(INameResolver nameResolver)
+        public TableQBuilder(INameResolver nameResolver)
             : this(nameResolver, new ParserLookup(nameResolver))
         {
         }
 
-        public SingleTableQueryBuilder(INameResolver nameResolver, IParserLookup lookup)
+        public TableQBuilder(INameResolver nameResolver, IParserLookup lookup)
             : this(new ColumnsBuilder(nameResolver)
                   , new TablesBuilder(nameResolver)
                   , new ColumnsBuilder(nameResolver)
@@ -28,7 +28,7 @@ namespace BenzeneSoft.QBuild.Builders
         {
         }
 
-        public SingleTableQueryBuilder(IColumnsBuilder selectBuilder
+        public TableQBuilder(IColumnsBuilder selectBuilder
             , ITablesBuilder tablesBuilder
             , IColumnsBuilder groupByBuilder
             , IOrderByBuilder orderByBuilder
@@ -41,43 +41,43 @@ namespace BenzeneSoft.QBuild.Builders
             _predicateParser = predicateParser;
         }
 
-        public SingleTableQueryBuilder<T> SelectAll()
+        public TableQBuilder<T> SelectAll()
         {
             _selectBuilder.All();
             return this;
         }
 
-        public SingleTableQueryBuilder<T> Select(params Expression<Func<T, object>>[] expressions)
+        public TableQBuilder<T> Select(params Expression<Func<T, object>>[] expressions)
         {
             _selectBuilder.Columns(expressions);
             return this;
         }
 
-        public SingleTableQueryBuilder<T> Where(Expression<Func<T, bool>> predicate)
+        public TableQBuilder<T> Where(Expression<Func<T, bool>> predicate)
         {
             _wherePredicate = predicate;
             return this;
         }
 
-        public SingleTableQueryBuilder<T> GroupBy(params Expression<Func<T, object>>[] expressions)
+        public TableQBuilder<T> GroupBy(params Expression<Func<T, object>>[] expressions)
         {
             _groupByBuilder.Columns(expressions);
             return this;
         }
 
-        public SingleTableQueryBuilder<T> Having(Expression<Func<T, bool>> predicate)
+        public TableQBuilder<T> Having(Expression<Func<T, bool>> predicate)
         {
             _havingPredicate = predicate;
             return this;
         }
 
-        public SingleTableQueryBuilder<T> OrderByAsc(params Expression<Func<T, object>>[] orderProperty)
+        public TableQBuilder<T> OrderByAsc(params Expression<Func<T, object>>[] orderProperty)
         {
             _orderByBuilder.Asc(orderProperty);
             return this;
         }
 
-        public SingleTableQueryBuilder<T> OrderByDesc(params Expression<Func<T, object>>[] orderProperty)
+        public TableQBuilder<T> OrderByDesc(params Expression<Func<T, object>>[] orderProperty)
         {
             _orderByBuilder.Desc(orderProperty);
             return this;
