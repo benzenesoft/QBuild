@@ -10,13 +10,13 @@ namespace UnitTest
     public class OrderByBuilderTest
     {
         private TestConnection _connection;
-        private OrderByBuilder<Product> _orderByBuilder;
+        private OrderByBuilder _orderByBuilder;
 
         [SetUp]
         public void Setup()
         {
             var nameResolver = new LowerSnakeCaseNameResolver();
-            _orderByBuilder = new OrderByBuilder<Product>(nameResolver);
+            _orderByBuilder = new OrderByBuilder(nameResolver);
 
             _connection = new TestConnection();
             _connection.Open();
@@ -32,7 +32,7 @@ namespace UnitTest
         [Test(Description = "select * from product order by name asc")]
         public void Asc_SingleColumn()
         {
-            var orderSql = _orderByBuilder.Asc(product => product.Name).Build();
+            var orderSql = _orderByBuilder.Asc<Product>(product => product.Name).Build();
 
             using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
             {
@@ -44,7 +44,7 @@ namespace UnitTest
         [Test(Description = "select * from product order by name desc")]
         public void Desc_SingleColumn()
         {
-            var orderSql = _orderByBuilder.Desc(product => product.Name).Build();
+            var orderSql = _orderByBuilder.Desc<Product>(product => product.Name).Build();
 
             using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
             {
@@ -56,7 +56,7 @@ namespace UnitTest
         [Test(Description = "select * from product order by name asc, price asc")]
         public void Asc_MultiColumn()
         {
-            var orderSql = _orderByBuilder.Asc(product => product.Name, product => product.Price).Build();
+            var orderSql = _orderByBuilder.Asc<Product>(product => product.Name, product => product.Price).Build();
 
             using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
             {
@@ -73,7 +73,7 @@ namespace UnitTest
         [Test(Description = "select * from product order by name desc, price desc")]
         public void Desc_MultiColumn()
         {
-            var orderSql = _orderByBuilder.Desc(product => product.Name, product => product.Price).Build();
+            var orderSql = _orderByBuilder.Desc<Product>(product => product.Name, product => product.Price).Build();
 
             using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
             {
@@ -90,7 +90,7 @@ namespace UnitTest
         [Test(Description = "select * from product order by name asc, price desc")]
         public void Mix_MultiColumn()
         {
-            var orderSql = _orderByBuilder.Asc(product => product.Name).Desc(product => product.Price).Build();
+            var orderSql = _orderByBuilder.Asc<Product>(product => product.Name).Desc<Product>(product => product.Price).Build();
 
             using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
             {

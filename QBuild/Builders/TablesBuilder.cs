@@ -1,6 +1,6 @@
 ﻿namespace BenzeneSoft.QBuild.Builders
 {
-    public class TablesBuilder<T> : ITablesBuilder<T>
+    public class TablesBuilder : ITablesBuilder
     {
         private readonly INameResolver _nameResolver;
         private string _table;
@@ -12,19 +12,18 @@
 
         public ISql Build()
         {
-            var table = _table ?? _nameResolver.Table(typeof(T));
-            return new Sql(table);
+            return new Sql(_table);
         }
 
-        ITablesBuilder ITablesBuilder.Table(string tableExpression)
-        {
-            return Table(tableExpression);
-        }
-
-        public ITablesBuilder<T> Table(string tableExpression)
+        public ITablesBuilder Table(string tableExpression)
         {
             _table = tableExpression;
             return this;
+        }
+
+        public ITablesBuilder Table<T>()
+        {
+            return Table(_nameResolver.Table(typeof(T)));
         }
     }
 }

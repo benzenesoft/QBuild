@@ -4,9 +4,6 @@
     public interface ITablesBuilder : ISqlBuilder
     {
         ITablesBuilder Table(string tableExpression);
-    }
-
-    public interface ITablesBuilder<T> : ITablesBuilder
-    {
+        ITablesBuilder Table<T>();
     }
 }

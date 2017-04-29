@@ -10,12 +10,12 @@ namespace UnitTest
     public class ColumnsBuilderTest
     {
         private TestConnection _connection;
-        private ColumnsBuilder<Product> builder;
+        private ColumnsBuilder builder;
 
         [SetUp]
         public void Setup()
         {
-            builder = new ColumnsBuilder<Product>(new LowerSnakeCaseNameResolver());
+            builder = new ColumnsBuilder(new LowerSnakeCaseNameResolver());
             _connection = new TestConnection();
             _connection.Open();
         }
@@ -52,7 +52,7 @@ namespace UnitTest
         [Test]
         public void Column_Expression()
         {
-            var columnsSql = builder.Columns(p => p.Id, p => p.Name).Build();
+            var columnsSql = builder.Columns<Product>(p => p.Id, p => p.Name).Build();
             var sql = new Sql("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);

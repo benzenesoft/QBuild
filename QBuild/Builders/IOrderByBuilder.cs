@@ -7,11 +7,7 @@ namespace BenzeneSoft.QBuild.Builders
     {
         IOrderByBuilder Asc(params string[] orderExpression);
         IOrderByBuilder Desc(params string[] orderExpression);
-    }
-
-    public interface IOrderByBuilder<T> : IOrderByBuilder
-    {
-        IOrderByBuilder<T> Asc(params Expression<Func<T, object>>[] orderProperty);
-        IOrderByBuilder<T> Desc(params Expression<Func<T, object>>[] orderProperty);
+        IOrderByBuilder Asc<T>(params Expression<Func<T, object>>[] orderProperty);
+        IOrderByBuilder Desc<T>(params Expression<Func<T, object>>[] orderProperty);
     }
 }
