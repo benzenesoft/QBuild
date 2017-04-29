@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Expressions;
+using BenzeneSoft.QBuild.Sqls;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;

@@ -1,5 +1,6 @@
 ﻿using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
+using BenzeneSoft.QBuild.Expressions;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;
@@ -15,8 +16,7 @@ namespace UnitTest
         [SetUp]
         public void Setup()
         {
-            var nameResolver = new LowerSnakeCaseNameResolver();
-            _orderByBuilder = new OrderByBuilder(nameResolver);
+            _orderByBuilder = new OrderByBuilder(new LambdaParser(new ParserLookup(new LowerSnakeCaseNameResolver())));
 
             _connection = new TestConnection();
             _connection.Open();
@@ -34,7 +34,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Asc<Product>(product => product.Name).Build();
 
-            using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
@@ -46,7 +46,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Desc<Product>(product => product.Name).Build();
 
-            using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("table", reader["name"]);
@@ -58,7 +58,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Asc<Product>(product => product.Name, product => product.Price).Build();
 
-            using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
@@ -75,7 +75,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Desc<Product>(product => product.Name, product => product.Price).Build();
 
-            using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("table", reader["name"]);
@@ -92,7 +92,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Asc<Product>(product => product.Name).Desc<Product>(product => product.Price).Build();
 
-            using (var reader = _connection.Read($"select * from product {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);

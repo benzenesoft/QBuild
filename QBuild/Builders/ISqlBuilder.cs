@@ -1,4 +1,6 @@
-﻿namespace BenzeneSoft.QBuild.Builders
+﻿using BenzeneSoft.QBuild.Sqls;
+
+namespace BenzeneSoft.QBuild.Builders
 {
     public interface ISqlBuilder
     {

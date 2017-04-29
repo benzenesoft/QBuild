@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using BenzeneSoft.QBuild.Builders;
 
-namespace BenzeneSoft.QBuild
+namespace BenzeneSoft.QBuild.Sqls
 {
     public class Sql : ISql
     {

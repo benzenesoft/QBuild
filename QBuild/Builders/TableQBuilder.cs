@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Expressions;
+using BenzeneSoft.QBuild.Sqls;
 
 namespace BenzeneSoft.QBuild.Builders
 {
@@ -15,16 +16,16 @@ namespace BenzeneSoft.QBuild.Builders
         private readonly ILambdaParser _lambdaParser;
 
         public TableQBuilder(INameResolver nameResolver)
-            : this(nameResolver, new ParserLookup(nameResolver))
+            : this(new LambdaParser(new ParserLookup(nameResolver)), nameResolver)
         {
         }
 
-        public TableQBuilder(INameResolver nameResolver, IParserLookup lookup)
-            : this(new ColumnsBuilder(nameResolver)
+        public TableQBuilder(ILambdaParser lambdaParser, INameResolver nameResolver)
+            : this(new ColumnsBuilder(lambdaParser)
                   , new TablesBuilder(nameResolver)
-                  , new ColumnsBuilder(nameResolver)
-                  , new OrderByBuilder(nameResolver)
-                  , new LambdaParser(lookup))
+                  , new ColumnsBuilder(lambdaParser)
+                  , new OrderByBuilder(lambdaParser)
+                  , lambdaParser)
         {
         }
 

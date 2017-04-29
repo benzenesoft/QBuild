@@ -1,5 +1,7 @@
 ﻿using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
+using BenzeneSoft.QBuild.Expressions;
+using BenzeneSoft.QBuild.Sqls;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;
@@ -15,7 +17,7 @@ namespace UnitTest
         [SetUp]
         public void Setup()
         {
-            builder = new ColumnsBuilder(new LowerSnakeCaseNameResolver());
+            builder = new ColumnsBuilder(new LambdaParser(new ParserLookup(new LowerSnakeCaseNameResolver())));
             _connection = new TestConnection();
             _connection.Open();
         }

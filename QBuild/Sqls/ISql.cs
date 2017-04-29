@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 
-namespace BenzeneSoft.QBuild
+namespace BenzeneSoft.QBuild.Sqls
 {
     public interface ISql
     {

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
+using BenzeneSoft.QBuild.Sqls;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
@@ -27,7 +27,9 @@ namespace BenzeneSoft.QBuild.Expressions
 
         public bool CanParse(Expression expression)
         {
-            return (expression as MemberExpression)?.Member is PropertyInfo;
+            var can =  (expression as MemberExpression)?.Member is PropertyInfo;
+
+            return can;
         }
     }
 }

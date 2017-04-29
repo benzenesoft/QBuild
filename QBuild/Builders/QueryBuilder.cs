@@ -1,3 +1,5 @@
+using BenzeneSoft.QBuild.Sqls;
+
 namespace BenzeneSoft.QBuild.Builders
 {
     public class QueryBuilder : IQueryBuilder

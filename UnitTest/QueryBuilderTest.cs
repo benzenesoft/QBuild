@@ -1,6 +1,7 @@
 ﻿using System;
 using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
+using BenzeneSoft.QBuild.Sqls;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using static NUnit.Framework.Assert;
