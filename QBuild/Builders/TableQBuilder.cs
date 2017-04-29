@@ -12,7 +12,7 @@ namespace BenzeneSoft.QBuild.Builders
         private IColumnsBuilder _groupByBuilder;
         private Expression<Func<T, bool>> _havingPredicate;
         private IOrderByBuilder _orderByBuilder;
-        private readonly IPredicateParser _predicateParser;
+        private readonly ILambdaParser _lambdaParser;
 
         public TableQBuilder(INameResolver nameResolver)
             : this(nameResolver, new ParserLookup(nameResolver))
@@ -24,7 +24,7 @@ namespace BenzeneSoft.QBuild.Builders
                   , new TablesBuilder(nameResolver)
                   , new ColumnsBuilder(nameResolver)
                   , new OrderByBuilder(nameResolver)
-                  , new PredicateParser(lookup))
+                  , new LambdaParser(lookup))
         {
         }
 
@@ -32,13 +32,13 @@ namespace BenzeneSoft.QBuild.Builders
             , ITablesBuilder tablesBuilder
             , IColumnsBuilder groupByBuilder
             , IOrderByBuilder orderByBuilder
-            , IPredicateParser predicateParser)
+            , ILambdaParser lambdaParser)
         {
             _selectBuilder = selectBuilder;
             _tablesBuilder = tablesBuilder;
             _groupByBuilder = groupByBuilder;
             _orderByBuilder = orderByBuilder;
-            _predicateParser = predicateParser;
+            _lambdaParser = lambdaParser;
         }
 
         public TableQBuilder<T> SelectAll()
@@ -89,9 +89,9 @@ namespace BenzeneSoft.QBuild.Builders
             var sql = queryBuilder
                 .Select(_selectBuilder.Build())
                 .From(_tablesBuilder.Table<T>().Build())
-                .Where(_predicateParser.Parse(_wherePredicate))
+                .Where(_lambdaParser.Parse(_wherePredicate))
                 .GroupBy(_groupByBuilder.Build())
-                .Having(_predicateParser.Parse(_havingPredicate))
+                .Having(_lambdaParser.Parse(_havingPredicate))
                 .OrderBy(_orderByBuilder.Build())
                 .Build();
 

@@ -1,18 +1,17 @@
-using System;
 using System.Linq.Expressions;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class PredicateParser : IPredicateParser
+    public class LambdaParser : ILambdaParser
     {
         private readonly IParserLookup _lookup;
 
-        public PredicateParser(IParserLookup lookup)
+        public LambdaParser(IParserLookup lookup)
         {
             _lookup = lookup;
         }
 
-        public ISql Parse<T>(Expression<Func<T, bool>> predicate)
+        public ISql Parse(LambdaExpression predicate)
         {
             var expression = predicate.Body;
             var parser = _lookup[expression];
