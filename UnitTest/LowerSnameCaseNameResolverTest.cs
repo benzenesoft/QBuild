@@ -13,7 +13,7 @@ namespace UnitTest
             var resolver = new LowerSnakeCaseNameResolver();
             Assert.AreEqual("product_tag", resolver.Table(typeof(ProductTag)));
 
-            Assert.AreEqual("product_id", resolver.Column<ProductTag>(pt => pt.ProductId));
+            Assert.AreEqual("product_id", resolver.Column(typeof(ProductTag).GetProperty("ProductId")));
         }
     }
 }

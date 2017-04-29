@@ -2,54 +2,49 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using BenzeneSoft.QBuild.Expressions;
+using BenzeneSoft.QBuild.Sqls;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public class OrderByBuilder : IOrderByBuilder
     {
-        private readonly INameResolver _nameResolver;
-        private readonly List<string> _expressions;
+        private readonly ILambdaParser _lambdaParser;
+        private CompositeSql _sql;
 
-        public OrderByBuilder(INameResolver nameResolver)
+        public OrderByBuilder(ILambdaParser lambdaParser)
         {
-            _nameResolver = nameResolver;
-            _expressions = new List<string>();
+            _lambdaParser = lambdaParser;
+            _sql = new CompositeSql(new Sql().Line().Append(","));
         }
 
         public ISql Build()
         {
-            var sql = new Sql();
-            if (_expressions.Count > 0)
-            {
-                sql.Append("ORDER BY ").Append(_expressions[0]);
-                for (var i = 1; i < _expressions.Count; i++)
-                {
-                    sql.Line().Append(",").Append(_expressions[i]);
-                }
-            }
-            return sql;
+            return _sql;
         }
 
         public IOrderByBuilder Asc(params string[] orderExpression)
         {
-            _expressions.AddRange(orderExpression.Select(exp => $"{exp} ASC"));
+            _sql.AddRange(orderExpression.Select(exp => new Sql($"{exp} ASC")));
             return this;
         }
 
         public IOrderByBuilder Desc(params string[] orderExpression)
         {
-            _expressions.AddRange(orderExpression.Select(exp => $"{exp} DESC"));
+            _sql.AddRange(orderExpression.Select(exp => new Sql($"{exp} DESC")));
             return this;
         }
 
         public IOrderByBuilder Asc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
-            return Asc(orderProperty.Select(_nameResolver.Column).ToArray());
+            _sql.AddRange(orderProperty.Select(exp => new Sql(_lambdaParser.Parse(exp)).Append(" ASC")));
+            return this;
         }
 
         public IOrderByBuilder Desc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
-            return Desc(orderProperty.Select(_nameResolver.Column).ToArray());
+            _sql.AddRange(orderProperty.Select(exp => new Sql(_lambdaParser.Parse(exp)).Append(" DESC")));
+            return this;
         }
     }
 }

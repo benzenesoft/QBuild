@@ -1,50 +1,43 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using BenzeneSoft.QBuild.Expressions;
+using BenzeneSoft.QBuild.Sqls;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public class ColumnsBuilder : IColumnsBuilder
     {
-        private readonly INameResolver _nameResolver;
-        private readonly List<string> _columns;
+        private readonly ILambdaParser _lambdaParser;
+        private CompositeSql _sql;
 
-        public ColumnsBuilder(INameResolver nameResolver)
+        public ColumnsBuilder(ILambdaParser lambdaParser)
         {
-            _nameResolver = nameResolver;
-            _columns = new List<string>();
+            _lambdaParser = lambdaParser;
+            _sql = new CompositeSql(new Sql().Line().Append(","));
         }
 
         public ISql Build()
         {
-            if (_columns.Count <= 0) return new Sql();
-
-            var sql = new Sql();
-            sql.Append(new Sql(_columns[0])).Line();
-            for (var i = 1; i < _columns.Count; i++)
-            {
-                sql.Append(",").Append(new Sql(_columns[i])).Line();
-            }
-
-            return sql;
+            return _sql;
         }
 
         public IColumnsBuilder All()
         {
-            return Columns("*");
+            _sql.Add("*");
+            return this;
         }
 
         public IColumnsBuilder Columns(params string[] expressions)
         {
-            _columns.AddRange(expressions);
+            _sql.AddRange(expressions.Select(exp => new Sql(exp)));
             return this;
         }
 
         public IColumnsBuilder Columns<T>(params Expression<Func<T, object>>[] expressions)
         {
-            var names = expressions.Select(_nameResolver.Column).ToArray();
-            return Columns(names);
+            _sql.AddRange(expressions.Select(_lambdaParser.Parse));
+            return this;
         }
     }
 }

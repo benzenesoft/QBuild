@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BenzeneSoft.QBuild;
+using BenzeneSoft.QBuild.Sqls;
 using NUnit.Framework;
-using UnitTest.Doubles;
 
-namespace UnitTest
+namespace UnitTest.Sqls
 {
     [TestFixture]
     public class SqlTest

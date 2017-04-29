@@ -16,7 +16,8 @@ namespace BenzeneSoft.QBuild.Expressions
                 new ConstantExpressionParser(), 
                 new PropertyExpressionParser(nameResolver), 
                 new NullityExpressionParser(this), 
-                new BinaryExpressionParser(this)
+                new BinaryExpressionParser(this),
+                new UnaryExpressionParser(this) 
             };
 
             _operationParsers = new IOperationParser[]
