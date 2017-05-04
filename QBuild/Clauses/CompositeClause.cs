@@ -5,7 +5,7 @@ namespace BenzeneSoft.QBuild.Clauses
 {
     public class CompositeClause : IClause
     {
-        public string SqlText => _mutableClause.SqlText;
+        public string Text => _mutableClause.Text;
         public IEnumerable<Parameter> Parameters => _mutableClause.Parameters;
 
         private readonly IClause _separator;

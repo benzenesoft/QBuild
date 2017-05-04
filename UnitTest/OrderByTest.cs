@@ -34,7 +34,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Asc<Product>(product => product.Name).Build();
 
-            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.text}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
@@ -46,7 +46,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Desc<Product>(product => product.Name).Build();
 
-            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.text}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("table", reader["name"]);
@@ -58,7 +58,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Asc<Product>(product => product.Name, product => product.Price).Build();
 
-            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.text}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);
@@ -75,7 +75,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Desc<Product>(product => product.Name, product => product.Price).Build();
 
-            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.text}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("table", reader["name"]);
@@ -92,7 +92,7 @@ namespace UnitTest
         {
             var orderSql = _orderByBuilder.Asc<Product>(product => product.Name).Desc<Product>(product => product.Price).Build();
 
-            using (var reader = _connection.Read($"select * from product order by {orderSql.SqlText}"))
+            using (var reader = _connection.Read($"select * from product order by {orderSql.text}"))
             {
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual("almira", reader["name"]);

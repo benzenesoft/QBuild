@@ -17,10 +17,10 @@ namespace BenzeneSoft.QBuild.Clauses
         }
 
         public MutableClause() : this(string.Empty) { }
-        public MutableClause(IClause clause) : this(clause.SqlText, clause.Parameters.ToArray()) { }
+        public MutableClause(IClause clause) : this(clause.Text, clause.Parameters.ToArray()) { }
         public MutableClause(ISqlBuilder builder) : this(builder.Build()) { }
 
-        public string SqlText => _sqlTextBuilder.ToString();
+        public string Text => _sqlTextBuilder.ToString();
 
         public IEnumerable<Parameter> Parameters => _parameters;
 
@@ -28,7 +28,7 @@ namespace BenzeneSoft.QBuild.Clauses
         {
             if (clause == null) return this;
 
-            var text = clause.SqlText;
+            var text = clause.Text;
 
             _sqlTextBuilder.Append(text);
             _parameters.AddRange(clause.Parameters);
@@ -56,7 +56,7 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public override string ToString()
         {
-            return SqlText;
+            return Text;
         }
     }
 }
