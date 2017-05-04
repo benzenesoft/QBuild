@@ -12,7 +12,7 @@ namespace UnitTest
         {
             var fromBuilder = new TablesBuilder(new LowerSnakeCaseNameResolver());
             
-            Assert.AreEqual("product_table", fromBuilder.Table("product_table").Build().SqlText);
+            Assert.AreEqual("product_table", fromBuilder.Table("product_table").Build().text);
         }
     }
 }

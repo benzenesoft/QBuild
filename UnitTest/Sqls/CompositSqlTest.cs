@@ -12,7 +12,7 @@ namespace UnitTest.Sqls
             var sql = new CompositeClause(new MutableClause(","));
             sql.Add("one");
 
-            Assert.AreEqual("one", sql.SqlText);
+            Assert.AreEqual("one", sql.text);
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace UnitTest.Sqls
             var sql = new CompositeClause(new MutableClause(","));
             sql.Add("one").Add("two");
 
-            Assert.AreEqual("one,two", sql.SqlText);
+            Assert.AreEqual("one,two", sql.text);
         }
     }
 }

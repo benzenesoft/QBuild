@@ -33,7 +33,7 @@ namespace UnitTest
         {
             var columnsSql = builder.All().Build();
 
-            Assert.AreEqual("*", columnsSql.SqlText.Trim());
+            Assert.AreEqual("*", columnsSql.text.Trim());
         }
 
         [Test]

@@ -4,7 +4,7 @@ namespace BenzeneSoft.QBuild.Clauses
 {
     public interface IClause
     {
-        string SqlText { get; }
+        string Text { get; }
         IEnumerable<Parameter> Parameters { get; }
     }
 }

@@ -81,7 +81,7 @@ namespace UnitTest.Doubles
         public SQLiteDataReader Read(IClause clause)
         {
             var command = CreateCommand();
-            command.CommandText = clause.SqlText;
+            command.CommandText = clause.text;
             foreach (var parameter in clause.Parameters)
             {
                 var param = command.CreateParameter();
@@ -90,7 +90,7 @@ namespace UnitTest.Doubles
                 command.Parameters.Add(param);
             }
 
-            Console.WriteLine(clause.SqlText);
+            Console.WriteLine(clause.text);
             return command.ExecuteReader();
         }
     }
