@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using BenzeneSoft.QBuild;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 using NUnit.Framework;
 
 namespace UnitTest.Sqls
@@ -12,7 +12,7 @@ namespace UnitTest.Sqls
         [Test]
         public void Construct_Empty_TextAndParamsEmpty()
         {
-            var sql = new Sql();
+            var sql = new Clause();
             Assert.IsEmpty(sql.SqlText);
             Assert.IsEmpty(sql.Parameters);
         }
@@ -21,7 +21,7 @@ namespace UnitTest.Sqls
         public void Construct_WithTextNoParam_TextMathcasAndParamsEmpty()
         {
             var someSql = "some sql";
-            var sql = new Sql(someSql);
+            var sql = new Clause(someSql);
             Assert.AreEqual(someSql, sql.SqlText);
             Assert.IsEmpty(sql.Parameters);
         }
@@ -32,7 +32,7 @@ namespace UnitTest.Sqls
             var parameter = Parameter.CreateNew("parameterized");
             var someSql = $"some sql {parameter.Name}";
 
-            var sql = new Sql(someSql, parameter);
+            var sql = new Clause(someSql, parameter);
 
             Assert.AreEqual(someSql, sql.SqlText);
             Assert.Contains(parameter, sql.Parameters.ToList());
@@ -41,8 +41,8 @@ namespace UnitTest.Sqls
         [Test]
         public void Append_NoWrap()
         {
-            var sql = new Sql("some sql ");
-            var sqlToAppend = new Sql("append this");
+            var sql = new Clause("some sql ");
+            var sqlToAppend = new Clause("append this");
             sql.Append(sqlToAppend);
 
             Assert.AreEqual("some sql append this", sql.SqlText);
@@ -51,7 +51,7 @@ namespace UnitTest.Sqls
         [Test]
         public void AppendLine_EndWithLine()
         {
-            var sql = new Sql("some sql");
+            var sql = new Clause("some sql");
             sql.Line();
             
             Assert.AreEqual("some sql\n", sql.SqlText);
@@ -60,7 +60,7 @@ namespace UnitTest.Sqls
         [Test]
         public void AppendText_TextAppended()
         {
-            var sql = new Sql("some sql");
+            var sql = new Clause("some sql");
             sql.Append(" append this");
 
             Assert.AreEqual("some sql append this", sql.SqlText);

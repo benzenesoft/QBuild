@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
@@ -12,18 +12,18 @@ namespace BenzeneSoft.QBuild.Expressions
             _lookup = lookup;
         }
 
-        public ISql Parse(Expression expression)
+        public IClause Parse(Expression expression)
         {
             return ParseExact(expression as BinaryExpression);
         }
 
-        private ISql ParseExact(BinaryExpression expression)
+        private IClause ParseExact(BinaryExpression expression)
         {
             var left = _lookup[expression.Left].Parse(expression.Left);
             var op = _lookup[expression.NodeType];
             var right = _lookup[expression.Right].Parse(expression.Right);
 
-            var sql = new Sql(op.Parse(expression.NodeType, left, right))
+            var sql = new Clause(op.Parse(expression.NodeType, left, right))
                 .WrapParentheses();
 
             return sql;

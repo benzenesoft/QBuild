@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using BenzeneSoft.QBuild;
+using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
-using BenzeneSoft.QBuild.Sqls;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;
@@ -29,7 +29,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = p => p.DiscountedPrice < p.Price;
             var predicate = _parser.Parse((BinaryExpression)exp.Body);
-            var sql = new Sql("select * from product where ").Append(predicate);
+            var sql = new Clause("select * from product where ").Append(predicate);
             var reader = _connection.Read(sql);
             IsTrue(reader.Read());
             AreEqual("sofa", reader["name"]);
@@ -40,7 +40,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = p => p.Price <= 15;
             var predicate = _parser.Parse((BinaryExpression)exp.Body);
-            var sql = new Sql("select * from product where ").Append(predicate);
+            var sql = new Clause("select * from product where ").Append(predicate);
             var reader = _connection.Read(sql);
             IsTrue(reader.Read());
             AreEqual("bench", reader["name"]);
@@ -54,7 +54,7 @@ namespace UnitTest.Expressions
             var eBody = exp.Body;
             var predicate = _parser.Parse(eBody);
 
-            var sql = new Sql("select * from product where ").Append(predicate).Append(" order by price");
+            var sql = new Clause("select * from product where ").Append(predicate).Append(" order by price");
             var reader = _connection.Read(sql);
 
             IsTrue(_parser.CanParse(eBody));
@@ -79,7 +79,7 @@ namespace UnitTest.Expressions
             var eBody = exp.Body;
             var predicate = _parser.Parse(eBody);
 
-            var sql = new Sql("select * from product where ").Append(predicate).Append(" order by price");
+            var sql = new Clause("select * from product where ").Append(predicate).Append(" order by price");
             var reader = _connection.Read(sql);
 
             IsTrue(_parser.CanParse(eBody));
@@ -97,7 +97,7 @@ namespace UnitTest.Expressions
 
             var predicate = _parser.Parse(exp.Body);
 
-            var sql = new Sql("select count(*) as count from product where ")
+            var sql = new Clause("select count(*) as count from product where ")
                 .Append(predicate);
             var reader = _connection.Read(sql);
 
@@ -113,7 +113,7 @@ namespace UnitTest.Expressions
             Expression<Predicate<Product>> exp = p => (100 * (p.Price - p.DiscountedPrice) / p.Price) + 1 >= 16;
             var predicate = _parser.Parse(exp.Body);
 
-            var sql = new Sql("select * from product where ").Append(predicate);
+            var sql = new Clause("select * from product where ").Append(predicate);
 
             var reader = _connection.Read(sql);
             IsTrue(reader.Read());
@@ -126,7 +126,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == false;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new Sql("select * from product where ").Append(predicate).Append(" order by name");
+            var sql = new Clause("select * from product where ").Append(predicate).Append(" order by name");
 
             var reader = _connection.Read(sql);
             IsTrue(reader.Read());
@@ -139,7 +139,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == true;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new Sql("select * from product where ").Append(predicate).Append(" order by name");
+            var sql = new Clause("select * from product where ").Append(predicate).Append(" order by name");
 
             var reader = _connection.Read(sql);
             IsTrue(reader.Read());

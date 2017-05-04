@@ -1,15 +1,15 @@
 ﻿using System.Linq.Expressions;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
     public class ConstantExpressionParser : IExpressionParser
     {
-        public ISql Parse(Expression expression)
+        public IClause Parse(Expression expression)
         {
             var value = (expression as ConstantExpression).Value;
             var param = Parameter.CreateNew(value);
-            return new Sql(param.Name, param);
+            return new Clause(param.Name, param);
         }
 
         public bool CanParse(Expression expression)

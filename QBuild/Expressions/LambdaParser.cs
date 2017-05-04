@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
@@ -12,7 +12,7 @@ namespace BenzeneSoft.QBuild.Expressions
             _lookup = lookup;
         }
 
-        public ISql Parse(LambdaExpression predicate)
+        public IClause Parse(LambdaExpression predicate)
         {
             var expression = predicate.Body;
             var parser = _lookup[expression];

@@ -1,7 +1,7 @@
 ﻿using System;
 using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using static NUnit.Framework.Assert;
@@ -33,9 +33,9 @@ namespace UnitTest
         [Test(Description = "select * from product where id = 1")]
         public void Test1()
         {
-            var sql = _builder.Select(new Sql("*"))
-                .From(new Sql("product"))
-                .Where(new Sql("id = 1"))
+            var sql = _builder.Select(new Clause("*"))
+                .From(new Clause("product"))
+                .Where(new Clause("id = 1"))
                 .Build();
 
             var reader = _connection.Read(sql);
@@ -51,9 +51,9 @@ namespace UnitTest
         public void GroupBy()
         {
             var sql = _builder
-                .Select(new Sql("name, avg(price) as avg_price"))
-                .From(new Sql("product"))
-                .GroupBy(new Sql("name"))
+                .Select(new Clause("name, avg(price) as avg_price"))
+                .From(new Clause("product"))
+                .GroupBy(new Clause("name"))
                 .Build();
 
             var reader = _connection.Read(sql);
@@ -66,10 +66,10 @@ namespace UnitTest
         public void Having()
         {
             var sql = _builder
-                .Select(new Sql("name, avg(price) as avg_price"))
-                .From(new Sql("product"))
-                .GroupBy(new Sql("name"))
-                .Having(new Sql("avg_price > 74"))
+                .Select(new Clause("name, avg(price) as avg_price"))
+                .From(new Clause("product"))
+                .GroupBy(new Clause("name"))
+                .Having(new Clause("avg_price > 74"))
                 .Build();
 
             var reader = _connection.Read(sql);
@@ -84,9 +84,9 @@ namespace UnitTest
         public void OrderBy()
         {
             var sql = _builder
-                .Select(new Sql("name"))
-                .From(new Sql("product"))
-                .OrderBy(new Sql("name desc"))
+                .Select(new Clause("name"))
+                .From(new Clause("product"))
+                .OrderBy(new Clause("name desc"))
                 .Build();
 
             var reader = _connection.Read(sql);

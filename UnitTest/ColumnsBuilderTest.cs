@@ -1,7 +1,7 @@
 ﻿using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Builders;
+using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
-using BenzeneSoft.QBuild.Sqls;
 using NUnit.Framework;
 using UnitTest.Doubles;
 using UnitTest.Entities;
@@ -40,7 +40,7 @@ namespace UnitTest
         public void Column_String()
         {
             var columnsSql = builder.Columns("id", "name").Build();
-            var sql = new Sql("select ").Append(columnsSql).Append(" from product");
+            var sql = new Clause("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);
             var count = reader.FieldCount;
@@ -55,7 +55,7 @@ namespace UnitTest
         public void Column_Expression()
         {
             var columnsSql = builder.Columns<Product>(p => p.Id, p => p.Name).Build();
-            var sql = new Sql("select ").Append(columnsSql).Append(" from product");
+            var sql = new Clause("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);
             var count = reader.FieldCount;

@@ -1,42 +1,42 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
-using BenzeneSoft.QBuild.Sqls;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public class ColumnsBuilder : IColumnsBuilder
     {
         private readonly ILambdaParser _lambdaParser;
-        private CompositeSql _sql;
+        private CompositeClause _clause;
 
         public ColumnsBuilder(ILambdaParser lambdaParser)
         {
             _lambdaParser = lambdaParser;
-            _sql = new CompositeSql(new Sql().Line().Append(","));
+            _clause = new CompositeClause(new Clause().Line().Append(","));
         }
 
-        public ISql Build()
+        public IClause Build()
         {
-            return _sql;
+            return _clause;
         }
 
         public IColumnsBuilder All()
         {
-            _sql.Add("*");
+            _clause.Add("*");
             return this;
         }
 
         public IColumnsBuilder Columns(params string[] expressions)
         {
-            _sql.AddRange(expressions.Select(exp => new Sql(exp)));
+            _clause.AddRange(expressions.Select(exp => new Clause(exp)));
             return this;
         }
 
         public IColumnsBuilder Columns<T>(params Expression<Func<T, object>>[] expressions)
         {
-            _sql.AddRange(expressions.Select(_lambdaParser.Parse));
+            _clause.AddRange(expressions.Select(_lambdaParser.Parse));
             return this;
         }
     }

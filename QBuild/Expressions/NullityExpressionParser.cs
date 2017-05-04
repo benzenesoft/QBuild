@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 using static System.Linq.Expressions.ExpressionType;
 
 namespace BenzeneSoft.QBuild.Expressions
@@ -40,12 +40,12 @@ namespace BenzeneSoft.QBuild.Expressions
                    binExpression.NodeType == NotEqual;
         }
 
-        public ISql Parse(Expression expression)
+        public IClause Parse(Expression expression)
         {
             return ParseExact(expression as BinaryExpression);
         }
 
-        private ISql ParseExact(BinaryExpression binaryExpression)
+        private IClause ParseExact(BinaryExpression binaryExpression)
         {
             Expression other;
             
@@ -61,7 +61,7 @@ namespace BenzeneSoft.QBuild.Expressions
             var nullCheck = binaryExpression.NodeType == Equal ? " IS NULL" : " IS NOT NULL";
 
             var otherSql = _lookup[other].Parse(other);
-            var sql = new Sql().Append(otherSql).Append(nullCheck).WrapParentheses();
+            var sql = new Clause().Append(otherSql).Append(nullCheck).WrapParentheses();
 
             return sql;
         }

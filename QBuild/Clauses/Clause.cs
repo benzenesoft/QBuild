@@ -3,52 +3,52 @@ using System.Linq;
 using System.Text;
 using BenzeneSoft.QBuild.Builders;
 
-namespace BenzeneSoft.QBuild.Sqls
+namespace BenzeneSoft.QBuild.Clauses
 {
-    public class Sql : ISql
+    public class Clause : IClause
     {
         private readonly StringBuilder _sqlTextBuilder;
         private readonly List<Parameter> _parameters;
 
-        public Sql(string sqlText, params Parameter[] parameters)
+        public Clause(string sqlText, params Parameter[] parameters)
         {
             _sqlTextBuilder = new StringBuilder(sqlText);
             _parameters = new List<Parameter>(parameters);
         }
 
-        public Sql() : this(string.Empty) { }
-        public Sql(ISql sql) : this(sql.SqlText, sql.Parameters.ToArray()) { }
-        public Sql(ISqlBuilder builder) : this(builder.Build()) { }
+        public Clause() : this(string.Empty) { }
+        public Clause(IClause clause) : this(clause.SqlText, clause.Parameters.ToArray()) { }
+        public Clause(ISqlBuilder builder) : this(builder.Build()) { }
 
         public string SqlText => _sqlTextBuilder.ToString();
 
         public IEnumerable<Parameter> Parameters => _parameters;
 
-        public Sql Append(ISql sql)
+        public Clause Append(IClause clause)
         {
-            if (sql == null) return this;
+            if (clause == null) return this;
 
-            var text = sql.SqlText;
+            var text = clause.SqlText;
 
             _sqlTextBuilder.Append(text);
-            _parameters.AddRange(sql.Parameters);
+            _parameters.AddRange(clause.Parameters);
 
             return this;
         }
 
-        public Sql Append(string sqlText)
+        public Clause Append(string sqlText)
         {
             _sqlTextBuilder.Append(sqlText);
             return this;
         }
 
-        public Sql Line()
+        public Clause Line()
         {
             _sqlTextBuilder.Append("\n");
             return this;
         }
 
-        public Sql WrapParentheses()
+        public Clause WrapParentheses()
         {
             _sqlTextBuilder.Insert(0, "(").Append(")");
             return this;

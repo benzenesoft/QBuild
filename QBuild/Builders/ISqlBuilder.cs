@@ -1,9 +1,9 @@
-﻿using BenzeneSoft.QBuild.Sqls;
+﻿using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public interface ISqlBuilder
     {
-        ISql Build();
+        IClause Build();
     }
 }
