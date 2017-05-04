@@ -33,9 +33,9 @@ namespace UnitTest
         [Test(Description = "select * from product where id = 1")]
         public void Test1()
         {
-            var sql = _builder.Select(new Clause("*"))
-                .From(new Clause("product"))
-                .Where(new Clause("id = 1"))
+            var sql = _builder.Select(new MutableClause("*"))
+                .From(new MutableClause("product"))
+                .Where(new MutableClause("id = 1"))
                 .Build();
 
             var reader = _connection.Read(sql);
@@ -51,9 +51,9 @@ namespace UnitTest
         public void GroupBy()
         {
             var sql = _builder
-                .Select(new Clause("name, avg(price) as avg_price"))
-                .From(new Clause("product"))
-                .GroupBy(new Clause("name"))
+                .Select(new MutableClause("name, avg(price) as avg_price"))
+                .From(new MutableClause("product"))
+                .GroupBy(new MutableClause("name"))
                 .Build();
 
             var reader = _connection.Read(sql);
@@ -66,10 +66,10 @@ namespace UnitTest
         public void Having()
         {
             var sql = _builder
-                .Select(new Clause("name, avg(price) as avg_price"))
-                .From(new Clause("product"))
-                .GroupBy(new Clause("name"))
-                .Having(new Clause("avg_price > 74"))
+                .Select(new MutableClause("name, avg(price) as avg_price"))
+                .From(new MutableClause("product"))
+                .GroupBy(new MutableClause("name"))
+                .Having(new MutableClause("avg_price > 74"))
                 .Build();
 
             var reader = _connection.Read(sql);
@@ -84,9 +84,9 @@ namespace UnitTest
         public void OrderBy()
         {
             var sql = _builder
-                .Select(new Clause("name"))
-                .From(new Clause("product"))
-                .OrderBy(new Clause("name desc"))
+                .Select(new MutableClause("name"))
+                .From(new MutableClause("product"))
+                .OrderBy(new MutableClause("name desc"))
                 .Build();
 
             var reader = _connection.Read(sql);

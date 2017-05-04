@@ -40,7 +40,7 @@ namespace UnitTest
         public void Column_String()
         {
             var columnsSql = builder.Columns("id", "name").Build();
-            var sql = new Clause("select ").Append(columnsSql).Append(" from product");
+            var sql = new MutableClause("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);
             var count = reader.FieldCount;
@@ -55,7 +55,7 @@ namespace UnitTest
         public void Column_Expression()
         {
             var columnsSql = builder.Columns<Product>(p => p.Id, p => p.Name).Build();
-            var sql = new Clause("select ").Append(columnsSql).Append(" from product");
+            var sql = new MutableClause("select ").Append(columnsSql).Append(" from product");
 
             var reader = _connection.Read(sql);
             var count = reader.FieldCount;

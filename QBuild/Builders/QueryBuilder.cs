@@ -13,7 +13,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public IClause Build()
         {
-            var sql = new Clause();
+            var sql = new MutableClause();
 
             AppendIfNotNull("SELECT ", _select, sql);
             AppendIfNotNull("FROM ", _from, sql);
@@ -25,7 +25,7 @@ namespace BenzeneSoft.QBuild.Builders
             return sql;
         }
 
-        private void AppendIfNotNull(string prefix, IClause append, Clause appendTo)
+        private void AppendIfNotNull(string prefix, IClause append, MutableClause appendTo)
         {
             if (append != null)
                 appendTo.Append(prefix).Append(append).Line();

@@ -14,7 +14,7 @@ namespace BenzeneSoft.QBuild.Builders
         public ColumnsBuilder(ILambdaParser lambdaParser)
         {
             _lambdaParser = lambdaParser;
-            _clause = new CompositeClause(new Clause().Line().Append(","));
+            _clause = new CompositeClause(new MutableClause().Line().Append(","));
         }
 
         public IClause Build()
@@ -30,7 +30,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public IColumnsBuilder Columns(params string[] expressions)
         {
-            _clause.AddRange(expressions.Select(exp => new Clause(exp)));
+            _clause.AddRange(expressions.Select(exp => new MutableClause(exp)));
             return this;
         }
 
