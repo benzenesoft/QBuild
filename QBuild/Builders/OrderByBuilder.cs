@@ -15,7 +15,7 @@ namespace BenzeneSoft.QBuild.Builders
         public OrderByBuilder(ILambdaParser lambdaParser)
         {
             _lambdaParser = lambdaParser;
-            _clause = new CompositeClause(new Clause().Line().Append(","));
+            _clause = new CompositeClause(new MutableClause().Line().Append(","));
         }
 
         public IClause Build()
@@ -25,25 +25,25 @@ namespace BenzeneSoft.QBuild.Builders
 
         public IOrderByBuilder Asc(params string[] orderExpression)
         {
-            _clause.AddRange(orderExpression.Select(exp => new Clause($"{exp} ASC")));
+            _clause.AddRange(orderExpression.Select(exp => new MutableClause($"{exp} ASC")));
             return this;
         }
 
         public IOrderByBuilder Desc(params string[] orderExpression)
         {
-            _clause.AddRange(orderExpression.Select(exp => new Clause($"{exp} DESC")));
+            _clause.AddRange(orderExpression.Select(exp => new MutableClause($"{exp} DESC")));
             return this;
         }
 
         public IOrderByBuilder Asc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
-            _clause.AddRange(orderProperty.Select(exp => new Clause(_lambdaParser.Parse(exp)).Append(" ASC")));
+            _clause.AddRange(orderProperty.Select(exp => new MutableClause(_lambdaParser.Parse(exp)).Append(" ASC")));
             return this;
         }
 
         public IOrderByBuilder Desc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
-            _clause.AddRange(orderProperty.Select(exp => new Clause(_lambdaParser.Parse(exp)).Append(" DESC")));
+            _clause.AddRange(orderProperty.Select(exp => new MutableClause(_lambdaParser.Parse(exp)).Append(" DESC")));
             return this;
         }
     }

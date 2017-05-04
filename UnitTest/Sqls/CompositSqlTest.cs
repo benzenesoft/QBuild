@@ -9,7 +9,7 @@ namespace UnitTest.Sqls
         [Test]
         public void Add_Single_NoSeparator()
         {
-            var sql = new CompositeClause(new Clause(","));
+            var sql = new CompositeClause(new MutableClause(","));
             sql.Add("one");
 
             Assert.AreEqual("one", sql.SqlText);
@@ -18,7 +18,7 @@ namespace UnitTest.Sqls
         [Test]
         public void Add_Multiple_AddsSeparator()
         {
-            var sql = new CompositeClause(new Clause(","));
+            var sql = new CompositeClause(new MutableClause(","));
             sql.Add("one").Add("two");
 
             Assert.AreEqual("one,two", sql.SqlText);

@@ -29,7 +29,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.Comment == null;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new Clause("select * from product where ").Append(predicate).Append(" and name = 'bed'");
+            var sql = new MutableClause("select * from product where ").Append(predicate).Append(" and name = 'bed'");
 
             var reader = _connection.Read(sql);
             IsTrue(reader.Read());
@@ -41,7 +41,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.Comment != null;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new Clause("select * from product where ").Append(predicate);
+            var sql = new MutableClause("select * from product where ").Append(predicate);
 
             var reader = _connection.Read(sql);
             IsTrue(reader.Read());

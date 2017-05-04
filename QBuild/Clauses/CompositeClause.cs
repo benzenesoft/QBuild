@@ -5,32 +5,32 @@ namespace BenzeneSoft.QBuild.Clauses
 {
     public class CompositeClause : IClause
     {
-        public string SqlText => _clause.SqlText;
-        public IEnumerable<Parameter> Parameters => _clause.Parameters;
+        public string SqlText => _mutableClause.SqlText;
+        public IEnumerable<Parameter> Parameters => _mutableClause.Parameters;
 
         private readonly IClause _separator;
-        private readonly Clause _clause;
+        private readonly MutableClause _mutableClause;
         private bool _isEmpty;
 
         public CompositeClause(IClause separator)
         {
             _separator = separator;
-            _clause = new Clause();
+            _mutableClause = new MutableClause();
             _isEmpty = true;
         }
 
         public CompositeClause Add(string component)
         {
-            return Add(new Clause(component));
+            return Add(new MutableClause(component));
         }
 
         public CompositeClause Add(IClause component)
         {
             if (!_isEmpty)
-                _clause.Append(_separator);
+                _mutableClause.Append(_separator);
 
             _isEmpty = false;
-            _clause.Append(component);
+            _mutableClause.Append(component);
             return this;
         }
 

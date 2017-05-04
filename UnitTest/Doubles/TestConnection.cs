@@ -75,7 +75,7 @@ namespace UnitTest.Doubles
 
         public IDataReader Read(string query)
         {
-            return Read(new Clause(query));
+            return Read(new MutableClause(query));
         }
 
         public SQLiteDataReader Read(IClause clause)

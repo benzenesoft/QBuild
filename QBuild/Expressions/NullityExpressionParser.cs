@@ -61,7 +61,7 @@ namespace BenzeneSoft.QBuild.Expressions
             var nullCheck = binaryExpression.NodeType == Equal ? " IS NULL" : " IS NOT NULL";
 
             var otherSql = _lookup[other].Parse(other);
-            var sql = new Clause().Append(otherSql).Append(nullCheck).WrapParentheses();
+            var sql = new MutableClause().Append(otherSql).Append(nullCheck).WrapParentheses();
 
             return sql;
         }

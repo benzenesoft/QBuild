@@ -14,7 +14,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public IClause Build()
         {
-            return new Clause(_table);
+            return new MutableClause(_table);
         }
 
         public ITablesBuilder Table(string tableExpression)

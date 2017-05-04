@@ -22,7 +22,7 @@ namespace BenzeneSoft.QBuild.Expressions
         {
             var prop = expression.Member as PropertyInfo;
             var column = _nameResolver.Column(prop);
-            return new Clause(column);
+            return new MutableClause(column);
         }
 
         public bool CanParse(Expression expression)
