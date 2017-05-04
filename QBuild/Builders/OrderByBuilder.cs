@@ -2,48 +2,48 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
-using BenzeneSoft.QBuild.Sqls;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public class OrderByBuilder : IOrderByBuilder
     {
         private readonly ILambdaParser _lambdaParser;
-        private CompositeSql _sql;
+        private CompositeClause _clause;
 
         public OrderByBuilder(ILambdaParser lambdaParser)
         {
             _lambdaParser = lambdaParser;
-            _sql = new CompositeSql(new Sql().Line().Append(","));
+            _clause = new CompositeClause(new Clause().Line().Append(","));
         }
 
-        public ISql Build()
+        public IClause Build()
         {
-            return _sql;
+            return _clause;
         }
 
         public IOrderByBuilder Asc(params string[] orderExpression)
         {
-            _sql.AddRange(orderExpression.Select(exp => new Sql($"{exp} ASC")));
+            _clause.AddRange(orderExpression.Select(exp => new Clause($"{exp} ASC")));
             return this;
         }
 
         public IOrderByBuilder Desc(params string[] orderExpression)
         {
-            _sql.AddRange(orderExpression.Select(exp => new Sql($"{exp} DESC")));
+            _clause.AddRange(orderExpression.Select(exp => new Clause($"{exp} DESC")));
             return this;
         }
 
         public IOrderByBuilder Asc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
-            _sql.AddRange(orderProperty.Select(exp => new Sql(_lambdaParser.Parse(exp)).Append(" ASC")));
+            _clause.AddRange(orderProperty.Select(exp => new Clause(_lambdaParser.Parse(exp)).Append(" ASC")));
             return this;
         }
 
         public IOrderByBuilder Desc<T>(params Expression<Func<T, object>>[] orderProperty)
         {
-            _sql.AddRange(orderProperty.Select(exp => new Sql(_lambdaParser.Parse(exp)).Append(" DESC")));
+            _clause.AddRange(orderProperty.Select(exp => new Clause(_lambdaParser.Parse(exp)).Append(" DESC")));
             return this;
         }
     }

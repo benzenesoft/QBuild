@@ -1,14 +1,14 @@
-﻿using BenzeneSoft.QBuild.Sqls;
+﻿using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public interface IQueryBuilder : ISqlBuilder
     {
-        IQueryBuilder Select(ISql select);
-        IQueryBuilder From(ISql from);
-        IQueryBuilder Where(ISql where);
-        IQueryBuilder GroupBy(ISql groupBy);
-        IQueryBuilder Having(ISql having);
-        IQueryBuilder OrderBy(ISql orderBy);
+        IQueryBuilder Select(IClause select);
+        IQueryBuilder From(IClause from);
+        IQueryBuilder Where(IClause where);
+        IQueryBuilder GroupBy(IClause groupBy);
+        IQueryBuilder Having(IClause having);
+        IQueryBuilder OrderBy(IClause orderBy);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
+using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
-using BenzeneSoft.QBuild.Sqls;
 
 namespace BenzeneSoft.QBuild.Builders
 {
@@ -84,7 +84,7 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public ISql Build()
+        public IClause Build()
         {
             var queryBuilder = new QueryBuilder();
             var sql = queryBuilder

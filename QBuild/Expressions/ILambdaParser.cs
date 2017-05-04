@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
     public interface ILambdaParser
     {
-        ISql Parse(LambdaExpression predicate);
+        IClause Parse(LambdaExpression predicate);
     }
 }

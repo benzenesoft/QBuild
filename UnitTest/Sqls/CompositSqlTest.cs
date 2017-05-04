@@ -1,4 +1,4 @@
-﻿using BenzeneSoft.QBuild.Sqls;
+﻿using BenzeneSoft.QBuild.Clauses;
 using NUnit.Framework;
 
 namespace UnitTest.Sqls
@@ -9,7 +9,7 @@ namespace UnitTest.Sqls
         [Test]
         public void Add_Single_NoSeparator()
         {
-            var sql = new CompositeSql(new Sql(","));
+            var sql = new CompositeClause(new Clause(","));
             sql.Add("one");
 
             Assert.AreEqual("one", sql.SqlText);
@@ -18,7 +18,7 @@ namespace UnitTest.Sqls
         [Test]
         public void Add_Multiple_AddsSeparator()
         {
-            var sql = new CompositeSql(new Sql(","));
+            var sql = new CompositeClause(new Clause(","));
             sql.Add("one").Add("two");
 
             Assert.AreEqual("one,two", sql.SqlText);

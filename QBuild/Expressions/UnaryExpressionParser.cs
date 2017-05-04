@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
@@ -17,12 +17,12 @@ namespace BenzeneSoft.QBuild.Expressions
             return expression is UnaryExpression;
         }
 
-        ISql IExpressionParser.Parse(Expression expression)
+        IClause IExpressionParser.Parse(Expression expression)
         {
             return Parse(expression as UnaryExpression);
         }
 
-        public ISql Parse(UnaryExpression expression)
+        public IClause Parse(UnaryExpression expression)
         {
             var inner =  _lookup[expression.Operand];
             return inner.Parse(expression.Operand);

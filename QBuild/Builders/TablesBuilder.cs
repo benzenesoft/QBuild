@@ -1,4 +1,4 @@
-﻿using BenzeneSoft.QBuild.Sqls;
+﻿using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Builders
 {
@@ -12,9 +12,9 @@ namespace BenzeneSoft.QBuild.Builders
             _nameResolver = nameResolver;
         }
 
-        public ISql Build()
+        public IClause Build()
         {
-            return new Sql(_table);
+            return new Clause(_table);
         }
 
         public ITablesBuilder Table(string tableExpression)
