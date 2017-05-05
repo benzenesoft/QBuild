@@ -35,10 +35,16 @@ namespace BenzeneSoft.QBuild.Clauses
 
             return this;
         }
-
+        
         public MutableClause Append(string sqlText)
         {
             _sqlTextBuilder.Append(sqlText);
+            return this;
+        }
+
+        public MutableClause Prepend(string text)
+        {
+            _sqlTextBuilder.Insert(0, text);
             return this;
         }
 
@@ -58,5 +64,6 @@ namespace BenzeneSoft.QBuild.Clauses
         {
             return Text;
         }
+
     }
 }
