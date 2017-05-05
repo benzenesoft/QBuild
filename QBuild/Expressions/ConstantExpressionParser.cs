@@ -9,7 +9,7 @@ namespace BenzeneSoft.QBuild.Expressions
         {
             var value = (expression as ConstantExpression).Value;
             var param = Parameter.CreateNew(value);
-            return new MutableClause(param.Name, param);
+            return new Clause(param.Name, param);
         }
 
         public bool CanParse(Expression expression)

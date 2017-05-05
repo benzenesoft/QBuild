@@ -21,7 +21,7 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public CompositeClause Add(string component)
         {
-            return Add(new MutableClause(component));
+            return Add(new Clause(component));
         }
 
         public CompositeClause Add(IClause component)

@@ -13,7 +13,7 @@ namespace UnitTest.Sqls
         public void Construct_Empty_TextAndParamsEmpty()
         {
             var sql = new MutableClause();
-            Assert.IsEmpty(sql.text);
+            Assert.IsEmpty(sql.Text);
             Assert.IsEmpty(sql.Parameters);
         }
 
@@ -22,7 +22,7 @@ namespace UnitTest.Sqls
         {
             var someSql = "some sql";
             var sql = new MutableClause(someSql);
-            Assert.AreEqual(someSql, sql.text);
+            Assert.AreEqual(someSql, sql.Text);
             Assert.IsEmpty(sql.Parameters);
         }
 
@@ -34,7 +34,7 @@ namespace UnitTest.Sqls
 
             var sql = new MutableClause(someSql, parameter);
 
-            Assert.AreEqual(someSql, sql.text);
+            Assert.AreEqual(someSql, sql.Text);
             Assert.Contains(parameter, sql.Parameters.ToList());
         }
 
@@ -45,7 +45,7 @@ namespace UnitTest.Sqls
             var sqlToAppend = new MutableClause("append this");
             sql.Append(sqlToAppend);
 
-            Assert.AreEqual("some sql append this", sql.text);
+            Assert.AreEqual("some sql append this", sql.Text);
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace UnitTest.Sqls
             var sql = new MutableClause("some sql");
             sql.Line();
             
-            Assert.AreEqual("some sql\n", sql.text);
+            Assert.AreEqual("some sql\n", sql.Text);
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace UnitTest.Sqls
             var sql = new MutableClause("some sql");
             sql.Append(" append this");
 
-            Assert.AreEqual("some sql append this", sql.text);
+            Assert.AreEqual("some sql append this", sql.Text);
         }
     }
 }
