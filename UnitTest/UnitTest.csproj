@@ -57,7 +57,6 @@
     <Compile Include="Expressions\BinaryExpressionParserTest.cs" />
     <Compile Include="Expressions\NullityExpressionParserTest.cs" />
     <Compile Include="Sqls\CompositSqlTest.cs" />
-    <Compile Include="TablesBuilderTest.cs" />
     <Compile Include="LowerSnameCaseNameResolverTest.cs" />
     <Compile Include="OrderByTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
