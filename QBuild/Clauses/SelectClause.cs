@@ -26,6 +26,12 @@ namespace BenzeneSoft.QBuild.Clauses
             return this;
         }
 
+        public SelectClause Column(string expression)
+        {
+            _delegate.AppendSeparated(expression);
+            return this;
+        }
+
         public SelectClause Column(IClause expression)
         {
             _delegate.AppendSeparated(expression);
