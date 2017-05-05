@@ -41,11 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\TableQBuilder.cs" />
-    <Compile Include="Builders\TablesBuilder.cs" />
-    <Compile Include="Builders\ITablesBuilder.cs" />
     <Compile Include="Builders\IOrderByBuilder.cs" />
     <Compile Include="Builders\OrderByBuilder.cs" />
     <Compile Include="Clauses\Clause.cs" />
+    <Compile Include="Clauses\FromClause.cs" />
     <Compile Include="Clauses\SelectClause.cs" />
     <Compile Include="Expressions\UnaryExpressionParser.cs" />
     <Compile Include="Clauses\SeparatedClause.cs" />
