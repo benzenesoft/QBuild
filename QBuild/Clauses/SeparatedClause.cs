@@ -13,12 +13,24 @@ namespace BenzeneSoft.QBuild.Clauses
         
         public SeparatedClause AppendSeparated(IClause clause)
         {
+            AppendSeparator();
+            Append(clause);
+            return this;
+        }
+
+        public SeparatedClause AppendSeparated(string expression)
+        {
+            AppendSeparator();
+            Append(expression);
+            return this;
+        }
+
+        private void AppendSeparator()
+        {
             if (!_isEmpty)
                 Append(_separator);
 
             _isEmpty = false;
-            Append(clause);
-            return this;
         }
     }
 }
