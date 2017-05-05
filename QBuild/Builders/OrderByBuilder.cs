@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,12 +10,12 @@ namespace BenzeneSoft.QBuild.Builders
     public class OrderByBuilder : IOrderByBuilder
     {
         private readonly ILambdaParser _lambdaParser;
-        private CompositeClause _clause;
+        private SeparatedClause _clause;
 
         public OrderByBuilder(ILambdaParser lambdaParser)
         {
             _lambdaParser = lambdaParser;
-            _clause = new CompositeClause(new MutableClause().Line().Append(","));
+            _clause = new SeparatedClause(new MutableClause().Line().Append(","));
         }
 
         public IClause Build()
@@ -25,13 +25,19 @@ namespace BenzeneSoft.QBuild.Builders
 
         public IOrderByBuilder Asc(params string[] orderExpression)
         {
-            _clause.AddRange(orderExpression.Select(exp => new MutableClause($"{exp} ASC")));
+            foreach (var exp in orderExpression)
+            {
+                _clause.AppendSeparated(new Clause($"{exp} ASC"));
+            }
             return this;
         }
 
         public IOrderByBuilder Desc(params string[] orderExpression)
         {
-            _clause.AddRange(orderExpression.Select(exp => new MutableClause($"{exp} DESC")));
+            foreach (var exp in orderExpression)
+            {
+                _clause.AppendSeparated(new Clause($"{exp} DESC"));
+            }
             return this;
         }
 
@@ -47,4 +53,4 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
     }
-}
+}*/
