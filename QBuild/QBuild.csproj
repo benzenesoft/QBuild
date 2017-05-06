@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Builders\TableQBuilder.cs" />
     <Compile Include="Clauses\Clause.cs" />
+    <Compile Include="Clauses\LambdaClause.cs" />
     <Compile Include="Clauses\FromClause.cs" />
     <Compile Include="Clauses\GroupByClause.cs" />
     <Compile Include="Clauses\OrderByClause.cs" />
