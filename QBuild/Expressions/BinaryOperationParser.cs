@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 using static System.Linq.Expressions.ExpressionType;
 
 namespace BenzeneSoft.QBuild.Expressions
@@ -31,10 +31,10 @@ namespace BenzeneSoft.QBuild.Expressions
             return Operations.ContainsKey(operation);
         }
 
-        public ISql Parse(ExpressionType operation, params ISql[] operands)
+        public IClause Parse(ExpressionType operation, params IClause[] operands)
         {
-            var sql = new Sql().Append(operands[0]).Append($" {Operations[operation]} ").Append(operands[1]);
-            return sql;
+            var clause = new MutableClause().Append(operands[0]).Append($" {Operations[operation]} ").Append(operands[1]);
+            return clause;
         }
     }
 }

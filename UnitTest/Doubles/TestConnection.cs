@@ -2,8 +2,7 @@
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using BenzeneSoft.QBuild;
-using BenzeneSoft.QBuild.Sqls;
+using BenzeneSoft.QBuild.Clauses;
 
 namespace UnitTest.Doubles
 {
@@ -75,14 +74,14 @@ namespace UnitTest.Doubles
 
         public IDataReader Read(string query)
         {
-            return Read(new Sql(query));
+            return Read(new MutableClause(query));
         }
 
-        public SQLiteDataReader Read(ISql sql)
+        public SQLiteDataReader Read(IClause clause)
         {
             var command = CreateCommand();
-            command.CommandText = sql.SqlText;
-            foreach (var parameter in sql.Parameters)
+            command.CommandText = clause.Text;
+            foreach (var parameter in clause.Parameters)
             {
                 var param = command.CreateParameter();
                 param.ParameterName = parameter.Name;
@@ -90,7 +89,7 @@ namespace UnitTest.Doubles
                 command.Parameters.Add(param);
             }
 
-            Console.WriteLine(sql.SqlText);
+            Console.WriteLine(clause.Text);
             return command.ExecuteReader();
         }
     }
