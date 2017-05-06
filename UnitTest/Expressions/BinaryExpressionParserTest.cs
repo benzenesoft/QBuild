@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
+using BenzeneSoft.QBuild.NameResolvers;
 using NUnit.Framework;
 using UnitTest.Doubles;
-using UnitTest.Entities;
 using static NUnit.Framework.Assert;
 
 namespace UnitTest.Expressions

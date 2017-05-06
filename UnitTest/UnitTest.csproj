@@ -52,12 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Doubles\TestConnection.cs" />
-    <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\ProductTag.cs" />
+    <Compile Include="Doubles\Product.cs" />
+    <Compile Include="Doubles\ProductTag.cs" />
     <Compile Include="Expressions\BinaryExpressionParserTest.cs" />
     <Compile Include="Expressions\NullityExpressionParserTest.cs" />
     <Compile Include="Clauses\SeparatedClauseTest.cs" />
-    <Compile Include="LowerSnameCaseNameResolverTest.cs" />
+    <Compile Include="NameResolvers\LowerSnameCaseNameResolverTest.cs" />
     <Compile Include="Clauses\OrderByClauseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\QueryBuilderTest.cs" />

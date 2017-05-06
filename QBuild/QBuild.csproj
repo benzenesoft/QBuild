@@ -58,14 +58,14 @@
     <Compile Include="Expressions\ParserLookup.cs" />
     <Compile Include="Expressions\LambdaParser.cs" />
     <Compile Include="Expressions\PropertyExpressionParser.cs" />
-    <Compile Include="INameResolver.cs" />
+    <Compile Include="NameResolvers\INameResolver.cs" />
     <Compile Include="Expressions\BinaryExpressionParser.cs" />
     <Compile Include="Expressions\IExpressionParser.cs" />
     <Compile Include="Builders\IQueryBuilder.cs" />
     <Compile Include="Clauses\IClause.cs" />
     <Compile Include="Builders\IClauseBuilder.cs" />
-    <Compile Include="LowerSnakeCaseNameResolver.cs" />
-    <Compile Include="Parameter.cs" />
+    <Compile Include="NameResolvers\LowerSnakeCaseNameResolver.cs" />
+    <Compile Include="Clauses\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\QueryBuilder.cs" />
     <Compile Include="Clauses\MutableClause.cs" />

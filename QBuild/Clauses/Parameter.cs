@@ -1,5 +1,5 @@
 ﻿
-namespace BenzeneSoft.QBuild
+namespace BenzeneSoft.QBuild.Clauses
 {
     public class Parameter
     {
