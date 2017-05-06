@@ -7,17 +7,20 @@ namespace BenzeneSoft.QBuild.Clauses
     public class LambdaClause : IClause
     {
         private readonly ILambdaParser _parser;
-        private readonly LambdaExpression _expression;
         private IClause _clause;
-        public LambdaClause(ILambdaParser parser, LambdaExpression expression)
+
+        public LambdaClause(ILambdaParser parser)
         {
             _parser = parser;
-            _expression = expression;
         }
 
-        public IClause Clause => _clause ?? (_clause = _parser.Parse(_expression));
+        public LambdaClause Expression(LambdaExpression expression)
+        {
+            _clause = _parser.Parse(expression);
+            return this;
+        }
 
-        public string Text => Clause.Text;
-        public IEnumerable<Parameter> Parameters => Clause.Parameters;
+        public string Text => _clause.Text;
+        public IEnumerable<Parameter> Parameters => _clause.Parameters;
     }
 }
