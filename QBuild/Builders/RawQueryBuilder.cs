@@ -1,4 +1,5 @@
 using BenzeneSoft.QBuild.Clauses;
+using BenzeneSoft.QBuild.Utils;
 
 namespace BenzeneSoft.QBuild.Builders
 {
@@ -15,19 +16,19 @@ namespace BenzeneSoft.QBuild.Builders
         {
             var clause = new MutableClause();
 
-            AppendIfNotNull("SELECT ", _select, clause);
-            AppendIfNotNull("FROM ", _from, clause);
-            AppendIfNotNull("WHERE ", _where, clause);
-            AppendIfNotNull("GROUP BY ", _groupBy, clause);
-            AppendIfNotNull("HAVING ", _having, clause);
-            AppendIfNotNull("ORDER BY ", _orderBy, clause);
+            AppendIfNotEmpty("SELECT ", _select, clause);
+            AppendIfNotEmpty("FROM ", _from, clause);
+            AppendIfNotEmpty("WHERE ", _where, clause);
+            AppendIfNotEmpty("GROUP BY ", _groupBy, clause);
+            AppendIfNotEmpty("HAVING ", _having, clause);
+            AppendIfNotEmpty("ORDER BY ", _orderBy, clause);
 
             return clause;
         }
 
-        private void AppendIfNotNull(string prefix, IClause append, MutableClause appendTo)
+        private void AppendIfNotEmpty(string prefix, IClause append, MutableClause appendTo)
         {
-            if (append != null)
+            if (append != null && !append.IsEmpty())
                 appendTo.Append(prefix).Append(append).Line();
         }
 
