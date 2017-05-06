@@ -51,19 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\QueryBuilderWithClauseFactoryTest.cs" />
     <Compile Include="Doubles\TestConnection.cs" />
-    <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\ProductTag.cs" />
+    <Compile Include="Doubles\Product.cs" />
+    <Compile Include="Doubles\ProductTag.cs" />
     <Compile Include="Expressions\BinaryExpressionParserTest.cs" />
     <Compile Include="Expressions\NullityExpressionParserTest.cs" />
-    <Compile Include="Sqls\CompositSqlTest.cs" />
-    <Compile Include="TablesBuilderTest.cs" />
-    <Compile Include="LowerSnameCaseNameResolverTest.cs" />
-    <Compile Include="OrderByTest.cs" />
+    <Compile Include="Clauses\SeparatedClauseTest.cs" />
+    <Compile Include="NameResolvers\LowerSnameCaseNameResolverTest.cs" />
+    <Compile Include="Clauses\OrderByClauseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBuilderTest.cs" />
-    <Compile Include="ColumnsBuilderTest.cs" />
-    <Compile Include="Sqls\SqlTest.cs" />
+    <Compile Include="Builders\QueryBuilderTest.cs" />
+    <Compile Include="Clauses\SelectClauseTest.cs" />
+    <Compile Include="Clauses\MutableClauseTest.cs" />
     <Content Include="sql_files\create_table_product.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace BenzeneSoft.QBuild.Sqls
+namespace BenzeneSoft.QBuild.Clauses
 {
-    public interface ISql
+    public interface IClause
     {
-        string SqlText { get; }
+        string Text { get; }
         IEnumerable<Parameter> Parameters { get; }
     }
 }
