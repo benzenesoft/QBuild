@@ -45,6 +45,7 @@
     <Compile Include="Builders\OrderByBuilder.cs" />
     <Compile Include="Clauses\Clause.cs" />
     <Compile Include="Clauses\FromClause.cs" />
+    <Compile Include="Clauses\GroupByClause.cs" />
     <Compile Include="Clauses\SelectClause.cs" />
     <Compile Include="Expressions\UnaryExpressionParser.cs" />
     <Compile Include="Clauses\SeparatedClause.cs" />
