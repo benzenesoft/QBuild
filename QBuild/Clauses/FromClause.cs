@@ -15,7 +15,13 @@ namespace BenzeneSoft.QBuild.Clauses
             _delegate = new MutableClause();
         }
 
-        public FromClause From(IClause expression)
+        public FromClause Table(IClause expression)
+        {
+            _delegate.Append(expression);
+            return this;
+        }
+
+        public FromClause Table(string expression)
         {
             _delegate.Append(expression);
             return this;

@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\QueryBuilderWithClauseFactoryTest.cs" />
     <Compile Include="Doubles\TestConnection.cs" />
     <Compile Include="Doubles\Product.cs" />
     <Compile Include="Doubles\ProductTag.cs" />
