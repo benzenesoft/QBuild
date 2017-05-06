@@ -62,7 +62,7 @@
     <Compile Include="Expressions\IExpressionParser.cs" />
     <Compile Include="Builders\IQueryBuilder.cs" />
     <Compile Include="Clauses\IClause.cs" />
-    <Compile Include="Builders\ISqlBuilder.cs" />
+    <Compile Include="Builders\IClauseBuilder.cs" />
     <Compile Include="LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

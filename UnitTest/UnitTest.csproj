@@ -60,7 +60,7 @@
     <Compile Include="LowerSnameCaseNameResolverTest.cs" />
     <Compile Include="OrderByTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBuilderTest.cs" />
+    <Compile Include="Builders\QueryBuilderTest.cs" />
     <Compile Include="Clauses\SelectClauseTest.cs" />
     <Compile Include="Clauses\SqlTest.cs" />
     <Content Include="sql_files\create_table_product.sql">
