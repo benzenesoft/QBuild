@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\ClauseFactory.cs" />
-    <Compile Include="Builders\TableQBuilder.cs" />
     <Compile Include="Clauses\Clause.cs" />
     <Compile Include="Clauses\LambdaClause.cs" />
     <Compile Include="Clauses\FromClause.cs" />
@@ -62,13 +61,12 @@
     <Compile Include="NameResolvers\INameResolver.cs" />
     <Compile Include="Expressions\BinaryExpressionParser.cs" />
     <Compile Include="Expressions\IExpressionParser.cs" />
-    <Compile Include="Builders\IQueryBuilder.cs" />
     <Compile Include="Clauses\IClause.cs" />
     <Compile Include="Builders\IClauseBuilder.cs" />
     <Compile Include="NameResolvers\LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Clauses\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Builders\QueryBuilder.cs" />
+    <Compile Include="Builders\RawQueryBuilder.cs" />
     <Compile Include="Clauses\MutableClause.cs" />
   </ItemGroup>
   <ItemGroup />
