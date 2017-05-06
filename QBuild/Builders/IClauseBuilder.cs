@@ -2,7 +2,7 @@
 
 namespace BenzeneSoft.QBuild.Builders
 {
-    public interface ISqlBuilder
+    public interface IClauseBuilder
     {
         IClause Build();
     }

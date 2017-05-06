@@ -2,7 +2,7 @@
 
 namespace BenzeneSoft.QBuild.Builders
 {
-    public interface IQueryBuilder : ISqlBuilder
+    public interface IQueryBuilder : IClauseBuilder
     {
         IQueryBuilder Select(IClause select);
         IQueryBuilder From(IClause from);

@@ -1,12 +1,9 @@
-﻿using System;
-using BenzeneSoft.QBuild;
-using BenzeneSoft.QBuild.Builders;
+﻿using BenzeneSoft.QBuild.Builders;
 using BenzeneSoft.QBuild.Clauses;
 using NUnit.Framework;
 using UnitTest.Doubles;
-using static NUnit.Framework.Assert;
 
-namespace UnitTest
+namespace UnitTest.Builders
 {
     [TestFixture]
     public class QueryBuilderTest
@@ -40,11 +37,11 @@ namespace UnitTest
 
             var reader = _connection.Read(sql);
 
-            IsTrue(reader.Read());
-            AreEqual(1, reader["id"]);
-            AreEqual("almira", reader["name"]);
-            AreEqual(80, reader["price"]);
-            IsFalse(reader.Read());
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual(1, reader["id"]);
+            Assert.AreEqual("almira", reader["name"]);
+            Assert.AreEqual(80, reader["price"]);
+            Assert.IsFalse(reader.Read());
         }
 
         [Test(Description = "select name, avg(price) from product group by name")]
@@ -57,9 +54,9 @@ namespace UnitTest
                 .Build();
 
             var reader = _connection.Read(sql);
-            IsTrue(reader.Read());
-            AreEqual("almira", reader["name"]);
-            AreEqual(75, reader["avg_price"]);
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual("almira", reader["name"]);
+            Assert.AreEqual(75, reader["avg_price"]);
         }
 
         [Test(Description = "select name, avg(price) from product group by name having price > 74")]
@@ -73,11 +70,11 @@ namespace UnitTest
                 .Build();
 
             var reader = _connection.Read(sql);
-            IsTrue(reader.Read());
-            AreEqual("almira", reader["name"]);
-            AreEqual(75, reader["avg_price"]);
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual("almira", reader["name"]);
+            Assert.AreEqual(75, reader["avg_price"]);
 
-            IsFalse(reader.Read());
+            Assert.IsFalse(reader.Read());
         }
 
         [Test(Description = "select * order by name desc")]
@@ -90,8 +87,8 @@ namespace UnitTest
                 .Build();
 
             var reader = _connection.Read(sql);
-            IsTrue(reader.Read());
-            AreEqual("table", reader["name"]);
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual("table", reader["name"]);
         }
     }
 }
