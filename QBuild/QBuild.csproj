@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\ClauseFactory.cs" />
+    <Compile Include="Builders\LambdaQueryBuilder.cs" />
     <Compile Include="Clauses\Clause.cs" />
     <Compile Include="Clauses\LambdaClause.cs" />
     <Compile Include="Clauses\FromClause.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\RawQueryBuilder.cs" />
     <Compile Include="Clauses\MutableClause.cs" />
+    <Compile Include="Utils\ClauseExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
