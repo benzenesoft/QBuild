@@ -25,17 +25,17 @@ namespace UnitTest.Clauses
         [Test]
         public void All()
         {
-            var columnsSql = new SelectClause().All();
-            Assert.AreEqual("*", columnsSql.Text.Trim());
+            var clause = new SelectClause().All();
+            Assert.AreEqual("*", clause.Text.Trim());
         }
 
         [Test]
         public void Column_String()
         {
-            var columnsSql = new SelectClause().Column("id").Column("name");
-            var sql = $"select {columnsSql.Text} from product";
+            var clause = new SelectClause().Column("id").Column("name");
+            var query = $"select {clause.Text} from product";
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(query);
             var count = reader.FieldCount;
             var columns = new[] { "id", "name" };
 

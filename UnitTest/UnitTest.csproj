@@ -56,13 +56,13 @@
     <Compile Include="Entities\ProductTag.cs" />
     <Compile Include="Expressions\BinaryExpressionParserTest.cs" />
     <Compile Include="Expressions\NullityExpressionParserTest.cs" />
-    <Compile Include="Clauses\CompositSqlTest.cs" />
+    <Compile Include="Clauses\SeparatedClauseTest.cs" />
     <Compile Include="LowerSnameCaseNameResolverTest.cs" />
     <Compile Include="OrderByTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\QueryBuilderTest.cs" />
     <Compile Include="Clauses\SelectClauseTest.cs" />
-    <Compile Include="Clauses\SqlTest.cs" />
+    <Compile Include="Clauses\MutableClauseTest.cs" />
     <Content Include="sql_files\create_table_product.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

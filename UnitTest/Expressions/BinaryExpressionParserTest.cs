@@ -29,8 +29,8 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = p => p.DiscountedPrice < p.Price;
             var predicate = _parser.Parse((BinaryExpression)exp.Body);
-            var sql = new MutableClause("select * from product where ").Append(predicate);
-            var reader = _connection.Read(sql);
+            var clause = new MutableClause("select * from product where ").Append(predicate);
+            var reader = _connection.Read(clause);
             IsTrue(reader.Read());
             AreEqual("sofa", reader["name"]);
         }
@@ -40,8 +40,8 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = p => p.Price <= 15;
             var predicate = _parser.Parse((BinaryExpression)exp.Body);
-            var sql = new MutableClause("select * from product where ").Append(predicate);
-            var reader = _connection.Read(sql);
+            var clause = new MutableClause("select * from product where ").Append(predicate);
+            var reader = _connection.Read(clause);
             IsTrue(reader.Read());
             AreEqual("bench", reader["name"]);
         }
@@ -54,8 +54,8 @@ namespace UnitTest.Expressions
             var eBody = exp.Body;
             var predicate = _parser.Parse(eBody);
 
-            var sql = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
-            var reader = _connection.Read(sql);
+            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
+            var reader = _connection.Read(clause);
 
             IsTrue(_parser.CanParse(eBody));
 
@@ -79,8 +79,8 @@ namespace UnitTest.Expressions
             var eBody = exp.Body;
             var predicate = _parser.Parse(eBody);
 
-            var sql = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
-            var reader = _connection.Read(sql);
+            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
+            var reader = _connection.Read(clause);
 
             IsTrue(_parser.CanParse(eBody));
 
@@ -97,9 +97,9 @@ namespace UnitTest.Expressions
 
             var predicate = _parser.Parse(exp.Body);
 
-            var sql = new MutableClause("select count(*) as count from product where ")
+            var clause = new MutableClause("select count(*) as count from product where ")
                 .Append(predicate);
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
 
             IsTrue(reader.Read());
             AreEqual(2, reader.GetInt32(0));
@@ -113,9 +113,9 @@ namespace UnitTest.Expressions
             Expression<Predicate<Product>> exp = p => (100 * (p.Price - p.DiscountedPrice) / p.Price) + 1 >= 16;
             var predicate = _parser.Parse(exp.Body);
 
-            var sql = new MutableClause("select * from product where ").Append(predicate);
+            var clause = new MutableClause("select * from product where ").Append(predicate);
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             IsTrue(reader.Read());
             AreEqual("sofa", reader["name"]);
             AreEqual("l", reader["size"]);
@@ -126,9 +126,9 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == false;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
+            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             IsTrue(reader.Read());
             AreEqual("almira", reader["name"]);
         }
@@ -139,9 +139,9 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == true;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
+            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             IsTrue(reader.Read());
             AreEqual("bed", reader["name"]);
         }

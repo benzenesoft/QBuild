@@ -33,8 +33,8 @@ namespace BenzeneSoft.QBuild.Expressions
 
         public IClause Parse(ExpressionType operation, params IClause[] operands)
         {
-            var sql = new MutableClause().Append(operands[0]).Append($" {Operations[operation]} ").Append(operands[1]);
-            return sql;
+            var clause = new MutableClause().Append(operands[0]).Append($" {Operations[operation]} ").Append(operands[1]);
+            return clause;
         }
     }
 }

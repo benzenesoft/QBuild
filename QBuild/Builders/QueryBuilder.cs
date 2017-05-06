@@ -13,16 +13,16 @@ namespace BenzeneSoft.QBuild.Builders
 
         public IClause Build()
         {
-            var sql = new MutableClause();
+            var clause = new MutableClause();
 
-            AppendIfNotNull("SELECT ", _select, sql);
-            AppendIfNotNull("FROM ", _from, sql);
-            AppendIfNotNull("WHERE ", _where, sql);
-            AppendIfNotNull("GROUP BY ", _groupBy, sql);
-            AppendIfNotNull("HAVING ", _having, sql);
-            AppendIfNotNull("ORDER BY ", _orderBy, sql);
+            AppendIfNotNull("SELECT ", _select, clause);
+            AppendIfNotNull("FROM ", _from, clause);
+            AppendIfNotNull("WHERE ", _where, clause);
+            AppendIfNotNull("GROUP BY ", _groupBy, clause);
+            AppendIfNotNull("HAVING ", _having, clause);
+            AppendIfNotNull("ORDER BY ", _orderBy, clause);
 
-            return sql;
+            return clause;
         }
 
         private void AppendIfNotNull(string prefix, IClause append, MutableClause appendTo)

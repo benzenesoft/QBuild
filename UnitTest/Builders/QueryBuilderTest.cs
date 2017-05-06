@@ -30,12 +30,12 @@ namespace UnitTest.Builders
         [Test(Description = "select * from product where id = 1")]
         public void Test1()
         {
-            var sql = _builder.Select(new MutableClause("*"))
+            var clause = _builder.Select(new MutableClause("*"))
                 .From(new MutableClause("product"))
                 .Where(new MutableClause("id = 1"))
                 .Build();
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(1, reader["id"]);
@@ -47,13 +47,13 @@ namespace UnitTest.Builders
         [Test(Description = "select name, avg(price) from product group by name")]
         public void GroupBy()
         {
-            var sql = _builder
+            var clause = _builder
                 .Select(new MutableClause("name, avg(price) as avg_price"))
                 .From(new MutableClause("product"))
                 .GroupBy(new MutableClause("name"))
                 .Build();
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             Assert.IsTrue(reader.Read());
             Assert.AreEqual("almira", reader["name"]);
             Assert.AreEqual(75, reader["avg_price"]);
@@ -62,14 +62,14 @@ namespace UnitTest.Builders
         [Test(Description = "select name, avg(price) from product group by name having price > 74")]
         public void Having()
         {
-            var sql = _builder
+            var clause = _builder
                 .Select(new MutableClause("name, avg(price) as avg_price"))
                 .From(new MutableClause("product"))
                 .GroupBy(new MutableClause("name"))
                 .Having(new MutableClause("avg_price > 74"))
                 .Build();
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             Assert.IsTrue(reader.Read());
             Assert.AreEqual("almira", reader["name"]);
             Assert.AreEqual(75, reader["avg_price"]);
@@ -80,13 +80,13 @@ namespace UnitTest.Builders
         [Test(Description = "select * order by name desc")]
         public void OrderBy()
         {
-            var sql = _builder
+            var clause = _builder
                 .Select(new MutableClause("name"))
                 .From(new MutableClause("product"))
                 .OrderBy(new MutableClause("name desc"))
                 .Build();
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             Assert.IsTrue(reader.Read());
             Assert.AreEqual("table", reader["name"]);
         }

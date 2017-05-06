@@ -23,10 +23,10 @@ namespace BenzeneSoft.QBuild.Expressions
             var op = _lookup[expression.NodeType];
             var right = _lookup[expression.Right].Parse(expression.Right);
 
-            var sql = new MutableClause(op.Parse(expression.NodeType, left, right))
+            var clause = new MutableClause(op.Parse(expression.NodeType, left, right))
                 .WrapParentheses();
 
-            return sql;
+            return clause;
         }
 
         public bool CanParse(Expression expression)
