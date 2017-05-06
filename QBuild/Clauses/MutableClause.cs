@@ -18,7 +18,7 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public MutableClause() : this(string.Empty) { }
         public MutableClause(IClause clause) : this(clause.Text, clause.Parameters.ToArray()) { }
-        public MutableClause(ISqlBuilder builder) : this(builder.Build()) { }
+        public MutableClause(IClauseBuilder builder) : this(builder.Build()) { }
 
         public string Text => _sqlTextBuilder.ToString();
 

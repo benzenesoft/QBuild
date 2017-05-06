@@ -3,7 +3,7 @@ using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Clauses;
 using NUnit.Framework;
 
-namespace UnitTest.Sqls
+namespace UnitTest.Clauses
 {
     [TestFixture]
     public class SqlTest

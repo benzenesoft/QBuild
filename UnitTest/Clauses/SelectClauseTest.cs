@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using UnitTest.Doubles;
 
-namespace UnitTest
+namespace UnitTest.Clauses
 {
     [TestFixture]
     public class SelectClauseTest
