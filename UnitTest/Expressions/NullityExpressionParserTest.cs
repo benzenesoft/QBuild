@@ -29,9 +29,9 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.Comment == null;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new MutableClause("select * from product where ").Append(predicate).Append(" and name = 'bed'");
+            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" and name = 'bed'");
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             IsTrue(reader.Read());
             AreEqual("bed", reader["name"]);
         }
@@ -41,9 +41,9 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.Comment != null;
             var predicate = _parser.Parse(exp.Body);
-            var sql = new MutableClause("select * from product where ").Append(predicate);
+            var clause = new MutableClause("select * from product where ").Append(predicate);
 
-            var reader = _connection.Read(sql);
+            var reader = _connection.Read(clause);
             IsTrue(reader.Read());
             AreEqual("chair", reader["name"]);
         }

@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Clauses;
 
 namespace UnitTest.Doubles
