@@ -8,13 +8,13 @@ namespace UnitTest.Builders
     [TestFixture]
     public class QueryBuilderTest
     {
-        private QueryBuilder _builder;
+        private RawQueryBuilder _builder;
         private TestConnection _connection;
 
         [SetUp]
         public void Setup()
         {
-            _builder = new QueryBuilder();
+            _builder = new RawQueryBuilder();
 
             _connection = new TestConnection();
             _connection.Open();
