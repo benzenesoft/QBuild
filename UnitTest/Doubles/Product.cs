@@ -1,4 +1,4 @@
-﻿namespace UnitTest.Entities
+﻿namespace UnitTest.Doubles
 {
     public class Product
     {

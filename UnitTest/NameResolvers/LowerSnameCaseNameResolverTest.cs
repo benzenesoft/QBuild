@@ -1,8 +1,8 @@
-﻿using BenzeneSoft.QBuild;
+﻿using BenzeneSoft.QBuild.NameResolvers;
 using NUnit.Framework;
-using UnitTest.Entities;
+using UnitTest.Doubles;
 
-namespace UnitTest
+namespace UnitTest.NameResolvers
 {
     [TestFixture]
     public class LowerSnameCaseNameResolverTest

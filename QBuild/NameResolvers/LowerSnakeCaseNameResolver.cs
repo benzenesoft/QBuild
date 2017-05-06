@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace BenzeneSoft.QBuild
+namespace BenzeneSoft.QBuild.NameResolvers
 {
     public class LowerSnakeCaseNameResolver : INameResolver
     {

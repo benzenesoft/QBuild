@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using BenzeneSoft.QBuild.NameResolvers;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
