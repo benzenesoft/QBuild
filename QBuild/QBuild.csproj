@@ -70,6 +70,7 @@
     <Compile Include="Builders\QueryBuilder.cs" />
     <Compile Include="Clauses\MutableClause.cs" />
     <Compile Include="Utils\ClauseExtensions.cs" />
+    <Compile Include="Utils\ParameterExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
