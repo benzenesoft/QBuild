@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using BenzeneSoft.QBuild.Clauses;
+using BenzeneSoft.QBuild.Utils;
 
 namespace UnitTest.Doubles
 {
@@ -77,18 +78,9 @@ namespace UnitTest.Doubles
             return Read(new MutableClause(query));
         }
 
-        public SQLiteDataReader Read(IClause clause)
+        public IDataReader Read(IClause clause)
         {
-            var command = CreateCommand();
-            command.CommandText = clause.Text;
-            foreach (var parameter in clause.Parameters)
-            {
-                var param = command.CreateParameter();
-                param.ParameterName = parameter.Name;
-                param.Value = parameter.Value;
-                command.Parameters.Add(param);
-            }
-
+            var command = clause.ToDbCommand(this);
             Console.WriteLine(clause.Text);
             return command.ExecuteReader();
         }
