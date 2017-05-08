@@ -10,13 +10,13 @@ namespace UnitTest.Builders
     [TestFixture]
     public class QueryBuilderWithClauseFactoryTest
     {
-        private RawQueryBuilder _builder;
+        private QueryBuilder _builder;
         private TestConnection _connection;
 
         [SetUp]
         public void Setup()
         {
-            _builder = new RawQueryBuilder();
+            _builder = new QueryBuilder();
             SetDefaultParser(new LambdaParser(new ParserLookup(new LowerSnakeCaseNameResolver())));
             _connection = new TestConnection();
             _connection.Open();

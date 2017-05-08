@@ -29,7 +29,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public IClause Build()
         {
-            var queryBuilder = new RawQueryBuilder()
+            var queryBuilder = new QueryBuilder()
                 .Select(_select)
                 .From(_from)
                 .Where(_where)
