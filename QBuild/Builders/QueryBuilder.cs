@@ -3,7 +3,7 @@ using BenzeneSoft.QBuild.Utils;
 
 namespace BenzeneSoft.QBuild.Builders
 {
-    public class RawQueryBuilder : IClauseBuilder
+    public class QueryBuilder : IClauseBuilder
     {
         private IClause _select;
         private IClause _from;
@@ -32,37 +32,37 @@ namespace BenzeneSoft.QBuild.Builders
                 appendTo.Append(prefix).Append(append).Line();
         }
 
-        public RawQueryBuilder Select(IClause select)
+        public QueryBuilder Select(IClause select)
         {
             _select = select;
             return this;
         }
 
-        public RawQueryBuilder From(IClause from)
+        public QueryBuilder From(IClause from)
         {
             _from = from;
             return this;
         }
 
-        public RawQueryBuilder Where(IClause where)
+        public QueryBuilder Where(IClause where)
         {
             _where = where;
             return this;
         }
 
-        public RawQueryBuilder GroupBy(IClause groupBy)
+        public QueryBuilder GroupBy(IClause groupBy)
         {
             _groupBy = groupBy;
             return this;
         }
 
-        public RawQueryBuilder Having(IClause having)
+        public QueryBuilder Having(IClause having)
         {
             _having = having;
             return this;
         }
 
-        public RawQueryBuilder OrderBy(IClause orderBy)
+        public QueryBuilder OrderBy(IClause orderBy)
         {
             _orderBy = orderBy;
             return this;

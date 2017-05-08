@@ -67,7 +67,7 @@
     <Compile Include="NameResolvers\LowerSnakeCaseNameResolver.cs" />
     <Compile Include="Clauses\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Builders\RawQueryBuilder.cs" />
+    <Compile Include="Builders\QueryBuilder.cs" />
     <Compile Include="Clauses\MutableClause.cs" />
     <Compile Include="Utils\ClauseExtensions.cs" />
   </ItemGroup>
