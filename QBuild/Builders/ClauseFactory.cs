@@ -2,12 +2,13 @@
 using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
+using BenzeneSoft.QBuild.NameResolvers;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public static class ClauseFactory
     {
-        private static ILambdaParser _defaultParser;
+        private static ILambdaParser _defaultParser = new LambdaParser(new ParserLookup(new AsIsNameResolver()));
 
         public static SelectClause Select()
         {
