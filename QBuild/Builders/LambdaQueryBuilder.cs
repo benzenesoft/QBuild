@@ -17,6 +17,20 @@ namespace BenzeneSoft.QBuild.Builders
         private IClause _having;
         private OrderByClause _orderBy;
 
+        public LambdaQueryBuilder()
+            : this(new AsIsNameResolver())
+        {
+        }
+        public LambdaQueryBuilder(INameResolver nameResolver)
+            : this(new ParserLookup(nameResolver), nameResolver)
+        {
+        }
+
+        public LambdaQueryBuilder(IParserLookup lookup, INameResolver nameResolver)
+            : this(new LambdaParser(lookup), nameResolver)
+        {
+        }
+
         public LambdaQueryBuilder(ILambdaParser parser, INameResolver nameResolver)
         {
             _parser = parser;
