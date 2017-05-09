@@ -22,7 +22,7 @@ namespace BenzeneSoft.QBuild.Expressions
         private IClause ParseExact(MemberExpression expression)
         {
             var prop = expression.Member as PropertyInfo;
-            var column = _nameResolver.Column(prop);
+            var column = _nameResolver.Resolve(prop);
             return new Clause(column);
         }
 

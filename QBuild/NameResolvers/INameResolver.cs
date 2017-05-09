@@ -1,11 +1,9 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace BenzeneSoft.QBuild.NameResolvers
 {
     public interface INameResolver
     {
-        string Table(Type type);
-        string Column(PropertyInfo prop);
+        string Resolve(MemberInfo memberInfo);
     }
 }

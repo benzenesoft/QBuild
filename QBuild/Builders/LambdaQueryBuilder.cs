@@ -63,7 +63,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public LambdaQueryBuilder From<T>()
         {
-            _from.Table(_nameResolver.Table(typeof(T)));
+            _from.Table(_nameResolver.Resolve(typeof(T)));
             return this;
         }
 
