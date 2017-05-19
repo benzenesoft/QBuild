@@ -43,11 +43,13 @@
     <Compile Include="Builders\ClauseFactory.cs" />
     <Compile Include="Builders\LambdaQueryBuilder.cs" />
     <Compile Include="Clauses\Clause.cs" />
+    <Compile Include="Clauses\DelegatedClause.cs" />
     <Compile Include="Clauses\LambdaClause.cs" />
     <Compile Include="Clauses\FromClause.cs" />
     <Compile Include="Clauses\GroupByClause.cs" />
     <Compile Include="Clauses\OrderByClause.cs" />
     <Compile Include="Clauses\SelectClause.cs" />
+    <Compile Include="Clauses\WhereClause.cs" />
     <Compile Include="Expressions\UnaryExpressionParser.cs" />
     <Compile Include="Clauses\SeparatedClause.cs" />
     <Compile Include="Expressions\BinaryOperationParser.cs" />
