@@ -22,5 +22,6 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public string Text => _clause.Text;
         public IEnumerable<Parameter> Parameters => _clause.Parameters;
+        public bool IsEmpty => _clause.IsEmpty;
     }
 }

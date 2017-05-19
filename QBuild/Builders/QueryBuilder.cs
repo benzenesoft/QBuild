@@ -1,5 +1,4 @@
 using BenzeneSoft.QBuild.Clauses;
-using BenzeneSoft.QBuild.Utils;
 
 namespace BenzeneSoft.QBuild.Builders
 {
@@ -28,7 +27,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         private void AppendIfNotEmpty(string prefix, IClause append, MutableClause appendTo)
         {
-            if (append != null && !append.IsEmpty())
+            if (append != null && !append.IsEmpty)
                 appendTo.Append(prefix).Append(append).Line();
         }
 

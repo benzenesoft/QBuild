@@ -21,8 +21,8 @@ namespace BenzeneSoft.QBuild.Clauses
         public MutableClause(IClauseBuilder builder) : this(builder.Build()) { }
 
         public string Text => _textBuilder.ToString();
-
         public IEnumerable<Parameter> Parameters => _parameters;
+        public bool IsEmpty => _textBuilder.Length == 0 && _parameters.Count == 0;
 
         public MutableClause Append(IClause clause)
         {
