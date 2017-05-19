@@ -59,11 +59,5 @@ namespace BenzeneSoft.QBuild.Clauses
             _textBuilder.Insert(0, "(").Append(")");
             return this;
         }
-
-        public override string ToString()
-        {
-            return Text;
-        }
-
     }
 }

@@ -2,7 +2,7 @@
 {
     public class WhereClause : DelegatedClause
     {
-        private MutableClause _delegate;
+        private readonly MutableClause _delegate;
         public WhereClause() : base(new MutableClause())
         {
             _delegate = (MutableClause) Delegate;
@@ -15,7 +15,7 @@
 
         public WhereClause Or(IClause predicate)
         {
-            return AppendPredicate("OR", predicate);
+            return AppendPredicate(" OR ", predicate);
         }
 
         private WhereClause AppendPredicate(string condition, IClause predicate)
