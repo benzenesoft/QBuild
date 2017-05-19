@@ -12,9 +12,9 @@ namespace BenzeneSoft.QBuild.Builders
         private readonly INameResolver _nameResolver;
         private SelectClause _select;
         private FromClause _from;
-        private IClause _where;
+        private PredicateClause _where;
         private GroupByClause _groupBy;
-        private IClause _having;
+        private PredicateClause _having;
         private OrderByClause _orderBy;
 
         public LambdaQueryBuilder()
@@ -37,7 +37,9 @@ namespace BenzeneSoft.QBuild.Builders
             _nameResolver = nameResolver;
             _select = new SelectClause();
             _from = new FromClause();
+            _where = new PredicateClause();
             _groupBy = new GroupByClause();
+            _having = new PredicateClause();
             _orderBy = new OrderByClause();
         }
 
@@ -83,7 +85,19 @@ namespace BenzeneSoft.QBuild.Builders
 
         public LambdaQueryBuilder Where<T>(Expression<Func<T, bool>> predicate)
         {
-            _where = _parser.Parse(predicate);
+            _where.And(_parser.Parse(predicate));
+            return this;
+        }
+
+        public LambdaQueryBuilder AndWhere<T>(Expression<Func<T, bool>> predicate)
+        {
+            _where.And(_parser.Parse(predicate));
+            return this;
+        }
+
+        public LambdaQueryBuilder OrWhere<T>(Expression<Func<T, bool>> predicate)
+        {
+            _where.Or(_parser.Parse(predicate));
             return this;
         }
 
@@ -98,7 +112,19 @@ namespace BenzeneSoft.QBuild.Builders
 
         public LambdaQueryBuilder Having<T>(Expression<Func<T, bool>> predicate)
         {
-            _having = _parser.Parse(predicate);
+            _having.And(_parser.Parse(predicate));
+            return this;
+        }
+
+        public LambdaQueryBuilder AndHaving<T>(Expression<Func<T, bool>> predicate)
+        {
+            _having.And(_parser.Parse(predicate));
+            return this;
+        }
+
+        public LambdaQueryBuilder OrHaving<T>(Expression<Func<T, bool>> predicate)
+        {
+            _having.Or(_parser.Parse(predicate));
             return this;
         }
 
