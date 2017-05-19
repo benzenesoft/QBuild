@@ -4,7 +4,7 @@ namespace BenzeneSoft.QBuild.Clauses
 {
     public class Clause : IClause
     {
-        private Parameter[] _parameters;
+        private readonly Parameter[] _parameters;
 
         public Clause(string text, params Parameter[] parameters)
         {
@@ -12,8 +12,13 @@ namespace BenzeneSoft.QBuild.Clauses
             _parameters = parameters;
         }
 
-        public string Text { get; }
-        public IEnumerable<Parameter> Parameters => _parameters;
-        public bool IsEmpty => string.IsNullOrEmpty(Text) && _parameters.Length ==0;
+        public virtual string Text { get; }
+        public virtual IEnumerable<Parameter> Parameters => _parameters;
+        public virtual bool IsEmpty => string.IsNullOrEmpty(Text) && _parameters.Length == 0;
+
+        public override string ToString()
+        {
+            return Text;
+        }
     }
 }
