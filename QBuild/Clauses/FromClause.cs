@@ -7,6 +7,7 @@ namespace BenzeneSoft.QBuild.Clauses
     {
         public string Text => _delegate.Text;
         public IEnumerable<Parameter> Parameters => _delegate.Parameters;
+        public bool IsEmpty => _delegate.IsEmpty;
 
         private readonly MutableClause _delegate;
 

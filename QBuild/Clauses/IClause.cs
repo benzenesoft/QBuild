@@ -6,5 +6,6 @@ namespace BenzeneSoft.QBuild.Clauses
     {
         string Text { get; }
         IEnumerable<Parameter> Parameters { get; }
+        bool IsEmpty { get; }
     }
 }
