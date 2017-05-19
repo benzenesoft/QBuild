@@ -1,28 +1,31 @@
 ﻿namespace BenzeneSoft.QBuild.Clauses
 {
-    public class WhereClause : DelegatedClause
+    public class PredicateClause : DelegatedClause
     {
         private readonly MutableClause _delegate;
-        public WhereClause() : base(new MutableClause())
+        public PredicateClause() : base(new MutableClause())
         {
             _delegate = (MutableClause) Delegate;
         }
 
-        public WhereClause And(IClause predicate)
+        public PredicateClause And(IClause predicate)
         {
             return AppendPredicate(" AND ", predicate);
         }
 
-        public WhereClause Or(IClause predicate)
+        public PredicateClause Or(IClause predicate)
         {
             return AppendPredicate(" OR ", predicate);
         }
 
-        private WhereClause AppendPredicate(string condition, IClause predicate)
+        private PredicateClause AppendPredicate(string condition, IClause predicate)
         {
             if (!IsEmpty)
                 _delegate.Append($" {condition} ");
-            _delegate.Append(new MutableClause(predicate).WrapParentheses());
+            _delegate
+                .Append("(")
+                .Append(predicate)
+                .Append(")");
             return this;
         }
     }
