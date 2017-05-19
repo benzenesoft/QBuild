@@ -128,7 +128,7 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public LambdaQueryBuilder OrderByAsc<T>(Expression<Func<T, object>>[] expressions)
+        public LambdaQueryBuilder OrderByAsc<T>(params Expression<Func<T, object>>[] expressions)
         {
             foreach (var expression in expressions)
             {
@@ -137,7 +137,7 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public LambdaQueryBuilder OrderByDesc<T>(Expression<Func<T, object>>[] expressions)
+        public LambdaQueryBuilder OrderByDesc<T>(params Expression<Func<T, object>>[] expressions)
         {
             foreach (var expression in expressions)
             {
