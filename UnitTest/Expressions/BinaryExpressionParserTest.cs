@@ -28,7 +28,7 @@ namespace UnitTest.Expressions
         public void Parse_ColumnAndColumnComparison()
         {
             Expression<Predicate<Product>> exp = p => p.DiscountedPrice < p.Price;
-            var predicate = _parser.Parse((BinaryExpression)exp.Body);
+            var predicate = _parser.Parse((BinaryExpression)exp.Body, ClauseContext.Where);
             var clause = new MutableClause("select * from product where ").Append(predicate);
             var reader = _connection.Read(clause);
             IsTrue(reader.Read());
@@ -39,7 +39,7 @@ namespace UnitTest.Expressions
         public void Parse_ColumnAndValueComparison()
         {
             Expression<Predicate<Product>> exp = p => p.Price <= 15;
-            var predicate = _parser.Parse((BinaryExpression)exp.Body);
+            var predicate = _parser.Parse((BinaryExpression)exp.Body, ClauseContext.Where);
             var clause = new MutableClause("select * from product where ").Append(predicate);
             var reader = _connection.Read(clause);
             IsTrue(reader.Read());
@@ -52,7 +52,7 @@ namespace UnitTest.Expressions
             Expression<Predicate<Product>> exp = p => (p.Price <= 15) || (p.DiscountedPrice < p.Price);
 
             var eBody = exp.Body;
-            var predicate = _parser.Parse(eBody);
+            var predicate = _parser.Parse(eBody, ClauseContext.Where);
 
             var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
             var reader = _connection.Read(clause);
@@ -77,7 +77,7 @@ namespace UnitTest.Expressions
             Expression<Predicate<Product>> exp = p => (p.Price >= 65) && (p.DiscountedPrice < p.Price);
 
             var eBody = exp.Body;
-            var predicate = _parser.Parse(eBody);
+            var predicate = _parser.Parse(eBody, ClauseContext.Where);
 
             var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
             var reader = _connection.Read(clause);
@@ -95,7 +95,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = p => (p.Price <= 15) || p.DiscountedPrice < p.Price && p.Price <= 60;
 
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
 
             var clause = new MutableClause("select count(*) as count from product where ")
                 .Append(predicate);
@@ -111,7 +111,7 @@ namespace UnitTest.Expressions
         public void ArithmeticOperations()
         {
             Expression<Predicate<Product>> exp = p => (100 * (p.Price - p.DiscountedPrice) / p.Price) + 1 >= 16;
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
 
             var clause = new MutableClause("select * from product where ").Append(predicate);
 
@@ -125,7 +125,7 @@ namespace UnitTest.Expressions
         public void SimpleBoolean_False()
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == false;
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
             var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
 
             var reader = _connection.Read(clause);
@@ -138,7 +138,7 @@ namespace UnitTest.Expressions
         public void SimpleBoolean_True()
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == true;
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
             var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
 
             var reader = _connection.Read(clause);

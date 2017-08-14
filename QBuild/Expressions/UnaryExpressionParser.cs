@@ -17,15 +17,15 @@ namespace BenzeneSoft.QBuild.Expressions
             return expression is UnaryExpression;
         }
 
-        IClause IExpressionParser.Parse(Expression expression)
+        IClause IExpressionParser.Parse(Expression expression, ClauseContext context)
         {
-            return Parse(expression as UnaryExpression);
+            return Parse(expression as UnaryExpression, context);
         }
 
-        public IClause Parse(UnaryExpression expression)
+        public IClause Parse(UnaryExpression expression, ClauseContext context)
         {
             var inner =  _lookup[expression.Operand];
-            return inner.Parse(expression.Operand);
+            return inner.Parse(expression.Operand, context);
         }
     }
 }

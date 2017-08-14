@@ -22,7 +22,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public static IClause Where<T>(Expression<Predicate<T>> predicate)
         {
-            return Lambda().Expression(predicate);
+            return Lambda().Expression(predicate, ClauseContext.Where);
         }
 
         public static GroupByClause GroupBy()

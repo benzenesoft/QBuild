@@ -14,7 +14,7 @@ namespace BenzeneSoft.QBuild.Expressions
             _nameResolver = nameResolver;
         }
 
-        public IClause Parse(Expression expression)
+        public IClause Parse(Expression expression, ClauseContext context)
         {
             return ParseExact(expression as MemberExpression);
         }

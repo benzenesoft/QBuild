@@ -7,6 +7,6 @@ namespace BenzeneSoft.QBuild.Expressions
     public interface IExpressionParser
     {
         bool CanParse(Expression expression);
-        IClause Parse(Expression expression);
+        IClause Parse(Expression expression, ClauseContext context);
     }
 }
