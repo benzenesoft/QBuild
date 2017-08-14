@@ -5,6 +5,6 @@ namespace BenzeneSoft.QBuild.Expressions
 {
     public interface ILambdaParser
     {
-        IClause Parse(LambdaExpression expression);
+        IClause Parse(LambdaExpression expression, ClauseContext context);
     }
 }

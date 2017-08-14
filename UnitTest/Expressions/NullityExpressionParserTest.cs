@@ -28,7 +28,7 @@ namespace UnitTest.Expressions
         public void IsNull()
         {
             Expression<Predicate<Product>> exp = product => product.Comment == null;
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
             var clause = new MutableClause("select * from product where ").Append(predicate).Append(" and name = 'bed'");
 
             var reader = _connection.Read(clause);
@@ -40,7 +40,7 @@ namespace UnitTest.Expressions
         public void IsNotNull()
         {
             Expression<Predicate<Product>> exp = product => product.Comment != null;
-            var predicate = _parser.Parse(exp.Body);
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
             var clause = new MutableClause("select * from product where ").Append(predicate);
 
             var reader = _connection.Read(clause);

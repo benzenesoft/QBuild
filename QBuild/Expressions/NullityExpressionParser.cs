@@ -40,12 +40,12 @@ namespace BenzeneSoft.QBuild.Expressions
                    binExpression.NodeType == NotEqual;
         }
 
-        public IClause Parse(Expression expression)
+        public IClause Parse(Expression expression, ClauseContext context)
         {
-            return ParseExact(expression as BinaryExpression);
+            return ParseExact(expression as BinaryExpression, context);
         }
 
-        private IClause ParseExact(BinaryExpression binaryExpression)
+        private IClause ParseExact(BinaryExpression binaryExpression, ClauseContext context)
         {
             Expression other;
             
@@ -60,7 +60,7 @@ namespace BenzeneSoft.QBuild.Expressions
 
             var nullCheck = binaryExpression.NodeType == Equal ? " IS NULL" : " IS NOT NULL";
 
-            var otherClause = _lookup[other].Parse(other);
+            var otherClause = _lookup[other].Parse(other, context);
             var clause = new MutableClause().Append(otherClause).Append(nullCheck).WrapParentheses();
 
             return clause;

@@ -14,9 +14,9 @@ namespace BenzeneSoft.QBuild.Clauses
             _parser = parser;
         }
 
-        public LambdaClause Expression(LambdaExpression expression)
+        public LambdaClause Expression(LambdaExpression expression, ClauseContext context)
         {
-            _clause = _parser.Parse(expression);
+            _clause = _parser.Parse(expression, context);
             return this;
         }
 

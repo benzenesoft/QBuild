@@ -12,16 +12,16 @@ namespace BenzeneSoft.QBuild.Expressions
             _lookup = lookup;
         }
 
-        public IClause Parse(Expression expression)
+        public IClause Parse(Expression expression, ClauseContext context)
         {
-            return ParseExact(expression as BinaryExpression);
+            return ParseExact(expression as BinaryExpression, context);
         }
 
-        private IClause ParseExact(BinaryExpression expression)
+        private IClause ParseExact(BinaryExpression expression, ClauseContext context)
         {
-            var left = _lookup[expression.Left].Parse(expression.Left);
+            var left = _lookup[expression.Left].Parse(expression.Left, context);
             var op = _lookup[expression.NodeType];
-            var right = _lookup[expression.Right].Parse(expression.Right);
+            var right = _lookup[expression.Right].Parse(expression.Right, context);
 
             var clause = new MutableClause(op.Parse(expression.NodeType, left, right))
                 .WrapParentheses();

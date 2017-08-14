@@ -64,7 +64,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public LambdaQueryBuilder SelectAs<T>(Expression<Func<T, object>> expression, string alias)
         {
-            _select.ColumnAs(_parser.Parse(expression), new Clause(alias));
+            _select.ColumnAs(_parser.Parse(expression, ClauseContext.Select), new Clause(alias));
             return this;
         }
 
@@ -72,7 +72,7 @@ namespace BenzeneSoft.QBuild.Builders
         {
             foreach (var expression in expressions)
             {
-                _select.Column(_parser.Parse(expression));
+                _select.Column(_parser.Parse(expression, ClauseContext.Select));
             }
             return this;
         }
@@ -85,19 +85,19 @@ namespace BenzeneSoft.QBuild.Builders
 
         public LambdaQueryBuilder Where<T>(Expression<Func<T, bool>> predicate)
         {
-            _where.And(_parser.Parse(predicate));
+            _where.And(_parser.Parse(predicate, ClauseContext.Where));
             return this;
         }
 
         public LambdaQueryBuilder AndWhere<T>(Expression<Func<T, bool>> predicate)
         {
-            _where.And(_parser.Parse(predicate));
+            _where.And(_parser.Parse(predicate, ClauseContext.Where));
             return this;
         }
 
         public LambdaQueryBuilder OrWhere<T>(Expression<Func<T, bool>> predicate)
         {
-            _where.Or(_parser.Parse(predicate));
+            _where.Or(_parser.Parse(predicate, ClauseContext.Where));
             return this;
         }
 
@@ -105,26 +105,26 @@ namespace BenzeneSoft.QBuild.Builders
         {
             foreach (var expression in expressions)
             {
-                _groupBy.Column(_parser.Parse(expression));
+                _groupBy.Column(_parser.Parse(expression, ClauseContext.GroupBy));
             }
             return this;
         }
 
         public LambdaQueryBuilder Having<T>(Expression<Func<T, bool>> predicate)
         {
-            _having.And(_parser.Parse(predicate));
+            _having.And(_parser.Parse(predicate, ClauseContext.Having));
             return this;
         }
 
         public LambdaQueryBuilder AndHaving<T>(Expression<Func<T, bool>> predicate)
         {
-            _having.And(_parser.Parse(predicate));
+            _having.And(_parser.Parse(predicate, ClauseContext.Having));
             return this;
         }
 
         public LambdaQueryBuilder OrHaving<T>(Expression<Func<T, bool>> predicate)
         {
-            _having.Or(_parser.Parse(predicate));
+            _having.Or(_parser.Parse(predicate, ClauseContext.Having));
             return this;
         }
 
@@ -132,7 +132,7 @@ namespace BenzeneSoft.QBuild.Builders
         {
             foreach (var expression in expressions)
             {
-                _orderBy.Asc(_parser.Parse(expression));
+                _orderBy.Asc(_parser.Parse(expression, ClauseContext.OrderBy));
             }
             return this;
         }
@@ -141,7 +141,7 @@ namespace BenzeneSoft.QBuild.Builders
         {
             foreach (var expression in expressions)
             {
-                _orderBy.Desc(_parser.Parse(expression));
+                _orderBy.Desc(_parser.Parse(expression, ClauseContext.OrderBy));
             }
             return this;
         }

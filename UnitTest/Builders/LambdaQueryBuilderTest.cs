@@ -48,6 +48,8 @@ namespace UnitTest.Builders
         [Test(Description = "select name, avg(price) from product group by name")]
         public void GroupBy()
         {
+            //var reader = _connection.Read("select name, avg(price) as avg_price from product group by name");
+
             var clause = _builder
                 .Select<Product>(product => product.Name, product => "avg(price) as avg_price")
                 .From<Product>()
@@ -55,6 +57,7 @@ namespace UnitTest.Builders
                 .Build();
 
             var reader = _connection.Read(clause);
+
             Assert.IsTrue(reader.Read());
             Assert.AreEqual("almira", reader["name"]);
             Assert.AreEqual(75, reader["avg_price"]);
