@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.IO;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Utils;
+using NUnit.Framework;
 
 namespace UnitTest.Doubles
 {
@@ -56,7 +57,8 @@ namespace UnitTest.Doubles
             _connection.Open();
             using (var createTableCommand = _connection.CreateCommand())
             {
-                createTableCommand.CommandText = File.ReadAllText("sql_files/create_table_product.sql");
+                var path = Path.Combine(TestContext.CurrentContext.TestDirectory, @"sql_files\create_table_product.sql");
+                createTableCommand.CommandText = File.ReadAllText(path);
                 createTableCommand.ExecuteNonQuery();
             }
         }
