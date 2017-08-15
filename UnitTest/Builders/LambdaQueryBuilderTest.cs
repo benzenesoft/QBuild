@@ -2,6 +2,7 @@
 using BenzeneSoft.QBuild.Builders;
 using BenzeneSoft.QBuild.NameResolvers;
 using NUnit.Framework;
+using System.Linq;
 using UnitTest.Doubles;
 
 namespace UnitTest.Builders
@@ -70,7 +71,7 @@ namespace UnitTest.Builders
                 .Select<Product>(product => product.Name, product => "avg(price) as avg_price")
                 .From<Product>()
                 .GroupBy<Product>(product => product.Name)
-                //.Having<Product>(product => "avg_price > 74")
+                .HavingGroup<Product>(products => products.Average(p => p.Price) > 74)
                 .Build();
 
             var reader = _connection.Read(clause);
@@ -87,7 +88,7 @@ namespace UnitTest.Builders
             var clause = _builder
                 .Select<Product>(product => product.Name)
                 .From<Product>()
-                .OrderByDesc<Product>(product=>product.Name)
+                .OrderByDesc<Product>(product => product.Name)
                 .Build();
 
             var reader = _connection.Read(clause);
