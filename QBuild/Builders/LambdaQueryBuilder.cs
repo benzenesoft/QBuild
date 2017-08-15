@@ -3,12 +3,13 @@ using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
 using BenzeneSoft.QBuild.NameResolvers;
+using System.Collections.Generic;
 
 namespace BenzeneSoft.QBuild.Builders
 {
     public class LambdaQueryBuilder : IClauseBuilder
     {
-        private readonly ILambdaParser _parser;
+        private readonly ILambdaResolver _parser;
         private readonly INameResolver _nameResolver;
         private SelectClause _select;
         private FromClause _from;
@@ -27,11 +28,11 @@ namespace BenzeneSoft.QBuild.Builders
         }
 
         public LambdaQueryBuilder(IParserLookup lookup, INameResolver nameResolver)
-            : this(new LambdaParser(lookup), nameResolver)
+            : this(new LambdaResolver(lookup), nameResolver)
         {
         }
 
-        public LambdaQueryBuilder(ILambdaParser parser, INameResolver nameResolver)
+        public LambdaQueryBuilder(ILambdaResolver parser, INameResolver nameResolver)
         {
             _parser = parser;
             _nameResolver = nameResolver;
@@ -65,6 +66,15 @@ namespace BenzeneSoft.QBuild.Builders
         public LambdaQueryBuilder SelectAs<T>(Expression<Func<T, object>> expression, string alias)
         {
             _select.ColumnAs(_parser.Parse(expression, ClauseContext.Select), new Clause(alias));
+            return this;
+        }
+
+        public LambdaQueryBuilder SelectGroup<T>(params Expression<Func<IEnumerable<T>, object>>[] expressions)
+        {
+            foreach (var expression in expressions)
+            {
+                _select.Column(_parser.Parse(expression, ClauseContext.Select));
+            }
             return this;
         }
 
@@ -107,6 +117,12 @@ namespace BenzeneSoft.QBuild.Builders
             {
                 _groupBy.Column(_parser.Parse(expression, ClauseContext.GroupBy));
             }
+            return this;
+        }
+
+        public LambdaQueryBuilder HavingGroup<T>(Expression<Func<IEnumerable<T>, bool>> predicate)
+        {
+            _having.And(_parser.Parse(predicate, ClauseContext.Having));
             return this;
         }
 

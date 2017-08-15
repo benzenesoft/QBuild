@@ -8,7 +8,7 @@ namespace BenzeneSoft.QBuild.Builders
 {
     public static class ClauseFactory
     {
-        private static ILambdaParser _defaultParser = new LambdaParser(new ParserLookup(new AsIsNameResolver()));
+        private static ILambdaResolver _defaultParser = new LambdaResolver(new ParserLookup(new AsIsNameResolver()));
 
         public static SelectClause Select()
         {
@@ -40,12 +40,12 @@ namespace BenzeneSoft.QBuild.Builders
             return Lambda(_defaultParser);
         }
 
-        public static LambdaClause Lambda(ILambdaParser parser)
+        public static LambdaClause Lambda(ILambdaResolver parser)
         {
             return new LambdaClause(parser);
         }
 
-        public static void SetDefaultParser(ILambdaParser parser)
+        public static void SetDefaultParser(ILambdaResolver parser)
         {
             _defaultParser = parser;
         }

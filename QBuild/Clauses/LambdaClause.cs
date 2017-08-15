@@ -6,10 +6,10 @@ namespace BenzeneSoft.QBuild.Clauses
 {
     public class LambdaClause : IClause
     {
-        private readonly ILambdaParser _parser;
+        private readonly ILambdaResolver _parser;
         private IClause _clause;
 
-        public LambdaClause(ILambdaParser parser)
+        public LambdaClause(ILambdaResolver parser)
         {
             _parser = parser;
         }

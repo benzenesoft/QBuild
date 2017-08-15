@@ -4,11 +4,11 @@ using BenzeneSoft.QBuild.Clauses;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class LambdaParser : ILambdaParser
+    public class LambdaResolver : ILambdaResolver
     {
         private readonly IParserLookup _lookup;
 
-        public LambdaParser(IParserLookup lookup)
+        public LambdaResolver(IParserLookup lookup)
         {
             _lookup = lookup;
         }
