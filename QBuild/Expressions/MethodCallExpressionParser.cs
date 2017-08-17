@@ -35,7 +35,7 @@ namespace BenzeneSoft.QBuild.Expressions
 
             if (method == typeof(FunctionFactory).GetMethod("Avg"))
             {
-                var argClause = _lookup[arguments[0]].Parse(arguments[0], context);
+                var argClause = _lookup.Parse(arguments[0], context);
                 var funcClause = new MutableClause(argClause).WrapParentheses().Prepend("avg");
                 return funcClause;
             }
