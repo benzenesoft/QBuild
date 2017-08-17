@@ -2,12 +2,14 @@
 using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Functions;
+using System.Linq;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
     public class MethodCallExpressionParser : IExpressionParser
     {
         private readonly IParserLookup _lookup;
+        private readonly FunctionParser _functParser = new FunctionParser();
 
         public MethodCallExpressionParser(IParserLookup lookup)
         {
@@ -27,20 +29,8 @@ namespace BenzeneSoft.QBuild.Expressions
         public IClause ParseExact(MethodCallExpression expression, ClauseContext context)
         {
             var method = expression.Method;
-            if (method.IsGenericMethod)
-            {
-                method = method.GetGenericMethodDefinition();
-            }
-            var arguments = expression.Arguments;
-
-            if (method == typeof(FunctionFactory).GetMethod("Avg"))
-            {
-                var argClause = _lookup.Parse(arguments[0], context);
-                var funcClause = new MutableClause(argClause).WrapParentheses().Prepend("avg");
-                return funcClause;
-            }
-
-            throw new NotImplementedException();
+            var arguments = expression.Arguments.Select(arg=> _lookup.Parse(arg, context)).ToArray();
+            return _functParser.Parse(method.Name, arguments);
         }
     }
 }

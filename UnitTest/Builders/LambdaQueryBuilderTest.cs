@@ -69,10 +69,11 @@ namespace UnitTest.Builders
         public void Having()
         {
             var clause = _builder
-                .Select<Product>(product => product.Name, product => "avg(price) as avg_price")
+                .Select<Product>(product => product.Name)
+                .SelectAs<Product>(product => SqlFunctions.Avg(product.Price), "avg_price")
                 .From<Product>()
                 .GroupBy<Product>(product => product.Name)
-                .Having<Product>(product => FunctionFactory.Avg(product.Price) > 74)
+                .Having<Product>(product => SqlFunctions.Avg(product.Price) > 74)
                 .Build();
 
             var reader = _connection.Read(clause);
