@@ -63,7 +63,7 @@
     <Compile Include="Expressions\NullityExpressionParser.cs" />
     <Compile Include="Expressions\ParserLookup.cs" />
     <Compile Include="Expressions\PropertyExpressionParser.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Functions\FunctionFactory.cs" />
     <Compile Include="NameResolvers\AsIsNameResolver.cs" />
     <Compile Include="NameResolvers\INameResolver.cs" />
     <Compile Include="Expressions\BinaryExpressionParser.cs" />

@@ -14,6 +14,7 @@ namespace BenzeneSoft.QBuild.Expressions
         {
             _expressionParsers = new IExpressionParser[]
             {
+                new MethodCallExpressionParser(this),
                 new ConstantExpressionParser(), 
                 new PropertyExpressionParser(nameResolver), 
                 new NullityExpressionParser(this), 
