@@ -11,11 +11,11 @@ namespace BenzeneSoft.QBuild.Expressions
         private readonly IExpressionParser[] _expressionParsers;
         private readonly IOperationParser[] _operationParsers;
 
-        public ParserLookup(INameResolver nameResolver)
+        public ParserLookup(INameResolver nameResolver, ISqlFunctionNameResolver funcResolver)
         {
             _expressionParsers = new IExpressionParser[]
             {
-                new MethodCallExpressionParser(this),
+                new MethodCallExpressionParser(this, funcResolver),
                 new ConstantExpressionParser(),
                 new PropertyExpressionParser(nameResolver),
                 new NullityExpressionParser(this),

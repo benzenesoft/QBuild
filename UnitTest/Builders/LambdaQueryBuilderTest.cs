@@ -1,5 +1,6 @@
 ﻿
 using BenzeneSoft.QBuild.Builders;
+using BenzeneSoft.QBuild.Expressions;
 using BenzeneSoft.QBuild.Functions;
 using BenzeneSoft.QBuild.NameResolvers;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace UnitTest.Builders
         [SetUp]
         public void Setup()
         {
-            _builder = new LambdaQueryBuilder(new LowerSnakeCaseNameResolver());
+            _builder = new LambdaQueryBuilder(new LowerSnakeCaseNameResolver(), new SqlFunctionNameResolver(new LowerSnakeCaseNameResolver()));
 
             _connection = new TestConnection();
             _connection.Open();

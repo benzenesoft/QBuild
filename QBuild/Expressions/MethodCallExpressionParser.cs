@@ -2,18 +2,18 @@
 using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Functions;
-using System.Linq;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
     public class MethodCallExpressionParser : IExpressionParser
     {
         private readonly IParserLookup _lookup;
-        private readonly FunctionParser _functParser = new FunctionParser();
+        private readonly ISqlFunctionNameResolver _funcResolver;
 
-        public MethodCallExpressionParser(IParserLookup lookup)
+        public MethodCallExpressionParser(IParserLookup lookup, ISqlFunctionNameResolver funcResolver)
         {
             _lookup = lookup;
+            _funcResolver = funcResolver;
         }
 
         public bool CanParse(Expression expression)
@@ -28,9 +28,15 @@ namespace BenzeneSoft.QBuild.Expressions
 
         public IClause ParseExact(MethodCallExpression expression, ClauseContext context)
         {
-            var method = expression.Method;
-            var arguments = expression.Arguments.Select(arg=> _lookup.Parse(arg, context)).ToArray();
-            return _functParser.Parse(method.Name, arguments);
+            var functionName = _funcResolver.Lookup(expression.Method);
+            var argClause = new SeparatedClause(new Clause(","));
+            foreach (var arg in expression.Arguments)
+            {
+                argClause.AppendSeparated(_lookup.Parse(arg, context));
+            }
+
+            var clause = new MutableClause(argClause).WrapParentheses().Prepend(functionName);
+            return clause;
         }
     }
 }

@@ -51,7 +51,8 @@
     <Compile Include="Clauses\OrderByClause.cs" />
     <Compile Include="Clauses\SelectClause.cs" />
     <Compile Include="Clauses\PredicateClause.cs" />
-    <Compile Include="Expressions\FunctionParser.cs" />
+    <Compile Include="Expressions\FunctionNameLookup.cs" />
+    <Compile Include="Expressions\IFunctionNameLookup.cs" />
     <Compile Include="Expressions\ILambdaResolver.cs" />
     <Compile Include="Expressions\LambdaResolver.cs" />
     <Compile Include="Expressions\MethodCallExpressionParser.cs" />
