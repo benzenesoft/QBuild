@@ -24,8 +24,7 @@ namespace BenzeneSoft.QBuild.Expressions
 
         public IClause Parse(UnaryExpression expression, ClauseContext context)
         {
-            var inner =  _lookup[expression.Operand];
-            return inner.Parse(expression.Operand, context);
+            return _lookup.Parse(expression.Operand, context);
         }
     }
 }

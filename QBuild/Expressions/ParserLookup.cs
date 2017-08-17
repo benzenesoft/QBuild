@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.NameResolvers;
 
 namespace BenzeneSoft.QBuild.Expressions
@@ -15,11 +16,11 @@ namespace BenzeneSoft.QBuild.Expressions
             _expressionParsers = new IExpressionParser[]
             {
                 new MethodCallExpressionParser(this),
-                new ConstantExpressionParser(), 
-                new PropertyExpressionParser(nameResolver), 
-                new NullityExpressionParser(this), 
+                new ConstantExpressionParser(),
+                new PropertyExpressionParser(nameResolver),
+                new NullityExpressionParser(this),
                 new BinaryExpressionParser(this),
-                new UnaryExpressionParser(this) 
+                new UnaryExpressionParser(this)
             };
 
             _operationParsers = new IOperationParser[]
@@ -28,30 +29,36 @@ namespace BenzeneSoft.QBuild.Expressions
             };
         }
 
-        public IExpressionParser this[Expression expression]
+        public IExpressionParser Lookup(Expression expression)
         {
-            get
+            var parser = _expressionParsers.FirstOrDefault(p => p.CanParse(expression));
+            if (parser != null)
             {
-                var parser = _expressionParsers.FirstOrDefault(p => p.CanParse(expression));
-                if (parser != null)
-                {
-                    return parser;
-                }
-                throw new ArgumentException($"Expression ({expression}) of type ({expression.Type}) is not supported.");
+                return parser;
             }
+            throw new ArgumentException($"Expression ({expression}) of type ({expression.Type}) is not supported.");
         }
 
-        public IOperationParser this[ExpressionType operation]
+        public IOperationParser Lookup(ExpressionType operation)
         {
-            get
+            var parser = _operationParsers.FirstOrDefault(p => p.CanParse(operation));
+            if (parser != null)
             {
-                var parser = _operationParsers.FirstOrDefault(p => p.CanParse(operation));
-                if (parser != null)
-                {
-                    return parser;
-                }
-                throw new ArgumentException($"Operation {operation} is not supported.");
+                return parser;
             }
+            throw new ArgumentException($"Operation {operation} is not supported.");
+        }
+
+        public IClause Parse(Expression expression, ClauseContext context)
+        {
+            var parser = Lookup(expression);
+            return parser.Parse(expression, context);
+        }
+
+        public IClause Parse(ExpressionType operation, params IClause[] operands)
+        {
+            var parser = Lookup(operation);
+            return parser.Parse(operation, operands);
         }
     }
 }

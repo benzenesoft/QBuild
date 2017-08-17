@@ -15,9 +15,7 @@ namespace BenzeneSoft.QBuild.Expressions
 
         public IClause Parse(LambdaExpression expression, ClauseContext context)
         {
-            var body = expression.Body;
-            var parser = _lookup[body];
-            return parser.Parse(body, context);
+            return _lookup.Parse(expression.Body, context);
         }
     }
 }

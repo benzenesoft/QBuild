@@ -19,11 +19,11 @@ namespace BenzeneSoft.QBuild.Expressions
 
         private IClause ParseExact(BinaryExpression expression, ClauseContext context)
         {
-            var left = _lookup[expression.Left].Parse(expression.Left, context);
-            var op = _lookup[expression.NodeType];
-            var right = _lookup[expression.Right].Parse(expression.Right, context);
+            var left = _lookup.Parse(expression.Left, context);
+            var right = _lookup.Lookup(expression.Right).Parse(expression.Right, context);
+            var op = _lookup.Parse(expression.NodeType, left, right);
 
-            var clause = new MutableClause(op.Parse(expression.NodeType, left, right))
+            var clause = new MutableClause(op)
                 .WrapParentheses();
 
             return clause;
