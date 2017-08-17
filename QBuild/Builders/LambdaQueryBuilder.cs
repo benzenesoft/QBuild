@@ -120,12 +120,6 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public LambdaQueryBuilder HavingGroup<T>(Expression<Func<IEnumerable<T>, bool>> predicate)
-        {
-            _having.And(_parser.Parse(predicate, ClauseContext.Having));
-            return this;
-        }
-
         public LambdaQueryBuilder Having<T>(Expression<Func<T, bool>> predicate)
         {
             _having.And(_parser.Parse(predicate, ClauseContext.Having));

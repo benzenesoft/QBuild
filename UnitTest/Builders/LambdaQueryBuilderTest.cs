@@ -1,5 +1,6 @@
 ﻿
 using BenzeneSoft.QBuild.Builders;
+using BenzeneSoft.QBuild.Functions;
 using BenzeneSoft.QBuild.NameResolvers;
 using NUnit.Framework;
 using System.Linq;
@@ -71,7 +72,7 @@ namespace UnitTest.Builders
                 .Select<Product>(product => product.Name, product => "avg(price) as avg_price")
                 .From<Product>()
                 .GroupBy<Product>(product => product.Name)
-                .HavingGroup<Product>(products => products.Average(p => p.Price) > 74)
+                .Having<Product>(product => FunctionFactory.Avg(product.Price) > 74)
                 .Build();
 
             var reader = _connection.Read(clause);
