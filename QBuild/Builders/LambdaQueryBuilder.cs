@@ -69,15 +69,6 @@ namespace BenzeneSoft.QBuild.Builders
             return this;
         }
 
-        public LambdaQueryBuilder SelectGroup<T>(params Expression<Func<IEnumerable<T>, object>>[] expressions)
-        {
-            foreach (var expression in expressions)
-            {
-                _select.Column(_parser.Parse(expression, ClauseContext.Select));
-            }
-            return this;
-        }
-
         public LambdaQueryBuilder Select<T>(params Expression<Func<T, object>>[] expressions)
         {
             foreach (var expression in expressions)
