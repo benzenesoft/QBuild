@@ -17,7 +17,7 @@ namespace UnitTest.Builders
         public void Setup()
         {
             _builder = new QueryBuilder();
-            SetDefaultParser(new LambdaResolver(new ParserLookup(new LowerSnakeCaseNameResolver())));
+            SetDefaultParser(new LambdaResolver(new ParserLookup(new LowerSnakeCaseNameResolver(), new SqlFunctionNameResolver(new LowerSnakeCaseNameResolver()))));
             _connection = new TestConnection();
             _connection.Open();
         }

@@ -19,7 +19,7 @@ namespace UnitTest.Expressions
         [SetUp]
         public void Setup()
         {
-            _parser = new NullityExpressionParser(new ParserLookup(new LowerSnakeCaseNameResolver()));
+            _parser = new NullityExpressionParser(new ParserLookup(new LowerSnakeCaseNameResolver(), new SqlFunctionNameResolver(new LowerSnakeCaseNameResolver())));
             _connection = new TestConnection();
             _connection.Open();
         }

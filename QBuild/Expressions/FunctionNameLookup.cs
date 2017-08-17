@@ -1,4 +1,5 @@
 ﻿using BenzeneSoft.QBuild.Clauses;
+using BenzeneSoft.QBuild.NameResolvers;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -6,13 +7,15 @@ using static BenzeneSoft.QBuild.Functions.SqlFunctions;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
-    public class FunctionParser
-    {
-        private static readonly Dictionary<string, string> FunctionNameMap;
 
-        static FunctionParser()
+    public class SqlFunctionNameResolver: ISqlFunctionNameResolver
+    {
+        private readonly INameResolver _nameResolver;
+        private readonly Dictionary<string, string> _functionNameMap;
+
+        public SqlFunctionNameResolver(INameResolver nameResolver)
         {
-            FunctionNameMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            _functionNameMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
                 [nameof(Avg)] = "avg",
                 [nameof(Max)] = "max",
@@ -26,11 +29,17 @@ namespace BenzeneSoft.QBuild.Expressions
                 [nameof(Floor)] = "sum",
                 [nameof(Ceil)] = "sum",
             };
+            _nameResolver = nameResolver;
         }
 
-        public bool CanParse(string funcName)
+        public string Lookup(MethodInfo methodInfo)
         {
-            return FunctionNameMap.ContainsKey(funcName);
+            if(!_functionNameMap.TryGetValue(methodInfo.Name, out string func))
+            {
+                func = _nameResolver.Resolve(methodInfo);
+            }
+
+            return func;
         }
 
         public IClause Parse(string funcName, params IClause[] arguments)
@@ -41,7 +50,7 @@ namespace BenzeneSoft.QBuild.Expressions
                 argClause.AppendSeparated(arg);
             }
 
-            var clause = new MutableClause(argClause).WrapParentheses().Prepend(FunctionNameMap[funcName]);
+            var clause = new MutableClause(argClause).WrapParentheses().Prepend(_functionNameMap[funcName]);
             return clause;
         }
     }
