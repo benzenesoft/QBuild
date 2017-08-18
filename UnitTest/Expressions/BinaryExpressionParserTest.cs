@@ -53,7 +53,7 @@ namespace UnitTest.Expressions
             var eBody = exp.Body;
             var predicate = _parser.Parse(eBody, ClauseContext.Where);
 
-            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
+            var clause = new MutableClause("select * from product where ").Append(predicate).AppendText(" order by price");
             var reader = _connection.Read(clause);
 
             IsTrue(_parser.CanParse(eBody));
@@ -78,7 +78,7 @@ namespace UnitTest.Expressions
             var eBody = exp.Body;
             var predicate = _parser.Parse(eBody, ClauseContext.Where);
 
-            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by price");
+            var clause = new MutableClause("select * from product where ").Append(predicate).AppendText(" order by price");
             var reader = _connection.Read(clause);
 
             IsTrue(_parser.CanParse(eBody));
@@ -125,7 +125,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == false;
             var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
-            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
+            var clause = new MutableClause("select * from product where ").Append(predicate).AppendText(" order by name");
 
             var reader = _connection.Read(clause);
             IsTrue(reader.Read());
@@ -138,7 +138,7 @@ namespace UnitTest.Expressions
         {
             Expression<Predicate<Product>> exp = product => product.IsAvailable == true;
             var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
-            var clause = new MutableClause("select * from product where ").Append(predicate).Append(" order by name");
+            var clause = new MutableClause("select * from product where ").Append(predicate).AppendText(" order by name");
 
             var reader = _connection.Read(clause);
             IsTrue(reader.Read());

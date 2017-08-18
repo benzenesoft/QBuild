@@ -28,7 +28,7 @@ namespace BenzeneSoft.QBuild.Builders
         private void AppendIfNotEmpty(string prefix, IClause append, MutableClause appendTo)
         {
             if (append != null && !append.IsEmpty)
-                appendTo.Append(prefix).Append(append).Line();
+                appendTo.AppendText(prefix).Append(append).Line();
         }
 
         public QueryBuilder Select(IClause select)

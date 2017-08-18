@@ -35,7 +35,7 @@ namespace BenzeneSoft.QBuild.Expressions
                 argClause.AppendSeparated(_lookup.Parse(arg, context));
             }
 
-            var clause = new MutableClause(argClause).WrapParentheses().Prepend(functionName);
+            var clause = new MutableClause(argClause).WrapParentheses().PrependText(functionName);
             return clause;
         }
     }

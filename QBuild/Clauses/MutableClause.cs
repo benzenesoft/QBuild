@@ -18,7 +18,6 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public MutableClause() : this(string.Empty) { }
         public MutableClause(IClause clause) : this(clause.Text, clause.Parameters.ToArray()) { }
-        public MutableClause(IClauseBuilder builder) : this(builder.Build()) { }
 
         public override string Text => _textBuilder.ToString();
         public override IEnumerable<Parameter> Parameters => _parameters;
@@ -35,13 +34,13 @@ namespace BenzeneSoft.QBuild.Clauses
             return this;
         }
         
-        public MutableClause Append(string text)
+        public MutableClause AppendText(string text)
         {
             _textBuilder.Append(text);
             return this;
         }
 
-        public MutableClause Prepend(string text)
+        public MutableClause PrependText(string text)
         {
             _textBuilder.Insert(0, text);
             return this;

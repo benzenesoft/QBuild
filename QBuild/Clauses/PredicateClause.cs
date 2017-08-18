@@ -21,11 +21,11 @@
         private PredicateClause AppendPredicate(string condition, IClause predicate)
         {
             if (!IsEmpty)
-                _delegate.Append($" {condition} ");
+                _delegate.AppendText($" {condition} ");
             _delegate
-                .Append("(")
+                .AppendText("(")
                 .Append(predicate)
-                .Append(")");
+                .AppendText(")");
             return this;
         }
     }

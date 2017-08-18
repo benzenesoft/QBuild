@@ -21,7 +21,7 @@ namespace BenzeneSoft.QBuild.Clauses
         public SeparatedClause AppendSeparated(string expression)
         {
             AppendSeparator();
-            Append(expression);
+            AppendText(expression);
             return this;
         }
 
