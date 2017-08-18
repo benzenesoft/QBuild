@@ -11,7 +11,7 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public GroupByClause()
         {
-            _delegate = new SeparatedClause(new MutableClause().Line().Append(","));
+            _delegate = new SeparatedClause(new MutableClause().Line().AppendText(","));
         }
 
         public GroupByClause Column(string expression)

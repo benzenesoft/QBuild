@@ -39,6 +39,15 @@ namespace UnitTest.Clauses
         }
 
         [Test]
+        public void Append_Null_NoChange()
+        {
+            var clause = new MutableClause("some clause");
+            clause.Append(null);
+
+            Assert.AreEqual("some clause", clause.Text);
+        }
+
+        [Test]
         public void Append_NoWrap()
         {
             var clause = new MutableClause("some clause ");
@@ -61,7 +70,7 @@ namespace UnitTest.Clauses
         public void AppendText_TextAppended()
         {
             var clause = new MutableClause("some clause");
-            clause.Append(" append this");
+            clause.AppendText(" append this");
 
             Assert.AreEqual("some clause append this", clause.Text);
         }

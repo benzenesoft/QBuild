@@ -10,7 +10,7 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public OrderByClause()
         {
-            _delegate = new SeparatedClause(new MutableClause().Line().Append(","));
+            _delegate = new SeparatedClause(new MutableClause().Line().AppendText(","));
         }
 
         public OrderByClause Asc(string expression)
@@ -27,13 +27,13 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public OrderByClause Asc(IClause expression)
         {
-            _delegate.AppendSeparated(expression).Append(" ASC");
+            _delegate.AppendSeparated(expression).AppendText(" ASC");
             return this;
         }
 
         public OrderByClause Desc(IClause expression)
         {
-            _delegate.AppendSeparated(expression).Append(" DESC");
+            _delegate.AppendSeparated(expression).AppendText(" DESC");
             return this;
         }
     }

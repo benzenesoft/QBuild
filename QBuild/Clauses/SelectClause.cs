@@ -12,12 +12,12 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public SelectClause()
         {
-            _delegate = new SeparatedClause(new MutableClause().Line().Append(","));
+            _delegate = new SeparatedClause(new MutableClause().Line().AppendText(","));
         }
 
         public SelectClause Distinct()
         {
-            _delegate.Prepend("DISTINCT ");
+            _delegate.PrependText("DISTINCT ");
             return this;
         }
 
@@ -42,7 +42,7 @@ namespace BenzeneSoft.QBuild.Clauses
         public SelectClause ColumnAs(IClause expression, IClause alias)
         {
             _delegate.AppendSeparated(expression)
-                .Append(" as ")
+                .AppendText(" as ")
                 .Append(alias);
             return this;
         }

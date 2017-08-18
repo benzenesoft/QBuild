@@ -23,7 +23,7 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public FromClause Table(string expression)
         {
-            _delegate.Append(expression);
+            _delegate.AppendText(expression);
             return this;
         }
     }
