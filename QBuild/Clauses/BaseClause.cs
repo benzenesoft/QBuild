@@ -19,5 +19,8 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public static PredicateClause operator |(BaseClause left, BaseClause right) 
             => new PredicateClause().Or(left).Or(right);
+
+        public static PredicateClause operator &(BaseClause left, BaseClause right)
+            => new PredicateClause().And(left).And(right);
     }
 }

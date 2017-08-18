@@ -36,5 +36,20 @@ namespace UnitTest.Clauses
             Assert.AreEqual("@p1", paramsArray[0].Name);
             Assert.AreEqual("@p2", paramsArray[1].Name);
         }
+
+        [Test]
+        public void And()
+        {
+            var c1 = new Clause("color = @p1", Parameter.CreateNew("@p1", "red"));
+            var c2 = new Clause("price < @p2", new Parameter("@p2", 100));
+
+            var c = c1 & c2;
+
+            Assert.AreEqual("(color = @p1) AND (price < @p2)", c.Text);
+
+            var paramsArray = c.Parameters.ToArray();
+            Assert.AreEqual("@p1", paramsArray[0].Name);
+            Assert.AreEqual("@p2", paramsArray[1].Name);
+        }
     }
 }
