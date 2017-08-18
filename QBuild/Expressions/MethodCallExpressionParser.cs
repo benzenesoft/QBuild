@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
-using BenzeneSoft.QBuild.Functions;
 
 namespace BenzeneSoft.QBuild.Expressions
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using BenzeneSoft.QBuild;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
 using BenzeneSoft.QBuild.NameResolvers;

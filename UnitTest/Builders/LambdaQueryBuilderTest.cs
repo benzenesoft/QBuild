@@ -4,7 +4,6 @@ using BenzeneSoft.QBuild.Expressions;
 using BenzeneSoft.QBuild.Functions;
 using BenzeneSoft.QBuild.NameResolvers;
 using NUnit.Framework;
-using System.Linq;
 using UnitTest.Doubles;
 
 namespace UnitTest.Builders

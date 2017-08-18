@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
 using BenzeneSoft.QBuild.NameResolvers;
-using System.Collections.Generic;
 
 namespace BenzeneSoft.QBuild.Builders
 {
