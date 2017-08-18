@@ -15,8 +15,9 @@ namespace BenzeneSoft.QBuild.Clauses
         }
 
         public static MutableClause operator +(BaseClause left, BaseClause right)
-        {
-            return new MutableClause(left).Append(right);
-        }
+            => new MutableClause(left).Append(right);
+
+        public static PredicateClause operator |(BaseClause left, BaseClause right) 
+            => new PredicateClause().Or(left).Or(right);
     }
 }
