@@ -3,11 +3,10 @@ using System.Collections.Generic;
 namespace BenzeneSoft.QBuild.Clauses
 {
     //TODO feature: join tables
-    public class FromClause : IClause
+    public class FromClause : BaseClause
     {
-        public string Text => _delegate.Text;
-        public IEnumerable<Parameter> Parameters => _delegate.Parameters;
-        public bool IsEmpty => _delegate.IsEmpty;
+        public override string Text => _delegate.Text;
+        public override IEnumerable<Parameter> Parameters => _delegate.Parameters;
 
         private readonly MutableClause _delegate;
 

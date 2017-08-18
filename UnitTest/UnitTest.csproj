@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Builders\LambdaQueryBuilderTest.cs" />
     <Compile Include="Builders\QueryBuilderWithClauseFactoryTest.cs" />
+    <Compile Include="Clauses\OperatorOverloadingTest.cs" />
     <Compile Include="Doubles\TestConnection.cs" />
     <Compile Include="Doubles\Product.cs" />
     <Compile Include="Doubles\ProductTag.cs" />

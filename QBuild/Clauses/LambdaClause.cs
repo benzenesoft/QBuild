@@ -4,7 +4,7 @@ using BenzeneSoft.QBuild.Expressions;
 
 namespace BenzeneSoft.QBuild.Clauses
 {
-    public class LambdaClause : IClause
+    public class LambdaClause : BaseClause
     {
         private readonly ILambdaResolver _parser;
         private IClause _clause;
@@ -20,8 +20,7 @@ namespace BenzeneSoft.QBuild.Clauses
             return this;
         }
 
-        public string Text => _clause.Text;
-        public IEnumerable<Parameter> Parameters => _clause.Parameters;
-        public bool IsEmpty => _clause.IsEmpty;
+        public override string Text => _clause.Text;
+        public override IEnumerable<Parameter> Parameters => _clause.Parameters;
     }
 }
