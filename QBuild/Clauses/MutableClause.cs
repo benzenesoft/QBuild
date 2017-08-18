@@ -5,7 +5,7 @@ using BenzeneSoft.QBuild.Builders;
 
 namespace BenzeneSoft.QBuild.Clauses
 {
-    public class MutableClause : IClause
+    public class MutableClause : BaseClause
     {
         private readonly StringBuilder _textBuilder;
         private readonly List<Parameter> _parameters;
@@ -20,9 +20,8 @@ namespace BenzeneSoft.QBuild.Clauses
         public MutableClause(IClause clause) : this(clause.Text, clause.Parameters.ToArray()) { }
         public MutableClause(IClauseBuilder builder) : this(builder.Build()) { }
 
-        public string Text => _textBuilder.ToString();
-        public IEnumerable<Parameter> Parameters => _parameters;
-        public bool IsEmpty => _textBuilder.Length == 0 && _parameters.Count == 0;
+        public override string Text => _textBuilder.ToString();
+        public override IEnumerable<Parameter> Parameters => _parameters;
 
         public MutableClause Append(IClause clause)
         {

@@ -2,11 +2,10 @@ using System.Collections.Generic;
 
 namespace BenzeneSoft.QBuild.Clauses
 {
-    public class SelectClause : IClause
+    public class SelectClause : BaseClause
     {
-        public string Text => _delegate.Text;
-        public IEnumerable<Parameter> Parameters => _delegate.Parameters;
-        public bool IsEmpty => _delegate.IsEmpty;
+        public override string Text => _delegate.Text;
+        public override IEnumerable<Parameter> Parameters => _delegate.Parameters;
 
         private readonly SeparatedClause _delegate;
 
