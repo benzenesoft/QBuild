@@ -13,5 +13,10 @@ namespace BenzeneSoft.QBuild.Clauses
         {
             return Text;
         }
+
+        public static MutableClause operator +(BaseClause left, BaseClause right)
+        {
+            return new MutableClause(left).Append(right);
+        }
     }
 }
