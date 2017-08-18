@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using BenzeneSoft.QBuild.Clauses;
 using NUnit.Framework;
+using BenzeneSoft.QBuild.Utils;
 
 namespace UnitTest.Clauses
 {
@@ -41,7 +42,7 @@ namespace UnitTest.Clauses
         public void Append_NoWrap()
         {
             var clause = new MutableClause("some clause ");
-            var clauseToAppend = new Clause("append this");
+            var clauseToAppend = "append this".ToClause();
             clause.Append(clauseToAppend);
 
             Assert.AreEqual("some clause append this", clause.Text);

@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.Expressions;
 using BenzeneSoft.QBuild.NameResolvers;
+using BenzeneSoft.QBuild.Utils;
 
 namespace BenzeneSoft.QBuild.Builders
 {
@@ -64,7 +65,7 @@ namespace BenzeneSoft.QBuild.Builders
 
         public LambdaQueryBuilder SelectAs<T>(Expression<Func<T, object>> expression, string alias)
         {
-            _select.ColumnAs(_parser.Parse(expression, ClauseContext.Select), new Clause(alias));
+            _select.ColumnAs(_parser.Parse(expression, ClauseContext.Select), alias.ToClause());
             return this;
         }
 

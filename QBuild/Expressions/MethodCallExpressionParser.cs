@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using BenzeneSoft.QBuild.Clauses;
+using BenzeneSoft.QBuild.Utils;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
@@ -28,7 +29,7 @@ namespace BenzeneSoft.QBuild.Expressions
         public IClause ParseExact(MethodCallExpression expression, ClauseContext context)
         {
             var functionName = _funcResolver.Resolve(expression.Method);
-            var argClause = new SeparatedClause(new Clause(","));
+            var argClause = new SeparatedClause(",".ToClause());
             foreach (var arg in expression.Arguments)
             {
                 argClause.AppendSeparated(_lookup.Parse(arg, context));

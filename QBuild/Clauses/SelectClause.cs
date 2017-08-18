@@ -1,3 +1,4 @@
+using BenzeneSoft.QBuild.Utils;
 using System.Collections.Generic;
 
 namespace BenzeneSoft.QBuild.Clauses
@@ -23,7 +24,7 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public SelectClause All()
         {
-            _delegate.AppendSeparated(new Clause("*"));
+            _delegate.AppendSeparated("*".ToClause());
             return this;
         }
 

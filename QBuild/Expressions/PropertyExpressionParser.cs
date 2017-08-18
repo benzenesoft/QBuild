@@ -2,6 +2,7 @@
 using System.Reflection;
 using BenzeneSoft.QBuild.Clauses;
 using BenzeneSoft.QBuild.NameResolvers;
+using BenzeneSoft.QBuild.Utils;
 
 namespace BenzeneSoft.QBuild.Expressions
 {
@@ -23,7 +24,7 @@ namespace BenzeneSoft.QBuild.Expressions
         {
             var prop = expression.Member as PropertyInfo;
             var column = _nameResolver.Resolve(prop);
-            return new Clause(column);
+            return column.ToClause();
         }
 
         public bool CanParse(Expression expression)
