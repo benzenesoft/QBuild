@@ -2,7 +2,7 @@
 
 namespace BenzeneSoft.QBuild.Clauses
 {
-    public class DelegatedClause : IClause
+    public class DelegatedClause : BaseClause
     {
         protected readonly IClause Delegate;
 
@@ -11,8 +11,7 @@ namespace BenzeneSoft.QBuild.Clauses
             Delegate = @delegate;
         }
 
-        public string Text => Delegate.Text;
-        public IEnumerable<Parameter> Parameters => Delegate.Parameters;
-        public bool IsEmpty => Delegate.IsEmpty;
+        public override string Text => Delegate.Text;
+        public override IEnumerable<Parameter> Parameters => Delegate.Parameters;
     }
 }

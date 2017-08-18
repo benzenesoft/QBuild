@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Builders\ClauseFactory.cs" />
     <Compile Include="Builders\LambdaQueryBuilder.cs" />
+    <Compile Include="Clauses\BaseClause.cs" />
     <Compile Include="Clauses\Clause.cs" />
     <Compile Include="Clauses\ClauseContext.cs" />
     <Compile Include="Clauses\DelegatedClause.cs" />
