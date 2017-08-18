@@ -17,7 +17,7 @@ namespace UnitTest.Builders
         [SetUp]
         public void Setup()
         {
-            _builder = new LambdaQueryBuilder(new LowerSnakeCaseNameResolver(), new SqlFunctionNameResolver(new LowerSnakeCaseNameResolver()));
+            _builder = new LambdaQueryBuilder(new LowerSnakeCaseNameResolver(), new SqlFunctionNameResolver());
 
             _connection = new TestConnection();
             _connection.Open();

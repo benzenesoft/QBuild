@@ -18,7 +18,7 @@ namespace BenzeneSoft.QBuild.Builders
         private OrderByClause _orderBy;
 
         public LambdaQueryBuilder()
-            : this(new AsIsNameResolver(), new SqlFunctionNameResolver(new AsIsNameResolver()))
+            : this(new AsIsNameResolver(), new SqlFunctionNameResolver())
         {
         }
         public LambdaQueryBuilder(INameResolver nameResolver, ISqlFunctionNameResolver funcResolver)

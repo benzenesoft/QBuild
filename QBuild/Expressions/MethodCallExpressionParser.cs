@@ -16,7 +16,8 @@ namespace BenzeneSoft.QBuild.Expressions
 
         public bool CanParse(Expression expression)
         {
-            return expression is MethodCallExpression;
+            return expression is MethodCallExpression
+                && _funcResolver.CanResolve(((MethodCallExpression)expression).Method);
         }
 
         public IClause Parse(Expression expression, ClauseContext context)
@@ -26,7 +27,7 @@ namespace BenzeneSoft.QBuild.Expressions
 
         public IClause ParseExact(MethodCallExpression expression, ClauseContext context)
         {
-            var functionName = _funcResolver.Lookup(expression.Method);
+            var functionName = _funcResolver.Resolve(expression.Method);
             var argClause = new SeparatedClause(new Clause(","));
             foreach (var arg in expression.Arguments)
             {

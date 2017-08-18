@@ -18,7 +18,7 @@ namespace UnitTest.Expressions
         [SetUp]
         public void Setup()
         {
-            _parser = new BinaryExpressionParser(new ParserLookup(new LowerSnakeCaseNameResolver(), new SqlFunctionNameResolver(new LowerSnakeCaseNameResolver())));
+            _parser = new BinaryExpressionParser(new ParserLookup(new LowerSnakeCaseNameResolver(), new SqlFunctionNameResolver()));
             _connection = new TestConnection();
             _connection.Open();
         }
