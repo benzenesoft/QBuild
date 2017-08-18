@@ -4,6 +4,7 @@ namespace BenzeneSoft.QBuild.Expressions
 {
     public interface ISqlFunctionNameResolver
     {
-        string Lookup(MethodInfo methodInfo);
+        string Resolve(MethodInfo method);
+        bool CanResolve(MethodInfo method);
     }
 }
