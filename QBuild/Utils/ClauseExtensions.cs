@@ -17,5 +17,10 @@ namespace BenzeneSoft.QBuild.Utils
 
             return command;
         }
+
+        public static Clause ToClause(this string text)
+        {
+            return new Clause(text);
+        }
     }
 }
