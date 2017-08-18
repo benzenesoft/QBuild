@@ -1,0 +1,51 @@
+using BenzeneSoft.QBuild.Utils;
+using System.Collections.Generic;
+
+namespace BenzeneSoft.QBuild.Clauses
+{
+    public class SelectClause : IClause
+    {
+        public string Text => _delegate.Text;
+        public IEnumerable<Parameter> Parameters => _delegate.Parameters;
+        public bool IsEmpty => _delegate.IsEmpty;
+
+        private readonly SeparatedClause _delegate;
+
+        public SelectClause()
+        {
+            _delegate = new SeparatedClause(new MutableClause().Line().Append(","));
+        }
+
+        public SelectClause Distinct()
+        {
+            _delegate.Prepend("DISTINCT ");
+            return this;
+        }
+
+        public SelectClause All()
+        {
+            _delegate.AppendSeparated("*".ToClause());
+            return this;
+        }
+
+        public SelectClause Column(string expression)
+        {
+            _delegate.AppendSeparated(expression);
+            return this;
+        }
+
+        public SelectClause Column(IClause expression)
+        {
+            _delegate.AppendSeparated(expression);
+            return this;
+        }
+
+        public SelectClause ColumnAs(IClause expression, IClause alias)
+        {
+            _delegate.AppendSeparated(expression)
+                .Append(" as ")
+                .Append(alias);
+            return this;
+        }
+    }
+}
