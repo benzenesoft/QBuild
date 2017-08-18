@@ -15,7 +15,12 @@ namespace BenzeneSoft.QBuild.Clauses
 
         public static Parameter CreateNew(object value)
         {
-            return new Parameter($"@p{_paramId++}", value);
+            return CreateNew($"@p{_paramId++}", value);
+        }
+
+        public static Parameter CreateNew(string name, object value)
+        {
+            return new Parameter(name, value);
         }
 
         public override string ToString()
