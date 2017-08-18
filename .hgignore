@@ -4,3 +4,4 @@ obj/*
 bin/*
 packages/*
 *.csproj.user
+.axoCover/runs/
