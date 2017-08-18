@@ -24,7 +24,39 @@ namespace UnitTest.Expressions
         }
 
         [Test]
-        public void IsNull()
+        public void CanParse_RightSideNull_GivesTrue()
+        {
+            Expression<Predicate<Product>> exp = product => product.Comment == null;
+            var can = _parser.CanParse(exp.Body);
+            IsTrue(can);
+        }
+
+        [Test]
+        public void CanParse_LeftSideNull_GivesTrue()
+        {
+            Expression<Predicate<Product>> exp = product => null == product.Comment;
+            var can = _parser.CanParse(exp.Body);
+            IsTrue(can);
+        }
+
+        [Test]
+        public void CanParse_BothSideNull_GivesFalse()
+        {
+            Expression<Predicate<Product>> exp = product => null == null;
+            var can = _parser.CanParse(exp.Body);
+            IsFalse(can);
+        }
+
+        [Test]
+        public void CanParse_NoSideNull_GivesFalse()
+        {
+            Expression<Predicate<Product>> exp = product => product.Comment == "a comment";
+            var can = _parser.CanParse(exp.Body);
+            IsFalse(can);
+        }
+
+        [Test]
+        public void IsNull_RightSideNull()
         {
             Expression<Predicate<Product>> exp = product => product.Comment == null;
             var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
@@ -36,9 +68,33 @@ namespace UnitTest.Expressions
         }
 
         [Test]
-        public void IsNotNull()
+        public void IsNull_LeftSideNull()
+        {
+            Expression<Predicate<Product>> exp = product => null == product.Comment ;
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
+            var clause = new MutableClause("select * from product where ").Append(predicate).AppendText(" and name = 'bed'");
+
+            var reader = _connection.Read(clause);
+            IsTrue(reader.Read());
+            AreEqual("bed", reader["name"]);
+        }
+
+        [Test]
+        public void IsNotNull_RightSideNull()
         {
             Expression<Predicate<Product>> exp = product => product.Comment != null;
+            var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
+            var clause = new MutableClause("select * from product where ").Append(predicate);
+
+            var reader = _connection.Read(clause);
+            IsTrue(reader.Read());
+            AreEqual("chair", reader["name"]);
+        }
+
+        [Test]
+        public void IsNotNull_LeftSideNull()
+        {
+            Expression<Predicate<Product>> exp = product => null != product.Comment;
             var predicate = _parser.Parse(exp.Body, ClauseContext.Where);
             var clause = new MutableClause("select * from product where ").Append(predicate);
 
