@@ -5,6 +5,7 @@ namespace BenzeneSoft.QBuild.Functions
     /// Implementations of methods in this class are not meaningful.
     /// These are only to be used as SQL function aliases
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class SqlFunctions
     {
         // Aggregate
