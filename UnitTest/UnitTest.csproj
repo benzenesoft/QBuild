@@ -59,6 +59,7 @@
     <Compile Include="Expressions\BinaryExpressionParserTest.cs" />
     <Compile Include="Expressions\NullityExpressionParserTest.cs" />
     <Compile Include="Clauses\SeparatedClauseTest.cs" />
+    <Compile Include="NameResolvers\AsIsNameResolverTest.cs" />
     <Compile Include="NameResolvers\LowerSnameCaseNameResolverTest.cs" />
     <Compile Include="Clauses\OrderByClauseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
