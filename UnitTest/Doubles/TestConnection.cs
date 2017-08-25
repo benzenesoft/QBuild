@@ -82,7 +82,7 @@ namespace UnitTest.Doubles
 
         public IDataReader Read(IClause clause)
         {
-            var command = clause.ToDbCommand(this);
+            var command = this.CreateCommand(clause);
             Console.WriteLine(clause.Text);
             return command.ExecuteReader();
         }
