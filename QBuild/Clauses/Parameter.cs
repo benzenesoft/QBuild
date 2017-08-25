@@ -1,4 +1,6 @@
 ﻿
+using System.Data;
+
 namespace BenzeneSoft.QBuild.Clauses
 {
     public class Parameter
@@ -21,6 +23,14 @@ namespace BenzeneSoft.QBuild.Clauses
         public static Parameter CreateNew(string name, object value)
         {
             return new Parameter(name, value);
+        }
+
+        public IDbDataParameter ToDbParameter(IDbCommand command)
+        {
+            var dbParameter = command.CreateParameter();
+            dbParameter.ParameterName = Name;
+            dbParameter.Value = Value;
+            return dbParameter;
         }
 
         public override string ToString()
