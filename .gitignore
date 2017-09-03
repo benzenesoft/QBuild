@@ -1,0 +1,7 @@
+syntax: glob
+.vs/
+obj/
+bin/
+packages/
+*.csproj.user
+.axoCover/runs/
